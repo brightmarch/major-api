@@ -1,0 +1,48 @@
+{% for quickbooksOrder in quickbooksOrders %}
+    <SalesOrderAddRq>
+        <SalesOrderAdd>
+            <CustomerRef>
+                <ListID>{{ quickbooksOrder.getQuickbooksCustomer.getQuickbooksListId }}</ListID> 
+            </CustomerRef>
+            <TxnDate>{{ quickbooksOrder.getOrderDateString }}</TxnDate>
+            <RefNumber>{{ quickbooksOrder.getRefNumber }}</RefNumber> 
+            <BillAddress> 
+                <Addr1>{{ quickbooksOrder.getBillAddress1 }}</Addr1> 
+                <Addr2>{{ quickbooksOrder.getBillAddress2 }}</Addr2> 
+                <Addr3>{{ quickbooksOrder.getBillAddress3 }}</Addr3> 
+                <Addr4>{{ quickbooksOrder.getBillAddress4 }}</Addr4> 
+                <Addr5>{{ quickbooksOrder.getBillAddress5 }}</Addr5> 
+                <City>{{ quickbooksOrder.getBillCity }}</City> 
+                <State>{{ quickbooksOrder.getBillState }}</State> 
+                <PostalCode>{{ quickbooksOrder.getBillPostalCode }}</PostalCode> 
+                <Country>{{ quickbooksOrder.getBillCountry }}</Country> 
+                <Note>{{ quickbooksOrder.getBillNote }}</Note> 
+            </BillAddress>
+            <ShipAddress> 
+                <Addr1>{{ quickbooksOrder.getShipAddress1 }}</Addr1> 
+                <Addr2>{{ quickbooksOrder.getShipAddress2 }}</Addr2> 
+                <Addr3>{{ quickbooksOrder.getShipAddress3 }}</Addr3> 
+                <Addr4>{{ quickbooksOrder.getShipAddress4 }}</Addr4> 
+                <Addr5>{{ quickbooksOrder.getShipAddress5 }}</Addr5> 
+                <City>{{ quickbooksOrder.getShipCity }}</City> 
+                <State>{{ quickbooksOrder.getShipState }}</State> 
+                <PostalCode>{{ quickbooksOrder.getShipPostalCode }}</PostalCode> 
+                <Country>{{ quickbooksOrder.getShipCountry }}</Country> 
+                <Note>{{ quickbooksOrder.getShipNote }}</Note> 
+            </ShipAddress>
+            <IsManuallyClosed>{{ quickbooksOrder.getIsManuallyClosedString }}</IsManuallyClosed>
+            <Memo>{{ quickbooksOrder.getMemo }}</Memo> 
+            <IsToBePrinted>{{ quickbooksOrder.getIsToBePrintedString }}</IsToBePrinted> 
+            <IsToBeEmailed>{{ quickbooksOrder.getIsToBeEmailedString }}</IsToBeEmailed> 
+            {% for quickbooksOrderLine in quickbooksOrder.getQuickbooksOrderLines %}
+                <SalesOrderLineAdd> 
+                    <ItemRef> 
+                        <ListID>{{ quickbooksOrderLine.getQuickbooksItem.getQuickbooksListId }}</ListID> 
+                    </ItemRef>
+                    <Desc>{{ quickbooksOrderLine.getItemDescription }}</Desc> 
+                    <Quantity>{{ quickbooksOrderLine.getQuantityOrdered }}</Quantity> 
+                </OrderLineAdd>
+            {% endfor %}
+        </SalesOrderAdd>
+    </SalesOrderAddRq>
+{% endfor %}

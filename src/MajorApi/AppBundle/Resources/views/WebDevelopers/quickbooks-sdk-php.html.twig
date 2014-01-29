@@ -1,0 +1,167 @@
+{% set selectedMenu = 'developers' %}
+{% set developersMenu = 'quickbooks-sdk-php' %}
+{% extends 'MajorApiAppBundle:WebLayouts:default.html.twig' %}
+
+{% block title %}MajorApi &mdash; Developers &mdash; QuickBooks PHP SDK{% endblock %}
+
+{% block body %}
+    <article>
+        <div class="wrapper">
+            <div class="documentation clearfix limiter">
+                {% include 'MajorApiAppBundle:WebTemplates:developers-menu.html.twig' %}
+
+                <div class="doc">
+                    <h1>QuickBooks PHP SDK</h1>
+                    <p>
+                        The Major QuickBooks REST API PHP SDK offers all basic API requests in a single core file. The overall goal is to provide a single file include to handle all API abstraction.
+                    </p>
+
+                    <h2>Download URL</h2>
+                    <p>
+                        <a href="https://github.com/brightmarch/majorapi-php-sdk">https://github.com/brightmarch/majorapi-php-sdk</a>
+                    </p>
+
+                    <h2>Including the PHP SDK</h2>
+                    <p>
+                        After cloning or downloading the PHP SDK, copy the file <code>lib/MajorApiQuickbooks.php</code> to your codebase.
+                    </p>
+                    <p>
+                        The <code>MajorApiQuickbooks.php</code> file is a single file that provides abstraction for all Major QuickBooks REST API functionality.
+                    </p>
+
+                    <h2>Using the PHP SDK</h2>
+                    <p>
+                        Using the PHP SDK is even simpler than installing it. The <code>MajorApiQuickbooks.php</code> file contains a single class, <code>MajorApiQuickbooks</code> which you will instantiate and use to make requests to the Major QuickBooks REST API.
+                    </p>
+
+                    <h3>Exceptions</h3>
+                    <p>
+                        Any method in the PHP SDK can throw a <code>MajorApiException</code> object. It is your responsibility to catch this exception and review its contents to determine what you should do.
+                    </p>
+
+                    <h3>Enabling an Endpoint</h3>
+                    <p>
+                        The length of your API key determines what endpoint you are using. API keys with a length of 32 characters are for production, 24 for staging, and 16 for development.
+                    </p>
+
+                    <h3>Authentication</h3>
+                    <p>
+                        Pass in the Major Application username and API key to the constructor of the <code>MajorApiQuickbooks</code> class. This will authenticate all requests.
+                    </p>
+<pre>$majorApiQuickbooks = new MajorApiQuickbooks(
+    'your-majorapi-application-username',
+    'your-majorapi-application-api-key'
+);</pre>
+
+                    <h3>Creating a New Invoice</h3>
+                    <p>
+                        The <code>createInvoice()</code> method in the PHP SDK allows you to create a new QuickBooks Invoice.
+                    </p>
+
+                    <h4>Method Signature</h4>
+                    <p><code>public createInvoice(array $invoice)</code></p>
+
+                    <h4>Example</h4>
+<pre>$majorApiQuickbooks = new MajorApiQuickbooks(
+    'your-majorapi-application-username',
+    'your-majorapi-application-api-key'
+);
+
+$quickbooksInvoice = $majorApiQuickbooks->createInvoice([
+    'customerName' => 'Jennifer Darden',
+    'refNumber' => mt_rand(1, 1000000),
+    'poNumber' => mt_rand(1, 1000000),
+    'isPending' => 0,
+    'isFinanceCharge' => 0,
+    'isToBePrinted' => 1,
+    'isToBeEmailed' => 1,
+    'memo' => 'Bill this customer immediately',
+    'invoiceLines' => [
+        [
+            'itemName' => 'BMService',
+            'quantityOrdered' => mt_rand(1, 100)
+        ]
+    ]
+]);</pre>
+
+                    <h3>Retrieving an Existing Invoice</h3>
+                    <p>
+                        The <code>retrieveInvoice()</code> method in the PHP SDK allows you to retrieve an existing QuickBooks Invoice by the Reference Number.
+                    </p>
+
+                    <h4>Method Signature</h4>
+                    <p><code>public retrieveInvoice($refNumber)</code></p>
+
+                    <h4>Example</h4>
+<pre>$majorApiQuickbooks = new MajorApiQuickbooks(
+    'your-majorapi-application-username',
+    'your-majorapi-application-api-key'
+);
+
+$quickbooksInvoice = $majorApiQuickbooks->retrieveInvoice(12);</pre>
+
+                    <h3>Creating a New Customer</h3>
+                    <p>
+                        The <code>createCustomer()</code> method in the PHP SDK allows you to create a new QuickBooks Customer.
+                    </p>
+
+                    <h4>Method Signature</h4>
+                    <p><code>public createCustomer(array $customer)</code></p>
+
+                    <h4>Example</h4>
+<pre>$majorApiQuickbooks = new MajorApiQuickbooks(
+    'your-majorapi-application-username',
+    'your-majorapi-application-api-key'
+);
+
+$quickbooksCustomer = $majorApiQuickbooks->createCustomer([
+    'name' => 'Jason Lee',
+    'firstName' => 'Maynard',
+    'middleName' => 'J',
+    'lastName' => 'Keenan',
+    'companyName' => 'Tool Band, Inc.',
+    'position' => 'Lead Singer',
+    'billAddress1' => '1000 Summerset Drive',
+    'billCity' => 'Los Angeles',
+    'billState' => 'CA',
+    'billPostalCode' => '90210',
+    'billCountry' => 'US'
+]);</pre>
+
+                    <h3>Retrieving an Existing Customer</h3>
+                    <p>
+                        The <code>retrieveCustomer()</code> method in the PHP SDK allows you to retrieve an existing QuickBooks customer.
+                    </p>
+
+                    <h4>Method Signature</h4>
+                    <p><code>public retrieveCustomer($customerId)</code></p>
+
+                    <h4>Example</h4>
+<pre>$majorApiQuickbooks = new MajorApiQuickbooks(
+    'your-majorapi-application-username',
+    'your-majorapi-application-api-key'
+);
+
+$quickbooksCustomer = $majorApiQuickbooks->retrieveCustomer(15);</pre>
+
+                    <h3>Retrieving an Existing Item</h3>
+                    <p>
+                        The <code>retrieveItem()</code> method in the PHP SDK allows you to retrieve an existing QuickBooks item.
+                    </p>
+
+                    <h4>Method Signature</h4>
+                    <p><code>public retrieveItem($itemName)</code></p>
+
+                    <h4>Example</h4>
+<pre>$majorApiQuickbooks = new MajorApiQuickbooks(
+    'your-majorapi-application-username',
+    'your-majorapi-application-api-key'
+);
+
+$quickbooksItem = $majorApiQuickbooks->retrieveItem('BMServicePro');</pre>
+
+                </div>
+            </div>
+        </div>
+    </article>
+{% endblock %}

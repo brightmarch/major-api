@@ -1,0 +1,32 @@
+{% autoescape false %}
+[
+    {% for quickbooksAccount in quickbooksAccounts %}
+        {
+            "created": {{ quickbooksAccount.getCreated.format('c')|json_encode }},
+            "updated": {{ quickbooksAccount.getUpdated.format('c')|json_encode }},
+            "status": {{ quickbooksAccount.getStatus }},
+            "applicationName": {{ quickbooksAccount.getApplication.getName|json_encode }},
+            "applicationUsername": {{ quickbooksAccount.getApplication.getUsername|json_encode }},
+            "name": {{ quickbooksAccount.getName|json_encode }},
+            "fullname": {{ quickbooksAccount.getFullname|json_encode }},
+            "isActive": {{ quickbooksAccount.getIsActive|json_encode }},
+            "sublevel": {{ quickbooksAccount.getSublevel }},
+            "type": {{ quickbooksAccount.getType|json_encode }},
+            "specialType": {{ quickbooksAccount.getSpecialType|json_encode }},
+            "accountNumber": {{ quickbooksAccount.getAccountNumber|json_encode }},
+            "description": {{ quickbooksAccount.getDescription|json_encode }},
+            "balance": {{ quickbooksAccount.getBalance }},
+            "totalBalance": {{ quickbooksAccount.getTotalBalance }},
+            "cashFlowClassification": {{ quickbooksAccount.getCashFlowClassification|json_encode }},
+            "_links": [
+                {
+                    "rel": "self",
+                    "method": "GET",
+                    "href": "{{ url('majorapi_api_quickbooks_accounts_read', {'accountName': quickbooksAccount.getName}) }}"
+                }
+            ]
+        }
+        {% if loop.index != quickbooksAccounts|length %},{% endif %}
+    {% endfor %}
+]
+{% endautoescape %}

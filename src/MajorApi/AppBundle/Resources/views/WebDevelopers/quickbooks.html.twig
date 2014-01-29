@@ -1,0 +1,49 @@
+{% set selectedMenu = 'developers' %}
+{% set developersMenu = 'quickbooks' %}
+{% extends 'MajorApiAppBundle:WebLayouts:default.html.twig' %}
+
+{% block title %}Major &mdash; Developers &mdash; QuickBooks{% endblock %}
+
+{% block body %}
+    <article>
+        <div class="wrapper">
+            <div class="documentation clearfix limiter">
+                {% include 'MajorApiAppBundle:WebTemplates:developers-menu.html.twig' %}
+
+                <div class="doc">
+                    <h1>QuickBooks Introduction</h1>
+
+                    <p>
+                        QuickBooks is a piece of accounting software developed by the company Intuit. It supports around 4.5 million users and is the standard for small-medium businesses (SMBs).
+                    </p>
+                    <p>
+                        A common need is for application developers to build custom integrations on top of QuickBooks for a client. For example, if you are a SMB owner and need a website that imports data directly into QuickBooks, you may hire a developer who then has to figure out how to get the data your customers enter into QuickBooks.
+                    </p>
+                    <p>
+                        If you are a developer and have attempted this task before, you have realized it is no easy feat. The QuickBooks documentation is complex and difficult to navigate. Using a software development kit (SDK) in the language of your choice may not even exist. And getting support is near impossible.
+                    </p>
+                    <p>
+                        <strong>Major aims to fix all of these issues.</strong>
+                    </p>
+                    <p>
+                        With the Major QuickBooks REST API, you can be up and running in <strong>no more than five minutes</strong>.
+                    </p>
+                    <p>
+                        Our documentation is simple to read. Our support is superb. And our technology is second to none.
+                    </p>
+                    <p>
+                        Using the Major QuickBooks REST API will require you to download and install a piece of software distributed by Intuit called the WebConnector. You will only have to do this once.
+                    </p>
+                    <p>
+                        WebConnector is free to install and use. There are no monthly fees charged by Intuit.
+                    </p>
+
+                    <h3>What's Next?</h3>
+                    <p>
+                        You will need to install the <a href="{{ path('majorapi_web_developers_quickbooks_installing_webconnector') }}">install the QuickBooks WebConnector</a> to integrate your Major Application with QuickBooks.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </article>
+{% endblock %}

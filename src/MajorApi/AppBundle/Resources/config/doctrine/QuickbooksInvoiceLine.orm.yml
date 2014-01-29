@@ -1,0 +1,95 @@
+MajorApi\AppBundle\Entity\QuickbooksInvoiceLine:
+    type: entity
+    table: api_quickbooks_invoice_line
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: SEQUENCE
+            sequenceGenerator:
+                sequenceName: api_quickbooks_invoice_line_id_seq
+                allocationSize: 1
+                initialValue: 1 
+    fields:
+        created:
+            column: created
+            type: datetime
+        updated:
+            column: updated 
+            type: datetime
+        status:
+            column: status
+            type: integer
+        quickbooksInvoiceId:
+            column: quickbooks_invoice_id
+            type: integer
+        quickbooksItemId:
+            column: quickbooks_item_id
+            type: integer
+        itemName:
+            column: item_name
+            type: string
+            nullable: true
+        itemDescription:
+            column: item_description
+            type: string
+            nullable: true
+        quantityOrdered:
+            column: quantity_ordered
+            type: decimal
+            precision: 4
+        unitOfMeasure:
+            column: unit_of_measure
+            type: string
+            nullable: true
+        rate:
+            column: rate
+            type: decimal
+            precision: 4
+        ratePercent:
+            column: rate_percent
+            type: decimal
+            precision: 4
+        amount:
+            column: amount
+            type: decimal
+            precision: 4
+        serialNumber:
+            column: serial_number
+            type: string
+            nullable: true
+        lotNumber:
+            column: lot_number
+            type: string
+            nullable: true
+        other1:
+            column: other1
+            type: string
+            nullable: true
+        other2:
+            column: other2
+            type: string
+            nullable: true
+        unitPrice:
+            column: unit_price
+            type: decimal
+            precision: 4
+        cost:
+            column: cost
+            type: decimal
+            precision: 4
+    manyToOne:
+        quickbooksInvoice:
+            targetEntity: QuickbooksInvoice
+            inversedBy: quickbooksInvoiceLines
+            joinColumn:
+                name: quickbooks_invoice_id
+                referencedColumnName: id
+        quickbooksItem:
+            targetEntity: QuickbooksItem
+            joinColumn:
+                name: quickbooks_item_id
+                referencedColumnName: id
+    lifecycleCallbacks:
+        prePersist: [ onCreate ]
+        preUpdate: [ onUpdate ]

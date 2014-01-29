@@ -1,0 +1,81 @@
+{% set selectedMenu = 'integrate' %}
+{% extends 'MajorApiAppBundle:WebLayouts:default.html.twig' %}
+
+{% block title %}Major &mdash; QuickBooks REST API &mdash; Connect with Stripe{% endblock %}
+
+{% block body %}
+    <div class="mast integrate">
+        <h1 class="major-stripe graphic">Major + Stripe</h1>
+
+        {% if app.user and app.user.isConnectedToStripe %}
+            <p>Stripe Connection Successful</p>
+        {% else %}
+            <a href="{{ stripeConnectAuthorizeUrl }}" class="button alt fat all-caps">Connect to Stripe</a>
+        {% endif %}
+    </div>
+    <article>
+        <div class="clearfix limiter">
+            <div class="content single-col">
+                {% include 'MajorApiAppBundle:WebTemplates:messaging.html.twig' %}
+
+                <h1 class="tight">Connecting QuickBooks to Stripe</h1>
+                <p>
+                    So, you're a Stripe customer and use QuickBooks. Now that your online store is taking off,
+                    you want your customers and orders to appear in QuickBooks. Great! Major can help with exactly that.
+                </p>
+
+                <h2>How does this work?</h2>
+                <p>
+                    We use <a href="https://stripe.com/blog/stripe-connect">Stripe Connect</a> to connect your Stripe account with Major.
+                    To start, click the "Connect to Stripe" button above. You will be redirected to the Stripe OAuth connection process.
+                </p>
+                <p>
+                    After approving the Major app to connect with your Stripe account, you will be redirected back to Major to complete the connection.
+                </p>
+                <p>
+                    <strong>That's it!</strong> As customers and payments are made through your Stripe account, they will automatically filter
+                    through Major to your QuickBooks file. Of course, no credit card information will be sent to QuickBooks &mdash; customer and
+                    invoice information only.
+                </p>
+                <p>
+                    <strong>Note</strong> &mdash; Naturally, you must have already created an application with Major and connected it to
+                    QuickBooks for data to start flowing from Stripe to QuickBooks. You can, however, connect with Stripe before connecting
+                    Major with QuickBooks.
+                </p>
+
+                <h2>What is sent?</h2>
+                <p>
+                    Major will send new customers and charges (sent as an invoice) to QuickBooks.
+                </p>
+
+                <h2>How much does this cost?</h2>
+                <p>
+                    Connecting with Stripe costs nothing extra! You simply pay our rates outlined on the <a href="{{ path('majorapi_web_pricing') }}">pricing page</a>.
+                </p>
+
+                <h2>What versions of QuickBooks are supported?</h2>
+                <p>
+                    Unfortunately we can only support QuickBooks Desktop. We can let you know as soon as we can support QuickBooks Online.
+                </p>
+
+                <h2>Under the hood</h2>
+                <p>
+                    Chances are, you're a developer like us and you want to know what is going on underneath the hood of the Major and Stripe connection.
+                </p>
+
+                <p>
+                    After you go through the Stripe Connect OAuth flow, Major will create a new item in your QuickBooks file. This item will be 1 US cent in value
+                    and will be used to create invoices with the same amount as the transaction from Stripe.
+                </p>
+                <p>
+                    Unfortunately, the Stripe Connect platform does not give detailed information on what items were included in the transaction. All we have to go
+                    on is the total amount. Therefore, we use a newly created item to associate with all Stripe transactions.
+                </p>
+                <p>
+                    Once that item is created, every time a new customer is created or a transaction is made in Stripe, the Major webhooks will receive that
+                    action and create the associated action in QuickBooks.
+                </p>
+            </div>
+        </div>
+    </article>
+{% endblock %}

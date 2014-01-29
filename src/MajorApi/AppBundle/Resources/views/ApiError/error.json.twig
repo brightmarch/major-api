@@ -1,0 +1,7 @@
+{% autoescape false %}
+{
+    "http_code": {{ httpCode }},
+    "message": {{ message|json_encode }},
+    "violations": {{ violations|json_encode }}
+}
+{% endautoescape %}

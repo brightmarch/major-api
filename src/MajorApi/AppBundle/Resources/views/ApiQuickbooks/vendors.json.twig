@@ -1,0 +1,68 @@
+{% autoescape false %}
+[
+    {% for v in quickbooksVendors %}
+        {
+            "created": {{ v.getCreated.format('c')|json_encode }},
+            "updated": {{ v.getUpdated.format('c')|json_encode }},
+            "status": {{ v.getStatus }},
+            "applicationName": {{ v.getApplication.getName|json_encode }},
+            "applicationUsername": {{ v.getApplication.getUsername|json_encode }},
+            "name": {{ v.getName|json_encode }},
+            "fullname": {{ v.getFullname|json_encode }},
+            "isActive": {{ v.getIsActive|json_encode }},
+            "companyName": {{ v.getCompanyName|json_encode }},
+            "salutation": {{ v.getSalutation|json_encode }},
+            "firstName": {{ v.getFirstName|json_encode }},
+            "middleName": {{ v.getMiddleName|json_encode }},
+            "lastName": {{ v.getLastName|json_encode }},
+            "jobTitle": {{ v.getJobTitle|json_encode }},
+            "vendorAddress": {
+                "address1": {{ v.getVendorAddressAddress1|json_encode }},
+                "address2": {{ v.getVendorAddressAddress2|json_encode }},
+                "address3": {{ v.getVendorAddressAddress3|json_encode }},
+                "address4": {{ v.getVendorAddressAddress4|json_encode }},
+                "address5": {{ v.getVendorAddressAddress5|json_encode }},
+                "city": {{ v.getVendorAddressCity|json_encode }},
+                "state": {{ v.getVendorAddressState|json_encode }},
+                "postalCode": {{ v.getVendorAddressPostalCode|json_encode }},
+                "country": {{ v.getVendorAddressCountry|json_encode }},
+                "note": {{ v.getVendorAddressNote|json_encode }}
+            },
+            "shipAddress": {
+                "address1": {{ v.getShipAddress1|json_encode }},
+                "address2": {{ v.getShipAddress2|json_encode }},
+                "address3": {{ v.getShipAddress3|json_encode }},
+                "address4": {{ v.getShipAddress4|json_encode }},
+                "address5": {{ v.getShipAddress5|json_encode }},
+                "city": {{ v.getShipCity|json_encode }},
+                "state": {{ v.getShipState|json_encode }},
+                "postalCode": {{ v.getShipPostalCode|json_encode }},
+                "country": {{ v.getShipCountry|json_encode }},
+                "note": {{ v.getShipNote|json_encode }}
+            },
+            "phone": {{ v.getPhone|json_encode }},
+            "altPhone": {{ v.getAltPhone|json_encode }},
+            "fax": {{ v.getFax|json_encode }},
+            "email": {{ v.getEmail|json_encode }},
+            "emailCc": {{ v.getEmailCc|json_encode }},
+            "contact": {{ v.getContact|json_encode }},
+            "altContact": {{ v.getAltContact|json_encode }},
+            "nameOnCheck": {{ v.getNameOnCheck|json_encode }},
+            "accountNumber": {{ v.getAccountNumber|json_encode }},
+            "notes": {{ v.getNotes|json_encode }},
+            "creditLimit": {{ v.getCreditLimit }},
+            "vendorTaxIdentity": {{ v.getVendorTaxIdentity|json_encode }},
+            "isVendorEligibleFor1099": {{ v.getIsVendorEligibleFor1099|json_encode }},
+            "balance": {{ v.getBalance }},
+            "_links": [
+                {
+                    "rel": "self",
+                    "method": "GET",
+                    "href": "{{ url('majorapi_api_quickbooks_vendors_read', {'vendorName': v.getName}) }}"
+                }
+            ]
+        }
+        {% if loop.index != quickbooksVendors|length %},{% endif %}
+    {% endfor %}
+]
+{% endautoescape %}

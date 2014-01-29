@@ -1,0 +1,731 @@
+MajorApi\AppBundle\Entity\Account:
+    properties:
+        email:
+            - NotBlank: { groups: [create] }
+            - Length: { max: 96, groups: [create] }
+            - Email: { groups: [create] }
+        firstName:
+            - NotBlank: { groups: [create] }
+            - Length: { max: 96, groups: [create] }
+        lastName:
+            - NotBlank: { groups: [create] }
+            - Length: { max: 96, groups: [create] }
+        passwordHash:
+            - NotBlank: { groups: [create] }
+        billingToken:
+            - Length: { max: 48, groups: [billing] }
+        billingDigits:
+            - Length: { max: 4, groups: [billing] }
+        billingType:
+            - Length: { max: 20, groups: [billing] }
+
+MajorApi\AppBundle\Entity\Application:
+    properties:
+        name:
+            - NotBlank: { groups: [create] }
+            - Length: { max: 96, groups: [create] }
+        username:
+            - NotBlank: { groups: [create] }
+            - Length: { max: 48, groups: [create] }
+            - Regex: { pattern: "/^[a-zA-Z0-9\-\_]+$/", groups: [create] }
+        apiKey:
+            - NotBlank: ~
+            - Length:
+                max: 48
+        quickbooksToken:
+            - Length:
+                max: 48
+        quickbooksProductName:
+            - Length:
+                max: 255
+        quickbooksMajorVersion:
+            - Length:
+                max: 5
+        quickbooksMinorVersion:
+            - Length:
+                max: 5
+        quickbooksCountry:
+            - Length:
+                max: 5
+        quickbooksSupportedQbxmlVersion:
+            - Length:
+                max: 10
+        quickbooksQbFileMode:
+            - Length:
+                max: 10
+        quickbooksOwnerId:
+            - Length:
+                max: 96
+        quickbooksFileId:
+            - Length:
+                max: 96
+
+MajorApi\AppBundle\Entity\QuickbooksAccount:
+    properties:
+        name:
+            - NotBlank: ~
+            - Length:
+                min: 1
+                max: 31
+        fullname:
+            - Length:
+                max: 159
+        type:
+            - Length:
+                max: 48
+        specialType:
+            - Length:
+                max: 48
+        accountNumber:
+            - Length:
+                max: 7
+        bankNumber:
+            - Length:
+                max: 25
+        description:
+            - Length:
+                max: 200
+        cashFlowClassification:
+            - Length:
+                max: 48
+        quickbooksListId:
+            - Length:
+                max: 128
+        quickbooksEditSequence:
+            - Length:
+                max: 16
+
+MajorApi\AppBundle\Entity\QuickbooksCustomer:
+    properties:
+        name:
+            - NotBlank: ~
+            - Length:
+                min: 1
+                max: 41
+            - Regex:
+                pattern: "/^[^:]+$/"
+        companyName:
+            - Length:
+                max: 41
+        salutation:
+            - Length:
+                max: 15
+        firstName:
+            - Length:
+                max: 25
+        middleName:
+            - Length:
+                max: 5
+        lastName:
+            - Length:
+                max: 25
+        jobTitle:
+            - Length:
+                max: 41
+        billAddress1:
+            - NotBlank: ~
+            - Length:
+                max: 41
+        billAddress2:
+            - Length:
+                max: 41
+        billAddress3:
+            - Length:
+                max: 41
+        billAddress4:
+            - Length:
+                max: 41
+        billAddress5:
+            - Length:
+                max: 41
+        billCity:
+            - NotBlank: ~
+            - Length:
+                max: 31
+        billState:
+            - NotBlank: ~
+            - Length:
+                max: 21
+        billPostalCode:
+            - NotBlank: ~
+            - Length:
+                max: 13
+        billCountry:
+            - NotBlank: ~
+            - Length:
+                max: 31
+        billNote:
+            - Length:
+                max: 41
+        shipAddress1:
+            - NotBlank: ~
+            - Length:
+                max: 41
+        shipAddress2:
+            - Length:
+                max: 41
+        shipAddress3:
+            - Length:
+                max: 41
+        shipAddress4:
+            - Length:
+                max: 41
+        shipAddress5:
+            - Length:
+                max: 41
+        shipCity:
+            - NotBlank: ~
+            - Length:
+                max: 31
+        shipState:
+            - NotBlank: ~
+            - Length:
+                max: 21
+        shipPostalCode:
+            - NotBlank: ~
+            - Length:
+                max: 13
+        shipCountry:
+            - NotBlank: ~
+            - Length:
+                max: 31
+        shipNote:
+            - Length:
+                max: 41
+        phone:
+            - Length:
+                max: 21
+        altPhone:
+            - Length:
+                max: 21
+        fax:
+            - Length:
+                max: 21
+        email:
+            - Length:
+                max: 256
+            - Email: ~
+        emailCc:
+            - Length:
+                max: 256
+            - Email: ~
+        notes:
+            - Length:
+                max: 4096
+        quickbooksListId:
+            - Length:
+                max: 128
+        quickbooksTxnId:
+            - Length:
+                max: 48
+        quickbooksTxnNumber:
+            - Length:
+                max: 48
+        quickbooksEditSequence:
+            - Length:
+                max: 48
+
+MajorApi\AppBundle\Entity\QuickbooksInvoice:
+    properties:
+        refNumber:
+            - NotBlank: ~
+            - Length:
+                min: 1
+                max: 11
+        poNumber:
+            - Length:
+                max: 25
+        billAddress1:
+            - Length:
+                max: 41
+        billAddress2:
+            - Length:
+                max: 41
+        billAddress3:
+            - Length:
+                max: 41
+        billAddress4:
+            - Length:
+                max: 41
+        billAddress5:
+            - Length:
+                max: 41
+        billCity:
+            - Length:
+                max: 31
+        billState:
+            - Length:
+                max: 21
+        billPostalCode:
+            - Length:
+                max: 13
+        billCountry:
+            - Length:
+                max: 31
+        billNote:
+            - Length:
+                max: 41
+        shipAddress1:
+            - Length:
+                max: 41
+        shipAddress2:
+            - Length:
+                max: 41
+        shipAddress3:
+            - Length:
+                max: 41
+        shipAddress4:
+            - Length:
+                max: 41
+        shipAddress5:
+            - Length:
+                max: 41
+        shipCity:
+            - Length:
+                max: 31
+        shipState:
+            - Length:
+                max: 21
+        shipPostalCode:
+            - Length:
+                max: 13
+        shipCountry:
+            - Length:
+                max: 31
+        shipNote:
+            - Length:
+                max: 41
+        fob:
+            - Length:
+                max: 13
+        memo:
+            - Length:
+                max: 4095
+        quickbooksTxnId:
+            - Length:
+                max: 48
+        quickbooksTxnNumber:
+            - Length:
+                max: 48
+        quickbooksEditSequence:
+            - Length:
+                max: 48
+
+MajorApi\AppBundle\Entity\QuickbooksInvoiceLine:
+    properties:
+        itemName:
+            - Length:
+                max: 31
+        itemDescription:
+            - Length:
+                max: 4095
+        unitOfMeasure:
+            - Length:
+                max: 31
+        serialNumber:
+            - Length:
+                max: 1024
+        lotNumber:
+            - Length:
+                max: 40
+        other1:
+            - Length:
+                max: 29
+        other2:
+            - Length:
+                max: 29
+
+MajorApi\AppBundle\Entity\QuickbooksItem:
+    properties:
+        type:
+            - NotBlank: ~
+            - Length:
+                min: 1
+                max: 128
+        name:
+            - NotBlank: ~
+            - Length:
+                min: 1
+                max: 31
+        fullname:
+            - Length:
+                max: 159
+        salesDescription:
+            - Length:
+                max: 4095
+        purchaseDescription:
+            - Length:
+                max: 4095
+        description:
+            - Length:
+                max: 4095
+        itemDescription:
+            - Length:
+                max: 4095
+        barCode:
+            - Length:
+                max: 50
+        manufacturerPartNumber:
+            - Length:
+                max: 31
+        vendorOrPayeeName:
+            - Length:
+                max: 50
+        acquiredAs:
+            - Length:
+                max: 50
+        assetDescription:
+            - Length:
+                max: 50
+        location:
+            - Length:
+                max: 50
+        poNumber:
+            - Length:
+                max: 30
+        serialNumber:
+            - Length:
+                max: 30
+        notes:
+            - Length:
+                max: 1024
+        assetNumber:
+            - Length:
+                max: 10
+        externalGuid:
+            - Length:
+                max: 48
+        quickbooksListId:
+            - Length:
+                max: 128
+        quickbooksEditSequence:
+            - Length:
+                max: 16
+
+MajorApi\AppBundle\Entity\QuickbooksLog:
+    properties:
+        type:
+            - NotBlank: ~
+            - Length:
+                min: 1
+                max: 128
+        message:
+            - NotBlank: ~
+            - Length:
+                min: 1
+                max: 1024
+
+MajorApi\AppBundle\Entity\QuickbooksLog:
+    properties:
+        initial:
+            - NotBlank: ~
+            - Length:
+                min: 1
+                max: 5
+        quickbooksListId:
+            - Length:
+                max: 128
+        quickbooksEditSequence:
+            - Length:
+                max: 48
+
+MajorApi\AppBundle\Entity\QuickbooksSalesOrder:
+    properties:
+        refNumber:
+            - NotBlank: ~
+            - Length:
+                min: 1
+                max: 11
+        billAddress1:
+            - Length:
+                max: 41
+        billAddress2:
+            - Length:
+                max: 41
+        billAddress3:
+            - Length:
+                max: 41
+        billAddress4:
+            - Length:
+                max: 41
+        billAddress5:
+            - Length:
+                max: 41
+        billCity:
+            - Length:
+                max: 31
+        billState:
+            - Length:
+                max: 21
+        billPostalCode:
+            - Length:
+                max: 13
+        billCountry:
+            - Length:
+                max: 31
+        billNote:
+            - Length:
+                max: 41
+        shipAddress1:
+            - Length:
+                max: 41
+        shipAddress2:
+            - Length:
+                max: 41
+        shipAddress3:
+            - Length:
+                max: 41
+        shipAddress4:
+            - Length:
+                max: 41
+        shipAddress5:
+            - Length:
+                max: 41
+        shipCity:
+            - Length:
+                max: 31
+        shipState:
+            - Length:
+                max: 21
+        shipPostalCode:
+            - Length:
+                max: 13
+        shipCountry:
+            - Length:
+                max: 31
+        shipNote:
+            - Length:
+                max: 41
+        fob:
+            - Length:
+                max: 13
+        memo:
+            - Length:
+                max: 4095
+        quickbooksTxnId:
+            - Length:
+                max: 48
+        quickbooksTxnNumber:
+            - Length:
+                max: 48
+        quickbooksEditSequence:
+            - Length:
+                max: 48
+
+MajorApi\AppBundle\Entity\QuickbooksSalesOrderLine:
+    properties:
+        description:
+            - Length:
+                max: 4095
+        unitOfMeasure:
+            - Length:
+                max: 31
+        serialNumber:
+            - Length:
+                max: 1024
+        lotNumber:
+            - Length:
+                max: 40
+        other1:
+            - Length:
+                max: 29
+        other2:
+            - Length:
+                max: 29
+        itemName:
+            - Length:
+                max: 31
+
+MajorApi\AppBundle\Entity\QuickbooksVendor:
+    properties:
+        name:
+            - NotBlank: ~
+            - Length:
+                min: 1
+                max: 41
+        fullname:
+            - Length:
+                max: 159
+        companyName:
+            - Length:
+                max: 41
+        salutation:
+            - Length:
+                max: 15
+        firstName:
+            - Length:
+                max: 25
+        middleName:
+            - Length:
+                max: 5
+        lastName:
+            - Length:
+                max: 25
+        jobTitle:
+            - Length:
+                max: 41
+        vendorAddressAddress1:
+            - Length:
+                max: 41
+        vendorAddressAddress2:
+            - Length:
+                max: 41
+        vendorAddressAddress3:
+            - Length:
+                max: 41
+        vendorAddressAddress4:
+            - Length:
+                max: 41
+        vendorAddressAddress5:
+            - Length:
+                max: 41
+        vendorAddressCity:
+            - Length:
+                max: 31
+        vendorAddressState:
+            - Length:
+                max: 21
+        vendorAddressPostalCode:
+            - Length:
+                max: 13
+        vendorAddressCountry:
+            - Length:
+                max: 31
+        vendorAddressNote:
+            - Length:
+                max: 41
+        shipAddress1:
+            - Length:
+                max: 41
+        shipAddress2:
+            - Length:
+                max: 41
+        shipAddress3:
+            - Length:
+                max: 41
+        shipAddress4:
+            - Length:
+                max: 41
+        shipAddress5:
+            - Length:
+                max: 41
+        shipCity:
+            - Length:
+                max: 31
+        shipState:
+            - Length:
+                max: 21
+        shipPostalCode:
+            - Length:
+                max: 13
+        shipCountry:
+            - Length:
+                max: 31
+        shipNote:
+            - Length:
+                max: 41
+        phone:
+            - Length:
+                max: 21
+        altPhone:
+            - Length:
+                max: 21
+        fax:
+            - Length:
+                max: 21
+        email:
+            - Length:
+                max: 256
+        emailCc:
+            - Length:
+                max: 256
+        contact:
+            - Length:
+                max: 41
+        altContact:
+            - Length:
+                max: 41
+        nameOnCheck:
+            - Length:
+                max: 41
+        accountNumber:
+            - Length:
+                max: 99
+        notes:
+            - Length:
+                max: 4095
+        vendorTaxIdentity:
+            - Length:
+                max: 15
+        quickbooksListId:
+            - Length:
+                max: 128
+        quickbooksEditSequence:
+            - Length:
+                max: 16
+        quickbooksNameToken:
+            - Length:
+                max: 48
+
+MajorApi\AppBundle\Entity\QuickbooksVendorContact:
+    properties:
+        salutation:
+            - Length:
+                max: 41
+        firstName:
+            - Length:
+                max: 25
+        middleName:
+            - Length:
+                max: 5
+        lastName:
+            - Length:
+                max: 25
+        jobTitle:
+            - Length:
+                max: 41
+        contactRefName1:
+            - Length:
+                max: 40
+        contactRefValue1:
+            - Length:
+                max: 255
+        contactRefName2:
+            - Length:
+                max: 40
+        contactRefValue2:
+            - Length:
+                max: 255
+        contactRefName3:
+            - Length:
+                max: 40
+        contactRefValue3:
+            - Length:
+                max: 255
+        contactRefName4:
+            - Length:
+                max: 40
+        contactRefValue4:
+            - Length:
+                max: 255
+        contactRefName5:
+            - Length:
+                max: 40
+        contactRefValue5:
+            - Length:
+                max: 255
+        quickbooksListId:
+            - Length:
+                max: 128
+        quickbooksEditSequence:
+            - Length:
+                max: 16
+
+MajorApi\AppBundle\Entity\QuickbooksVendorNote:
+    properties:
+        note:
+            - Length:
+                max: 4095
+        quickbooksListId:
+            - Length:
+                max: 128

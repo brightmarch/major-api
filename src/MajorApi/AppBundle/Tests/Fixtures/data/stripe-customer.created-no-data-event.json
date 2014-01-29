@@ -1,0 +1,42 @@
+{
+  "id": "evt_3hTAjv2tHvlSGI",
+  "created": 1366715068,
+  "livemode": false,
+  "type": "customer.created",
+  "data": {
+    "object": {
+      "object": "customer",
+      "created": 1366715068,
+      "id": "cus_1hTAhEjxsfXxs7",
+      "livemode": false,
+      "description": "Test Major Customer #2",
+      "active_card": {
+        "object": "card",
+        "last4": "4242",
+        "type": "Visa",
+        "exp_month": 1,
+        "exp_year": 2014,
+        "fingerprint": "QQDWqkkxCZEqo5Y4",
+        "country": "US",
+        "name": null,
+        "address_line1": null,
+        "address_line2": null,
+        "address_city": null,
+        "address_state": null,
+        "address_zip": null,
+        "address_country": null,
+        "cvc_check": "pass",
+        "address_line1_check": null,
+        "address_zip_check": null
+      },
+      "email": null,
+      "delinquent": false,
+      "subscription": null,
+      "discount": null,
+      "account_balance": 0
+    }
+  },
+  "object": "event",
+  "pending_webhooks": 1,
+  "user_id": "acct_1QE1OB1VDXKvTU4yJrkd"
+}

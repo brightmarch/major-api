@@ -1,0 +1,414 @@
+{% set selectedMenu = 'developers' %}
+{% set developersMenu = 'quickbooks-api-customers' %}
+{% extends 'MajorApiAppBundle:WebLayouts:default.html.twig' %}
+
+{% block title %}Major &mdash; Developers &mdash; QuickBooks Customers API{% endblock %}
+
+{% block body %}
+    <article>
+        <div class="wrapper">
+            <div class="documentation clearfix limiter">
+                {% include 'MajorApiAppBundle:WebTemplates:developers-menu.html.twig' %}
+
+                <div class="doc">
+                    <h1>QuickBooks Customers API</h1>
+                    <p>
+                        The Major QuickBooks REST API allows you to create a new customer to import into QuickBooks and to read information about customers you have created.
+                    </p>
+                    <p>
+                        Creating a new customer requires a POST request. Retrieving a customer requires a GET request.
+                    </p>
+
+                    <h2>Creating a New Customer</h2>
+                    <p>
+                        <code><strong>POST</strong><br>https://majorapi.com/api/quickbooks/customers</code>
+                    </p>
+                    <p>
+                        QuickBooks offers a variety of fields you can store data in for customers. When creating a customer, you must supply a unique name and at least one complete address.
+                    </p>
+                    <p>
+                        A complete address means that either the bill or ship address fields has a value in the <code>Address1</code>, <code>City</code>, <code>State</code>, <code>PostalCode</code>, and <code>Country</code> fields.
+                        Additionally, non-empty fields from one address will be copied over to their identical fields of the other address if the other address fields are empty. For example, if the billing address is complete, and the shipping address
+                        is not, empty fields from the billing address will be copied to the shipping address.
+                    </p>
+                    <p>
+                        In addition to being required, the <code>name</code> field must be unique per Major QuickBooks Application. It is your responsibility to ensure that the <code>name</code> field is unique. You will receive a <code>409 Conflict</code> error if you attempt to create a duplicate customer.
+                        Names are stored entirely in uppercase characters. Names can not contain colons.
+                    </p>
+                    <p>
+                        All other fields are entirely optional.
+                    </p>
+
+                    <h3>Customer Fields</h3>
+                    <p>
+                        <strong>Bolded</strong> fields below are required. The field names below are what must be specified in the HTTP request.
+                    </p>
+
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td class="field"><strong>name</strong></td>
+                                <td>
+                                    The unique name of the customer. Names must be unique per Major QuickBooks Application. Names can not contain colons.
+                                </td>
+                                <td class="max">41 characters max</td>
+                            </tr>
+                            <tr>
+                                <td class="field">companyName</td>
+                                <td>&nbsp;</td>
+                                <td class="max">41 characters max</td>
+                            </tr>
+                            <tr>
+                                <td class="field">salutation</td>
+                                <td>ex: Mr., Mrs., Doctor</td>
+                                <td class="max">15 characters max</td>
+                            </tr>
+                            <tr>
+                                <td class="field">firstName</td>
+                                <td>
+                                    The <em>firstName</em> field must be explicitly defined if you wish for it to have a value.
+                                </td>
+                                <td class="max">25 characters max</td>
+                            </tr>
+                            <tr>
+                                <td class="field">middleName</td>
+                                <td>&nbsp;</td>
+                                <td class="max">5 characters max</td>
+                            </tr>
+                            <tr>
+                                <td class="field">lastName</td>
+                                <td>
+                                    The <em>lastName</em> field must be explicitly defined if you wish for it to have a value.
+                                </td>
+                                <td class="max">25 characters max</td>
+                            </tr>
+                            <tr>
+                                <td class="field"><strong>billAddress1</strong></td>
+                                <td>&nbsp;</td>
+                                <td class="max">41 characters max</td>
+                            </tr>
+                            <tr>
+                                <td class="field">billAddress2</td>
+                                <td>&nbsp;</td>
+                                <td class="max">41 characters max</td>
+                            </tr>
+                            <tr>
+                                <td class="field">billAddress3</td>
+                                <td>&nbsp;</td>
+                                <td class="max">41 characters max</td>
+                            </tr>
+                            <tr>
+                                <td class="field">billAddress4</td>
+                                <td>&nbsp;</td>
+                                <td class="max">41 characters max</td>
+                            </tr>
+                            <tr>
+                                <td class="field">billAddress5</td>
+                                <td>&nbsp;</td>
+                                <td class="max">41 characters max</td>
+                            </tr>
+                            <tr>
+                                <td class="field"><strong>billCity</strong></td>
+                                <td>&nbsp;</td>
+                                <td class="max">31 characters max</td>
+                            </tr>
+                            <tr>
+                                <td class="field"><strong>billState</strong></td>
+                                <td>
+                                ex: Texas, TX, California, CA
+                                </td>
+                                <td class="max">21 characters max</td>
+                            </tr>
+                            <tr>
+                                <td class="field"><strong>billPostalCode</strong></td>
+                                <td>&nbsp;</td>
+                                <td class="max">13 characters max</td>
+                            </tr>
+                            <tr>
+                                <td class="field"><strong>billCountry</strong></td>
+                                <td>&nbsp;</td>
+                                <td class="max">31 characters max</td>
+                            </tr>
+                            <tr>
+                                <td class="field">billNote</td>
+                                <td>Any textual note about the billing address.</td>
+                                <td class="max">41 characters max</td>
+                            </tr>
+                            <tr>
+                                <td class="field"><strong>shipAddress1</strong></td>
+                                <td>&nbsp;</td>
+                                <td class="max">41 characters max</td>
+                            </tr>
+                            <tr>
+                                <td class="field">shipAddress2</td>
+                                <td>&nbsp;</td>
+                                <td class="max">41 characters max</td>
+                            </tr>
+                            <tr>
+                                <td class="field">shipAddress3</td>
+                                <td>&nbsp;</td>
+                                <td class="max">41 characters max</td>
+                            </tr>
+                            <tr>
+                                <td class="field">shipAddress4</td>
+                                <td>&nbsp;</td>
+                                <td class="max">41 characters max</td>
+                            </tr>
+                            <tr>
+                                <td class="field">shipAddress5</td>
+                                <td>&nbsp;</td>
+                                <td class="max">41 characters max</td>
+                            </tr>
+                            <tr>
+                                <td class="field"><strong>shipCity</strong></td>
+                                <td>&nbsp;</td>
+                                <td class="max">31 characters max</td>
+                            </tr>
+                            <tr>
+                                <td class="field"><strong>shipState</strong></td>
+                                <td>ex: Texas, TX, California, CA</td>
+                                <td class="max">21 characters max</td>
+                            </tr>
+                            <tr>
+                                <td class="field"><strong>shipPostalCode</strong></td>
+                                <td>&nbsp;</td>
+                                <td class="max">13 characters max</td>
+                            </tr>
+                            <tr>
+                                <td class="field"><strong>shipCountry</strong></td>
+                                <td>&nbsp;</td>
+                                <td class="max">31 characters max</td>
+                            </tr>
+                            <tr>
+                                <td class="field">shipNote</td>
+                                <td>Any textual note about the shipping address.</td>
+                                <td class="max">41 characters max</td>
+                            </tr>
+                            <tr>
+                                <td class="field">phone</td>
+                                <td>ex: 214-669-3033, 1-800-555-3303x203</td>
+                                <td class="max">21 characters max</td>
+                            </tr>
+                            <tr>
+                                <td class="field">altPhone</td>
+                                <td>Useful for cell phone numbers.</td>
+                                <td class="max">21 characters max</td>
+                            </tr>
+                            <tr>
+                                <td class="field">fax</td>
+                                <td>&nbsp;</td>
+                                <td class="max">21 characters max</td>
+                            </tr>
+                            <tr>
+                                <td class="field">email</td>
+                                <td>No validation is performed to ensure this is a valid email address.</td>
+                                <td class="max">256 characters max</td>
+                            </tr>
+                            <tr>
+                                <td class="field">notes</td>
+                                <td>Notes about this customer.</td>
+                                <td class="max">4096 characters max</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3>Successful Request and Response</h3>
+
+                    <h4>201 Created</h4>
+<pre>curl -X POST \
+    -u "username:API_KEY" \
+    -H "Accept: application/json" \
+    -d "name=Customer Name" \
+    -d "shipAddress1=1010 Place Road" \
+    -d "shipCity=Dallas" \
+    -d "shipState=TX" \
+    -d "shipPostalCode=75228" \
+    -d "shipCountry=USA" \
+    https://majorapi.com/api/quickbooks/customers</pre>
+
+<pre>[
+    {
+        "created": "2013-01-11T21:12:42+00:00",
+        "updated": "2013-01-11T21:12:42+00:00",
+        "status": 1,
+        "applicationName": "Major",
+        "applicationUsername": "major",
+        "name": "CUSTOMER NAME",
+        "isActive": true,
+        "companyName": null,
+        "salutation": null,
+        "firstName": null,
+        "middleName": null,
+        "lastName": null,
+        "jobTitle": null,
+        "billAddress": {
+            "address1": "1010 Place Road",
+            "address2": null,
+            "address3": null,
+            "address4": null,
+            "address5": null,
+            "city": "Dallas",
+            "state": "TX",
+            "postalCode": "75228",
+            "country": "USA",
+            "note": null
+        },
+        "shipAddress": {
+            "address1": "1010 Place Road",
+            "address2": null,
+            "address3": null,
+            "address4": null,
+            "address5": null,
+            "city": "Dallas",
+            "state": "TX",
+            "postalCode": "75228",
+            "country": "USA",
+            "note": null
+        },
+        "phone": null,
+        "altPhone": null,
+        "fax": null,
+        "email": null,
+        "emailCc": null,
+        "notes": null,
+        "_links": [
+            {
+                "rel": "self",
+                "method": "GET",
+                "href": "https://majorapi.com/api/quickbooks/customers/BAXTER%20BROWN"
+            }
+        ]
+    }
+]</pre>
+
+                    <h3>Unsuccessful Requests and Responses</h3>
+
+                    <h4>400 Bad Syntax</h4>
+<pre>curl -X POST \
+    -u "username:API_KEY" \
+    -H "Accept: application/json" \
+    -d "name=Billy James Williams the Third and Fourth and Fifth" \
+    https://majorapi.com/api/quickbooks/customers</pre>
+
+<pre>{
+    "httpCode": 400,
+    "message": "The Quickbooks Customer you are attempting to create is invalid.",
+    "violations": {
+        "name": "This value is too long. It should have 31 characters or less.",
+        "billAddress1": "This value should not be blank.",
+        "billCity": "This value should not be blank.",
+        "billState": "This value should not be blank.",
+        "billPostalCode": "This value should not be blank.",
+        "billCountry": "This value should not be blank."
+    }
+}</pre>
+
+                    <h4>409 Conflict</h4>
+<pre>curl -X POST \
+    -u "username:API_KEY" \
+    -H "Accept: application/json" \
+    -d "name=Customer Name" \
+    -d "shipAddress1=1010 Place Road" \
+    -d "shipCity=Dallas" \
+    -d "shipState=TX" \
+    -d "shipPostalCode=75228" \
+    -d "shipCountry=USA" \
+    https://majorapi.com/api/quickbooks/customers</pre>
+
+<pre>{
+    "httpCode": 409,
+    "message": "The Quickbooks Customer you are attempting to create with the name CUSTOMER NAME has already been created.",
+    "violations": []
+}</pre>
+
+                    <h2>Retrieving an Existing Customer</h2>
+                    <p>
+                        <code><strong>GET</strong><br>https://majorapi.com/api/quickbooks/customers/{customerName}</code>
+                    </p>
+                    <p>
+                        <strong>Note</strong> &mdash; Customers are retrieved by their name. If the name has a space in it, it must be URL encoded properly. The name does not have to be capitalized; Major will handle normalizing the name
+                        to best attempt to locate the customer.
+                    </p>
+
+                    <h3>Successful Request and Response</h3>
+
+                    <h4>200 Ok</h4>
+<pre>curl -X GET \
+    -u "username:API_KEY" \
+    -H "Accept: application/json" \
+    https://majorapi.com/api/quickbooks/customers/CUSTOMER%20NAME</pre>
+
+<pre>[
+    {
+        "created": "2013-01-11T21:12:42+00:00",
+        "updated": "2013-01-11T21:12:42+00:00",
+        "status": 1,
+        "applicationName": "Major",
+        "applicationUsername": "major",
+        "name": "CUSTOMER NAME",
+        "isActive": true,
+        "companyName": null,
+        "salutation": null,
+        "firstName": null,
+        "middleName": null,
+        "lastName": null,
+        "jobTitle": null,
+        "billAddress": {
+            "address1": "1010 Place Road",
+            "address2": null,
+            "address3": null,
+            "address4": null,
+            "address5": null,
+            "city": "Dallas",
+            "state": "TX",
+            "postalCode": "75228",
+            "country": "USA",
+            "note": null
+        },
+        "shipAddress": {
+            "address1": "1010 Place Road",
+            "address2": null,
+            "address3": null,
+            "address4": null,
+            "address5": null,
+            "city": "Dallas",
+            "state": "TX",
+            "postalCode": "75228",
+            "country": "USA",
+            "note": null
+        },
+        "phone": null,
+        "altPhone": null,
+        "fax": null,
+        "email": null,
+        "emailCc": null,
+        "notes": null,
+        "_links": [
+            {
+                "rel": "self",
+                "method": "GET",
+                "href": "https://majorapi.com/api/quickbooks/customers/BAXTER%20BROWN"
+            }
+        ]
+    }
+]</pre>
+
+                    <h3>Unsuccessful Request and Response</h3>
+
+                    <h4>404 Not Found</h4>
+<pre>curl -X GET \
+    -u "username:API_KEY" \
+    -H "Accept: application/json" \
+    https://majorapi.com/api/quickbooks/customers/Invalid%20Name</pre>
+
+<pre>{
+    "httpCode": 404,
+    "message": "A QuickBooks Customer with the name Invalid Name could not be found.",
+    "violations": []
+}</pre>
+
+                </div>
+            </div>
+        </div>
+    </article>
+{% endblock %}

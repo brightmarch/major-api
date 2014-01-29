@@ -1,0 +1,80 @@
+MajorApi\AppBundle\Entity\Account:
+    type: entity
+    table: web_account
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: SEQUENCE
+            sequenceGenerator:
+                sequenceName: web_account_id_seq 
+                allocationSize: 1
+                initialValue: 1 
+    fields:
+        created:
+            column: created
+            type: datetime
+        updated:
+            column: updated 
+            type: datetime
+        status:
+            column: status
+            type: integer
+        email:
+            column: email
+            type: string
+        salt:
+            column: salt
+            type: string
+        passwordHash:
+            column: password_hash
+            type: string
+        firstName:
+            column: first_name
+            type: string
+        lastName:
+            column: last_name
+            type: string
+        role:
+            column: role
+            type: string
+        billingToken:
+            column: billing_token
+            type: string
+        billingType:
+            column: billing_type
+            type: string
+        billingDigits:
+            column: billing_digits
+            type: string
+        planAmount:
+            column: plan_amount
+            type: decimal
+            precision: 2
+        transactionRate:
+            column: transaction_rate
+            type: decimal
+            precision: 4
+        stripeAccessToken:
+            column: stripe_access_token
+            type: string
+            nullable: true
+        stripeRefreshToken:
+            column: stripe_refresh_token
+            type: string
+            nullable: true
+        stripePublishableKey:
+            column: stripe_publishable_key
+            type: string
+            nullable: true
+        stripeUserId:
+            column: stripe_user_id
+            type: string
+            nullable: true
+    oneToMany:
+        applications:
+            targetEntity: Application
+            mappedBy: account
+    lifecycleCallbacks:
+        prePersist: [ onCreate ]
+        preUpdate: [ onUpdate ]

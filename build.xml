@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="MajorApi" default="build">
+
+    <resolvepath propertyName="root_path" file="./" />
+    <resolvepath propertyName="config_path" file="./app/config/" />
+    
+    <php function="date" returnProperty="build_date">
+        <param value="c" />
+    </php>
+
+    <available file="${build_settings_file}" property="build_settings_file_exists" value="1" />
+    <if>
+        <equals arg1="${build_settings_file_exists}" arg2="1" />
+        <then>
+            <property file="${build_settings_file}" />
+        </then>
+    </if>
+
+    <target name="build" depends="clean,compile-configuration,compile-vendors,warmup"></target>
+    <target name="deploy" depends="compile-configuration,compile-vendors,warmup,compile-composer-cache"></target>
+
+    <target name="clean">
+        <delete dir="${root_path}/vendor/" />
+        <delete file="${root_path}/vendor" />
+        <delete file="${root_path}/app/bootstrap.php.cache" />
+    </target>
+  
+    <target name="compile-vendors">
+        <available file="${vendor_path}" property="vendor_path_exists" value="1" />
+        <if>
+            <equals arg1="${vendor_path_exists}" arg2="1" />
+            <then>
+                <symlink target="${vendor_path}" link="${root_path}/vendor" />
+            </then>
+        </if>
+
+        <exec command="php composer.phar install --optimize-autoloader" checkreturn="true" />
+    </target>
+
+    <target name="compile-composer-cache">
+        <exec command="php composer.phar dump-autoload --optimize" checkreturn="true" />
+    </target>
+
+    <target name="compile-configuration">
+        <copy file="${root_path}/app/config/parameters.yml.template" tofile="${root_path}/app/config/parameters.yml" overwrite="true">
+            <filterchain>
+                <replacetokens begintoken="@@" endtoken="@@">
+                    <token key="DB_SETTINGS_HOST" value="${db_settings.host}" />
+                    <token key="DB_SETTINGS_DATABASE" value="${db_settings.database}" />
+                    <token key="DB_SETTINGS_USERNAME" value="${db_settings.username}" />
+                    <token key="DB_SETTINGS_PASSWORD" value="${db_settings.password}" />
+                    
+                    <token key="DB_SETTINGS_TEST_HOST" value="${db_settings_test.host}" />
+                    <token key="DB_SETTINGS_TEST_DATABASE" value="${db_settings_test.database}" />
+                    <token key="DB_SETTINGS_TEST_USERNAME" value="${db_settings_test.username}" />
+                    <token key="DB_SETTINGS_TEST_PASSWORD" value="${db_settings_test.password}" />
+
+                    <token key="REDIS_HOST" value="${redis_host}" />
+                    <token key="REDIS_PORT" value="${redis_port}" />
+
+                    <token key="API_KEY_LENGTH" value="${api_key_length}" />
+
+                    <token key="PLAN_AMOUNT" value="${plan_amount}" />
+                    <token key="TRANSACTION_RATE" value="${transaction_rate}" />
+                    <token key="RECORDS_PER_PAGE" value="${records_per_page}" />
+
+                    <token key="STRIPE_SECRET_KEY" value="${stripe_secret_key}" />
+                    <token key="STRIPE_PUBLISHABLE_KEY" value="${stripe_publishable_key}" />
+                    <token key="STRIPE_CLIENT_ID" value="${stripe_client_id}" />
+
+                    <token key="BUILD_DATE" value="${build_date}" />
+                </replacetokens>
+            </filterchain>
+        </copy>
+    </target>
+  
+    <target name="warmup">
+        <exec command="php ${root_path}/app/console assets:install web --no-interaction --no-ansi --symlink --env=prod" />
+
+        <exec command="php ${root_path}/app/console cache:clear --env=prod --no-interaction --no-ansi" />
+        <exec command="php ${root_path}/app/console cache:clear --env=test --no-interaction --no-ansi" />
+        <exec command="php ${root_path}/app/console cache:warmup --env=test --no-interaction --no-ansi" />
+        <exec command="php ${root_path}/app/console cache:warmup --env=prod --no-interaction --no-ansi" />
+    </target>
+    
+    <target name="run-database-migrations">
+        <exec command="php app/console doctrine:migrations:migrate --no-interaction --no-ansi" checkreturn="true" />
+        <exec command="php app/console doctrine:migrations:migrate --env=test --no-interaction --no-ansi" checkreturn="true" />
+    </target>
+
+    <target name="run-tests">
+        <exec command="phpunit -c app" checkreturn="true" />
+    </target>
+</project>

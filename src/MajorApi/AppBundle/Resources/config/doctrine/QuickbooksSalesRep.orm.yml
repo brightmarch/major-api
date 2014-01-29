@@ -1,0 +1,48 @@
+MajorApi\AppBundle\Entity\QuickbooksSalesRep:
+    type: entity
+    table: api_quickbooks_sales_rep
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: SEQUENCE
+            sequenceGenerator:
+                sequenceName: api_quickbooks_sales_rep_id_seq
+                allocationSize: 1
+                initialValue: 1 
+    fields:
+        created:
+            column: created
+            type: datetime
+        updated:
+            column: updated 
+            type: datetime
+        status:
+            column: status
+            type: integer
+        applicationId:
+            column: application_id
+            type: integer
+        initial:
+            column: initial
+            type: string
+        isActive:
+            column: is_active
+            type: boolean
+        quickbooksListId:
+            column: quickbooks_list_id
+            type: string
+            nullable: true
+        quickbooksEditSequence:
+            column: quickbooks_edit_sequence
+            type: string
+            nullable: true
+    manyToOne:
+        application:
+            targetEntity: Application
+            joinColumn:
+                name: application_id
+                referencedColumnName: id
+    lifecycleCallbacks:
+        prePersist: [ onCreate ]
+        preUpdate: [ onUpdate ]

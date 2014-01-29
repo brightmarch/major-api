@@ -1,0 +1,22 @@
+{% set selectedMenu = 'developers' %}
+{% set developersMenu = 'quickbooks-api-sales-orders' %}
+{% extends 'MajorApiAppBundle:WebLayouts:default.html.twig' %}
+
+{% block title %}Major &mdash; Developers &mdash; QuickBooks Sales Orders API{% endblock %}
+
+{% block body %}
+    <article>
+        <div class="wrapper">
+            <div class="documentation clearfix limiter">
+                {% include 'MajorApiAppBundle:WebTemplates:developers-menu.html.twig' %}
+
+                <div class="doc">
+                    <h1>QuickBooks Sales Orders API</h1>
+                    <p>
+                        The Major QuickBooks REST API will be updated momentarily to allow you to create and read sales orders.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </article>
+{% endblock %}

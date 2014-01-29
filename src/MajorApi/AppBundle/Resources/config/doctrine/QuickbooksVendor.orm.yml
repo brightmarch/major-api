@@ -1,0 +1,227 @@
+MajorApi\AppBundle\Entity\QuickbooksVendor:
+    type: entity
+    table: api_quickbooks_vendor
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: SEQUENCE
+            sequenceGenerator:
+                sequenceName: api_quickbooks_vendor_id_seq
+                allocationSize: 1
+                initialValue: 1 
+    fields:
+        created:
+            column: created
+            type: datetime
+        updated:
+            column: updated 
+            type: datetime
+        status:
+            column: status
+            type: integer
+        applicationId:
+            column: application_id
+            type: integer
+        token:
+            column: token
+            type: string
+            nullable: true
+        name:
+            column: name
+            type: string
+        fullname:
+            column: fullname
+            type: string
+            nullable: true
+        isActive:
+            column: is_active
+            type: boolean
+        companyName:
+            column: company_name
+            type: string
+            nullable: true
+        salutation:
+            column: salutation
+            type: string
+            nullable: true
+        firstName:
+            column: first_name
+            type: string
+            nullable: true
+        middleName:
+            column: middle_name
+            type: string
+            nullable: true
+        lastName:
+            column: last_name
+            type: string
+            nullable: true
+        jobTitle:
+            column: job_title
+            type: string
+            nullable: true
+        vendorAddressAddress1:
+            column: vendor_address_address1
+            type: string
+            nullable: true
+        vendorAddressAddress2:
+            column: vendor_address_address2
+            type: string
+            nullable: true
+        vendorAddressAddress3:
+            column: vendor_address_address3
+            type: string
+            nullable: true
+        vendorAddressAddress4:
+            column: vendor_address_address4
+            type: string
+            nullable: true
+        vendorAddressAddress5:
+            column: vendor_address_address5
+            type: string
+            nullable: true
+        vendorAddressCity:
+            column: vendor_address_city 
+            type: string
+            nullable: true
+        vendorAddressState:
+            column: vendor_address_state
+            type: string
+            nullable: true
+        vendorAddressPostalCode:
+            column: vendor_address_postal_code 
+            type: string
+            nullable: true
+        vendorAddressCountry:
+            column: vendor_address_country
+            type: string
+            nullable: true
+        vendorAddressNote:
+            column: vendor_address_note
+            type: string
+            nullable: true
+        shipAddress1:
+            column: ship_address1
+            type: string
+            nullable: true
+        shipAddress2:
+            column: ship_address2
+            type: string
+            nullable: true
+        shipAddress3:
+            column: ship_address3
+            type: string
+            nullable: true
+        shipAddress4:
+            column: ship_address4
+            type: string
+            nullable: true
+        shipAddress5:
+            column: ship_address5
+            type: string
+            nullable: true
+        shipCity:
+            column: ship_city 
+            type: string
+            nullable: true
+        shipState:
+            column: ship_state
+            type: string
+            nullable: true
+        shipPostalCode:
+            column: ship_postal_code 
+            type: string
+            nullable: true
+        shipCountry:
+            column: ship_country
+            type: string
+            nullable: true
+        shipNote:
+            column: ship_note
+            type: string
+            nullable: true
+        phone:
+            column: phone
+            type: string
+            nullable: true
+        altPhone:
+            column: alt_phone
+            type: string
+            nullable: true
+        fax:
+            column: fax
+            type: string
+            nullable: true
+        email:
+            column: email
+            type: string
+            nullable: true
+        emailCc:
+            column: email_cc
+            type: string
+            nullable: true
+        contact:
+            column: contact 
+            type: string
+            nullable: true
+        altContact:
+            column: alt_contact 
+            type: string
+            nullable: true
+        nameOnCheck:
+            column: name_on_check
+            type: string
+            nullable: true
+        accountNumber:
+            column: account_number
+            type: string
+            nullable: true
+        notes:
+            column: notes
+            type: string
+            nullable: true
+        creditLimit:
+            column: credit_limit
+            type: decimal
+            precision: 4
+        vendorTaxIdentity:
+            column: vendor_tax_identity
+            type: string
+            nullable: true
+        isVendorEligibleFor1099:
+            column: is_vendor_eligible_for_1099
+            type: boolean
+        balance:
+            column: balance
+            type: decimal
+            precision: 4
+        quickbooksListId:
+            column: quickbooks_list_id
+            type: string
+            nullable: true
+        quickbooksEditSequence:
+            column: quickbooks_edit_sequence
+            type: string
+            nullable: true
+        quickbooksNameToken:
+            column: quickbooks_name_token
+            type: string
+    manyToOne:
+        application:
+            targetEntity: Application
+            joinColumn:
+                name: application_id
+                referencedColumnName: id
+    oneToMany:
+        quickbooksVendorContacts:
+            targetEntity: QuickbooksVendorContact
+            mappedBy: quickbooksOrder
+            cascade: [ persist ]
+        quickbooksVendorNotes:
+            targetEntity: QuickbooksVendorNote
+            mappedBy: quickbooksNote
+            cascade: [ persist ]
+    lifecycleCallbacks:
+        prePersist: [ onCreate ]
+        preUpdate: [ onUpdate ]

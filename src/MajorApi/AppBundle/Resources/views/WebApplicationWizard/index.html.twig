@@ -1,0 +1,69 @@
+{% extends 'MajorApiAppBundle:WebLayouts:void.html.twig' %}
+
+{% block title %}Major &mdash; Integrate Your QuickBooks Application{% endblock %}
+
+{% block body %}
+    <div class="limiter">
+        <h1>Integrate with Major</h1>
+        <div class="col-12">
+            {% include 'MajorApiAppBundle:WebTemplates:messaging.html.twig' %}
+        </div>
+
+        <div class="col-5 left">
+            <div class="message success">
+                <p>
+                    <strong>Great!</strong> We've created an application
+                    with the username <strong>{{ application.getName }}</strong> for you.
+                </p>
+                <p>
+                    Your API key is: <br> <code>{{ application.getApiKey }}</code>
+                </p>
+            </div>
+
+            <a href="{{ path('majorapi_web_authentication_sign_out') }}" class="right">Sign Out</a>
+        </div>
+
+        <div class="col-7 left spacing-left-1-2" novalidate>
+            <p>
+                So far so good. It is time to integrate your Major application with QuickBooks.
+                You <strong>must</strong> integrate your application with QuickBooks before you can continue.
+                It will only take three minutes and you only have to do it once.
+            </p>
+
+            <ol>
+                <li>
+                    Download and install
+                    <a href="http://marketplace.intuit.com/webconnector/" target="_blank">Intuit's QuickBooks Web Connector</a> to
+                    the computer running QuickBooks.
+                </li>
+                <li>
+                    <a href="{{ path('majorapi_web_application_download_web_connector_file') }}">Download the .qwc XML manifest file</a>
+                    we've generated for this application.
+                </li>
+                <li>
+                    In the Web Connector click "Add Application" and navigate to
+                    the location of the .qwc file you just downloaded. Allow the Web Connector
+                    to run even if QuickBooks is not running.
+                </li>
+                <li>
+                    Enter your application's API Key (<code>{{ application.getApiKey }}</code>) as
+                    the password and allow the Web Connector to save your API
+                    Key as the password.
+                </li>
+                <li>
+                    Make sure the Major Application you just installed is
+                    checked and click <strong>Update Selected</strong> in the Web Connector.
+                </li>
+                <li>
+                    That's it! As soon as the Web Connector finishes, your Major application is integrated with QuickBooks.
+                </li>
+            </ol>
+
+            <p>
+                Got that? Then you're ready to hit sync.
+            </p>
+
+            <a href="{{ path('majorapi_web_application_wizard_billing') }}" class="button centered">Sync</a>
+        </div>
+    </div>
+{% endblock %}

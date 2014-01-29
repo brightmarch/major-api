@@ -1,0 +1,19 @@
+{% for quickbooksItem in quickbooksItems %}
+    <ItemNonInventoryAddRq>
+        <ItemNonInventoryAdd>
+            <Name>{{ quickbooksItem.getName }}</Name>
+            <IsActive>true</IsActive>
+            <SalesOrPurchase>
+                <Desc>{{ quickbooksItem.getDescription }}</Desc>
+                <Price>{{ quickbooksItem.getPrice }}</Price>
+                <AccountRef>
+                    {% if quickbooksAccount %}
+                        <ListID>{{ quickbooksAccount.getQuickbooksListId }}</ListID>
+                    {% else %}
+                        <Name>{{ quickbooksAccountName }}</Name>
+                    {% endif %}
+                </AccountRef>
+            </SalesOrPurchase>
+        </ItemNonInventoryAdd>
+    </ItemNonInventoryAddRq>
+{% endfor %}

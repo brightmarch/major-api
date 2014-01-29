@@ -1,0 +1,424 @@
+{% set selectedMenu = 'developers' %}
+{% set developersMenu = 'quickbooks-api-invoices' %}
+{% extends 'MajorApiAppBundle:WebLayouts:default.html.twig' %}
+
+{% block title %}Major &mdash; Developers &mdash; QuickBooks Invoices API{% endblock %}
+
+{% block body %}
+    <article>
+        <div class="wrapper">
+            <div class="documentation clearfix limiter">
+                {% include 'MajorApiAppBundle:WebTemplates:developers-menu.html.twig' %}
+
+                <div class="doc">
+                    <h1>QuickBooks Invoices API</h1>
+                    <p>
+                        The Major QuickBooks REST API allows you to create a new invoice to import into QuickBooks and to read information about invoices you have created.
+                    </p>
+                    <p>
+                        Creating a new invoice requires a POST request. Retrieving an existing invoice requires a GET request.
+                    </p>
+
+                    <h2>Creating a New Invoice</h2>
+                    <p>
+                        <code><strong>POST</strong><br>https://majorapi.com/api/quickbooks/invoices</code>
+                    </p>
+                    <p>
+                        The only required parameters when creating an invoice are <code>refNumber</code> and <code>customerName</code>. The <code>refNumber</code> parameter must be unique per Major Application.
+                        The customer referenced by <code>customerName</code> must already exist in the Major database before the invoice can be created.
+                    </p>
+
+                    <h3>Invoice Fields</h3>
+                    <p>
+                        <strong>Bolded</strong> fields below are required. The field names below are what must be specified in the HTTP request.
+                    </p>
+                    <p>
+                        <strong>Note</strong> &mdash; Contact information and address information from the customer attached to this invoice will be automatically copied over.
+                    </p>
+
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td class="field"><strong>refNumber</strong></td>
+                                <td>
+                                    The unique reference number or invoice number. Reference numbers must be unique per Major QuickBooks Application. Reference numbers can be alpha numeric.
+                                </td>
+                                <td class="max">11 characters max</td>
+                            </tr>
+                            <tr>
+                                <td class="field"><strong>customerName</strong></td>
+                                <td>
+                                    References the QuickBooks Customer to attach to this invoice. The customer must already exist in the Major database. Additionally, the invoice will not be bridged into QuickBooks until the customer exists in QuickBooks.
+                                </td>
+                                <td class="max">N/A</td>
+                            </tr>
+                            <tr>
+                                <td class="field">invoiceLines[]</td>
+                                <td>
+                                    If you wish to add line items to the invoice, use the <code>invoiceLines</code> parameter. See the next table for a definition of each <code>invoiceLines</code> array.
+                                </td>
+                                <td class="max">N/A</td>
+                            </tr>
+                            <tr>
+                                <td class="field">poNumber</td>
+                                <td>A purchase order number.</td>
+                                <td class="max">25 characters max</td>
+                            </tr>
+                            <tr>
+                                <td class="field">isPending</td>
+                                <td>0 for false, 1 for true (invoices only)</td>
+                                <td class="max">default: false</td>
+                            </tr>
+                            <tr>
+                                <td class="field">isFinanceCharge</td>
+                                <td>0 for false, 1 for true (invoices only)</td>
+                                <td class="max">default: false</td>
+                            </tr>
+                            <tr>
+                                <td class="field">isToBePrinted</td>
+                                <td>
+                                    Boolean value for determining if this invoice should be physically printed and mailed to the customer. 0 for false, 1 for true.
+                                </td>
+                                <td class="max">default: false</td>
+                            </tr>
+                            <tr>
+                                <td class="field">isToBeEmailed</td>
+                                <td>
+                                    Boolean value for determining if this invoice should be emailed to the customer. 0 for false, 1 for true. The customer attached to this invoice requires a valid email address.
+                                </td>
+                                <td class="max">default: false</td>
+                            </tr>
+                            <tr>
+                                <td class="field">fob</td>
+                                <td>
+                                    <a href="http://en.wikipedia.org/wiki/FOB_(shipping)">Free On Board</a>
+                                </td>
+                                <td class="max">13 characters max</td>
+                            </tr>
+                            <tr>
+                                <td class="field">memo</td>
+                                <td>&nbsp;</td>
+                                <td class="max">4095 characters max</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3>Invoice Line Fields</h3>
+                    <p>
+                        <strong>Bolded</strong> fields are required. The field names below are what must be specified in the HTTP request. The <code>invoiceLines</code> is a parameter array sent in the HTTP request.
+                    </p>
+
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td class="field"><strong>itemName</strong></td>
+                                <td>
+                                    The name of the QuickBooks Item you wish to assign to this QuickBooks Invoice Line. The QuickBooks Item must already exist in the Major database.
+                                </td>
+                                <td class="max">N/A</td>
+                            </tr>
+                            <tr>
+                                <td class="field">quantityOrdered</td>
+                                <td>
+                                    The quantity to associate with this QuickBooks Invoice Line item. The amount will be automatically calculated based on this field. This amount can be a floating point value up to four decimal places.
+                                </td>
+                                <td class="max">default: 1.0</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3>Successful Request and Response</h3>
+
+                    <h4>201 Created</h4>
+<pre>curl -X POST \
+    -u "username:API_KEY" \
+    -H "Accept: application/json" \
+    -d "refNumber=000001" \
+    -d "customerName=Baxter Brown" \
+    -d "isToBePrinted=1" \
+    -d "isToBeEmailed=1" \
+    -d "memo=Please do not accept checks from this customer." \
+    -d "invoiceLines[0][itemName]=BMServicePro" \
+    -d "invoiceLines[0][quantityOrdered]=3.25" \
+    -d "invoiceLines[1][itemName]=BMDesignService" \
+    -d "invoiceLines[1][quantityOrdered]=10" \
+    https://majorapi.com/api/quickbooks/invoices</pre>
+
+<pre>[
+    {
+        "created": "2013-03-15T05:09:27+00:00",
+        "updated": "2013-03-15T05:09:27+00:00",
+        "status": 1,
+        "applicationName": "Major",
+        "applicationUsername": "major",
+        "customerName": "BAXTER BROWN",
+        "refNumber": "000001",
+        "invoiceDate": "2013-03-15",
+        "dueDate": null,
+        "shipDate": null,
+        "poPumber": null,
+        "isPending": false,
+        "isFinanceCharge": false,
+        "isToBePrinted": true,
+        "isToBeEmailed": true,
+        "billAddress": {
+            "address1": "111 Place Road",
+            "address2": null,
+            "address3": null,
+            "address4": null,
+            "address5": null,
+            "city": "Dallas",
+            "state": "TX",
+            "postalCode": "75228",
+            "country": "USA",
+            "note": null
+        },
+        "shipAddress": {
+            "address1": "111 Place Road",
+            "address2": null,
+            "address3": null,
+            "address4": null,
+            "address5": null,
+            "city": "Dallas",
+            "state": "TX",
+            "postalCode": "75228",
+            "country": "USA",
+            "note": null
+        },
+        "fob": null,
+        "memo": "Please do not accept checks from this customer.",
+        "exchange_rate": 0.00000000,
+        "importable": true,
+        "invoiceLines": [
+            {
+                "itemName": "BMServicePro",
+                "itemDescription": "BMServicePro",
+                "quantityOrdered": 3.25,
+                "unitOfMeasure": null,
+                "rate": 0,
+                "ratePercent": 0,
+                "amount": 456.32,
+                "serialNumber": "BMSRV00001",
+                "lotNumber": null,
+                "other1": null,
+                "other2": null,
+                "unitPrice": 140.40,
+                "cost": 32.55
+            },
+            {
+                "itemName": "BMDesignService",
+                "itemDescription": "BMDesignService",
+                "quantityOrdered": 10,
+                "unitOfMeasure": null,
+                "rate": 0,
+                "ratePercent": 0,
+                "amount": 1093.33,
+                "serialNumber": "BMSRV00002",
+                "lotNumber": null,
+                "other1": null,
+                "other2": null,
+                "unit_price": 109.333,
+                "cost": 54.88
+            }
+        ],
+        "_links": [
+            {
+                "rel": "self",
+                "method": "GET",
+                "href": "https://majorapi.com/api/quickbooks/invoices/0000001"
+            },
+            {
+                "rel": "customer",
+                "method": "GET",
+                "href": "https://majorapi.com/api/quickbooks/customers/BAXTER%20BROWN"
+            }
+        ]
+    }
+]</pre>
+
+                    <h3>Unsuccessful Requests and Responses</h3>
+
+                    <h4>400 Bad Syntax</h4>
+<pre>curl -X POST \
+    -u "username:API_KEY" \
+    -H "Accept: application/json" \
+    -d "refNumber=124993838930199388383777" \
+    -d "customerName=Baxter Brown" \
+    https://majorapi.com/api/quickbooks/invoices</pre>
+
+<pre>{
+    "httpCode": 400,
+    "message": "The QuickBooks Invoice can not be created because it is invalid.",
+    "violations": {
+        "refNumber": "This value is too long. It should have 11 characters or less."
+    }
+}</pre>
+
+                    <h4>409 Conflict</h4>
+<pre>curl -X POST \
+    -u "username:API_KEY" \
+    -H "Accept: application/json" \
+    -d "refNumber=1234" \
+    -d "customerName=Baxter Brown" \
+    -d "invoiceLines[0][itemId]=1234" \
+    https://majorapi.com/api/quickbooks/invoices</pre>
+
+<pre>{
+    "httpCode": 409,
+    "message": "The QuickBooks Invoice you are attempting to create with the reference number 1234 has already been created. The reference number must be unique.",
+    "violations": []
+}</pre>
+
+                    <h4>412 Precondition Failed</h4>
+<pre>curl -X POST \
+    -u "username:API_KEY" \
+    -H "Accept: application/json" \
+    -d "refNumber=12345A" \
+    -d "customerName=Invalid Name" \
+    https://majorapi.com/api/quickbooks/invoices</pre>
+
+<pre>{
+    "httpCode": 412,
+    "message": "A QuickBooks Customer with the name Invalid Name for this MajorApi Application could not be found.",
+    "violations": []
+}</pre>
+
+                    <h4>412 Precondition Failed</h4>
+<pre>curl -X POST \
+    -u "username:API_KEY" \
+    -H "Accept: application/json" \
+    -d "refNumber=1234" \
+    -d "customerName=Baxter Brown" \
+    -d "invoiceLines[0][itemName]=InvalidItem" \
+    https://majorapi.com/api/quickbooks/invoices</pre>
+
+<pre>{
+    "httpCode": 412,
+    "message": "A QuickBooks Item with the name InvalidItem for this MajorApi Application could not be found.",
+    "violations": []
+}</pre>
+
+                    <h2>Retrieving an Existing Invoice</h2>
+                    <p>
+                        <code><strong>GET</strong><br>https://majorapi.com/api/quickbooks/invoices/{refNumber}</code>
+                    </p>
+
+                    <h3>Successful Request and Response</h3>
+
+                    <h4>200 Ok</h4>
+<pre>curl -X GET \
+    -u "username:API_KEY" \
+    -H "Accept: application/json" \
+    https://majorapi.com/api/quickbooks/invoices/000001</pre>
+
+<pre>[
+    {
+        "created": "2013-03-15T05:09:27+00:00",
+        "updated": "2013-03-15T05:09:27+00:00",
+        "status": 1,
+        "applicationName": "Major",
+        "applicationUsername": "major",
+        "customerName": "BAXTER BROWN",
+        "refNumber": "000001",
+        "invoiceDate": "2013-03-15",
+        "dueDate": null,
+        "shipDate": null,
+        "poPumber": null,
+        "isPending": false,
+        "isFinanceCharge": false,
+        "isToBePrinted": true,
+        "isToBeEmailed": true,
+        "billAddress": {
+            "address1": "111 Place Road",
+            "address2": null,
+            "address3": null,
+            "address4": null,
+            "address5": null,
+            "city": "Dallas",
+            "state": "TX",
+            "postalCode": "75228",
+            "country": "USA",
+            "note": null
+        },
+        "shipAddress": {
+            "address1": "111 Place Road",
+            "address2": null,
+            "address3": null,
+            "address4": null,
+            "address5": null,
+            "city": "Dallas",
+            "state": "TX",
+            "postalCode": "75228",
+            "country": "USA",
+            "note": null
+        },
+        "fob": null,
+        "memo": "Please do not accept checks from this customer.",
+        "exchange_rate": 0.00000000,
+        "importable": true,
+        "invoiceLines": [
+            {
+                "itemName": "BMServicePro",
+                "itemDescription": "BMServicePro",
+                "quantityOrdered": 3.25,
+                "unitOfMeasure": null,
+                "rate": 0,
+                "ratePercent": 0,
+                "amount": 456.32,
+                "serialNumber": "BMSRV00001",
+                "lotNumber": null,
+                "other1": null,
+                "other2": null,
+                "unitPrice": 140.40,
+                "cost": 32.55
+            },
+            {
+                "itemName": "BMDesignService",
+                "itemDescription": "BMDesignService",
+                "quantityOrdered": 10,
+                "unitOfMeasure": null,
+                "rate": 0,
+                "ratePercent": 0,
+                "amount": 1093.33,
+                "serialNumber": "BMSRV00002",
+                "lotNumber": null,
+                "other1": null,
+                "other2": null,
+                "unit_price": 109.333,
+                "cost": 54.88
+            }
+        ],
+        "_links": [
+            {
+                "rel": "self",
+                "method": "GET",
+                "href": "https://majorapi.com/api/quickbooks/invoices/0000001"
+            },
+            {
+                "rel": "customer",
+                "method": "GET",
+                "href": "https://majorapi.com/api/quickbooks/customers/BAXTER%20BROWN"
+            }
+        ]
+    }
+]</pre>
+
+                    <h3>Unsuccessful Request and Response</h3>
+
+                    <h4>404 Not Found</h4>
+<pre>curl -X GET \
+    -u "username:API_KEY" \
+    -H "Accept: application/json" \
+    https://majorapi.com/api/quickbooks/invoices/1200303</pre>
+
+<pre>{
+    "httpCode": 404,
+    "message": "A QuickBooks Invoice with reference number 1200303 could not be found.",
+    "violations": []
+}</pre>
+
+                </div>
+            </div>
+        </div>
+    </article>
+{% endblock %}

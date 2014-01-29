@@ -1,0 +1,45 @@
+MajorApi\AppBundle\Entity\QuickbooksVendorNote:
+    type: entity
+    table: api_quickbooks_vendor_note
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: SEQUENCE
+            sequenceGenerator:
+                sequenceName: api_quickbooks_vendor_note_id_seq
+                allocationSize: 1
+                initialValue: 1 
+    fields:
+        created:
+            column: created
+            type: datetime
+        updated:
+            column: updated 
+            type: datetime
+        status:
+            column: status
+            type: integer
+        quickbooksVendorId:
+            column: quickbooks_vendor_id
+            type: integer
+        noteDate:
+            type: datetime
+            nullable: true
+        note:
+            type: string
+            nullable: true
+        quickbooksListId:
+            column: quickbooks_list_id
+            type: string
+            nullable: true
+    manyToOne:
+        quickbooksVendor:
+            targetEntity: QuickbooksVendor
+            inversedBy: quickbooksVendorNotes
+            joinColumn:
+                name: quickbooks_vendor_id
+                referencedColumnName: id
+    lifecycleCallbacks:
+        prePersist: [ onCreate ]
+        preUpdate: [ onUpdate ]

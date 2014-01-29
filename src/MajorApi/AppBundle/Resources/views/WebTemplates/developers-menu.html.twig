@@ -1,0 +1,65 @@
+<nav>
+    <div class="doc-nav">
+        <ul class="no-bullets">
+            <li>
+                <strong><a href="{{ path('majorapi_web_developers') }}" {{ developersMenu == 'introduction' ? 'class="current"' : '' }}>Introduction</a></strong>
+            </li>
+            <li>
+                <strong><a href="{{ path('majorapi_web_developers_major_applications') }}" {{ developersMenu == 'major-applications' ? 'class="current"' : '' }}>Major Applications</a></strong>
+            </li>
+            <li class="padding-top-0-5">
+                <strong><a href="{{ path('majorapi_web_developers_quickbooks') }}" {{ developersMenu == 'quickbooks' ? 'class="current"' : '' }}>QuickBooks</a></strong>
+                <ul>
+                    <li>
+                        <a href="{{ path('majorapi_web_developers_quickbooks_installing_webconnector') }}" {{ developersMenu == 'quickbooks-webconnector' ? 'class="current"' : '' }}>Installing WebConnector</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('majorapi_web_developers_quickbooks_installing_webconnector_qwc_file') }}" {{ developersMenu == 'quickbooks-installing-webconnector-qwc-file' ? 'class="current"' : '' }}>Installing .qwc File</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('majorapi_web_developers_quickbooks_connecting_with_quickbooks') }}" {{ developersMenu == 'quickbooks-connecting-with-quickbooks' ? 'class="current"' : '' }}>Connecting With QuickBooks</a>
+                    </li>
+
+                    <li class="padding-top-0-5">
+                        <strong><a href="{{ path('majorapi_web_developers_quickbooks_api') }}" {{ developersMenu == 'quickbooks-api' ? 'class="current"' : '' }}>API</a></strong>
+                        <ul>
+                            <li>
+                                <a href="{{ path('majorapi_web_developers_quickbooks_api_authentication') }}" {{ developersMenu == 'quickbooks-api-authentication' ? 'class="current"' : '' }}>Authentication</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('majorapi_web_developers_quickbooks_api_accounts') }}" {{ developersMenu == 'quickbooks-api-accounts' ? 'class="current"' : '' }}>Accounts</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('majorapi_web_developers_quickbooks_api_invoices') }}" {{ developersMenu == 'quickbooks-api-invoices' ? 'class="current"' : '' }}>Invoices</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('majorapi_web_developers_quickbooks_api_sales_orders') }}" {{ developersMenu == 'quickbooks-api-sales-orders' ? 'class="current"' : '' }}>Sales Orders</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('majorapi_web_developers_quickbooks_api_customers') }}" {{ developersMenu == 'quickbooks-api-customers' ? 'class="current"' : '' }}>Customers</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('majorapi_web_developers_quickbooks_api_items') }}" {{ developersMenu == 'quickbooks-api-items' ? 'class="current"' : '' }}>Items</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('majorapi_web_developers_quickbooks_api_vendors') }}" {{ developersMenu == 'quickbooks-api-vendors' ? 'class="current"' : '' }}>Vendors</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="padding-top-0-5">
+                        <strong><a href="{{ path('majorapi_web_developers_quickbooks_sdk') }}" {{ developersMenu == 'quickbooks-sdk' ? 'class="current"' : '' }}>SDK</a></strong>
+                        <ul>
+                            <li>
+                                <a href="{{ path('majorapi_web_developers_quickbooks_sdk_php') }}" {{ developersMenu == 'quickbooks-sdk-php' ? 'class="current"' : '' }}>PHP</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('majorapi_web_developers_quickbooks_sdk_python') }}" {{ developersMenu == 'quickbooks-sdk-python' ? 'class="current"' : '' }}>Python</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</nav>

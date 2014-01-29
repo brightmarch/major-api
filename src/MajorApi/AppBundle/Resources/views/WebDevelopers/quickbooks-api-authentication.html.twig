@@ -1,0 +1,75 @@
+{% set selectedMenu = 'developers' %}
+{% set developersMenu = 'quickbooks-api-authentication' %}
+{% extends 'MajorApiAppBundle:WebLayouts:default.html.twig' %}
+
+{% block title %}Major &mdash; Developers &mdash; QuickBooks Authentication API{% endblock %}
+
+{% block body %}
+    <article>
+        <div class="wrapper">
+            <div class="documentation clearfix limiter">
+                {% include 'MajorApiAppBundle:WebTemplates:developers-menu.html.twig' %}
+
+                <div class="doc">
+                    <h1>QuickBooks Authentication API</h1>
+                    <p>
+                        Authenticating against the Major QuickBooks REST API is simple. You simply need to use the username of your Major QuickBooks Application and the generated API Key.
+                    </p>
+                    <p>
+                        The Major QuickBooks REST API uses HTTP Basic Authentication via the standard HTTP <code>Authorization</code> header.
+                    </p>
+                    <p>
+                        You can easily make requests using the command line application <code>curl</code>. In these examples, you need to add the URL parameter <code>private=1</code> to tell Major to authenticate the request. This is only for demonstration purposes and so you can validate your credentials. Requests to the actual Major QuickBooks REST API always require authentication without the <code>private=1</code> parameter.
+                    </p>
+<pre>curl -u "app_username:API_KEY" https://majorapi.com/api?private=1</pre>
+
+                    <p>
+                        <code>app_username</code> would be replaced with your actual Major QuickBooks Application's username, and <code>API_KEY</code> would be the application's generated API Key.
+                    </p>
+                    <p>
+                        If you do not wish to put the API Key in the command itself, you can leave it off and <code>curl</code> will prompt you for it.
+                    </p>
+<pre>curl -u "app_username" https://majorapi.com/api?private=1
+<em>$ Enter host password for user 'app_username':</em></pre>
+
+                    <h2>Successful Response</h2>
+                    <p>
+                        A successful response will show basic information about Major.
+                    </p>
+<pre>{
+    "message": "Welcome to Major",
+    "buildDate": "2013-01-04T20:08:06+00:00"
+}</pre>
+
+                    <h2>Unsuccessful Responses</h2>
+                    <p>
+                        There are two potential unsuccessful responses.
+                    </p>
+                    <p>
+                        <strong>Note</strong> &mdash; All resources provided by the Major QuickBooks REST API can return a 401 Unauthorized and 406 Not Acceptable response. Thus, they will not be repeated on each page of documentation.
+                    </p>
+
+                    <h3>401 Unauthorized</h3>
+                    <p>
+                        Entering the wrong credentials will respond with a 401 Unauthorized status code. In addition, a <code>WWW-authenticate: Basic realm=Major Secure Resource</code> header will be returned indicating if you do supply the correct credentials, your request will be authenticated.
+                    </p>
+<pre>{
+    "httpCode": 401,
+    "message": "Please specify a valid application username and API key for access to Major.",
+    "violations": []
+}</pre>
+
+                    <h3>406 Not Acceptable</h3>
+                    <p>
+                        Accepting an invalid content type will return a 406 Not Acceptable status code. The Major QuickBooks REST API supports <code>*/*</code> and <code>application/json</code> as acceptable media types.
+                    </p>
+<pre>{
+    "httpCode": 406,
+    "message": "This resource can not respond with a format the client will find acceptable. This resource supports: [application/json].",
+    "violations": []
+}</pre>
+                </div>
+            </div>
+        </div>
+    </article>
+{% endblock %}

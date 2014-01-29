@@ -1,0 +1,40 @@
+MajorApi\AppBundle\Entity\QuickbooksQbxml:
+    type: entity
+    table: api_quickbooks_qbxml
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: SEQUENCE
+            sequenceGenerator:
+                sequenceName: api_quickbooks_qbxml_id_seq
+                allocationSize: 1
+                initialValue: 1 
+    fields:
+        created:
+            column: created
+            type: datetime
+        updated:
+            column: updated 
+            type: datetime
+        status:
+            column: status
+            type: integer
+        applicationId:
+            column: application_id
+            type: integer
+        qbxmlHash:
+            column: qbxml_hash
+            type: string
+        qbxml:
+            column: qbxml
+            type: text
+    manyToOne:
+        application:
+            targetEntity: Application
+            joinColumn:
+                name: application_id
+                referencedColumnName: id
+    lifecycleCallbacks:
+        prePersist: [ onCreate ]
+        preUpdate: [ onUpdate ]

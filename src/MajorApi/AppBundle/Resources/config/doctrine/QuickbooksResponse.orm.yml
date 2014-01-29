@@ -1,0 +1,51 @@
+MajorApi\AppBundle\Entity\QuickbooksResponse:
+    type: entity
+    table: api_quickbooks_response
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: SEQUENCE
+            sequenceGenerator:
+                sequenceName: api_quickbooks_response_id_seq
+                allocationSize: 1
+                initialValue: 1 
+    fields:
+        created:
+            column: created
+            type: datetime
+        updated:
+            column: updated 
+            type: datetime
+        processed:
+            column: processed
+            type: datetime
+            nullable: true
+        status:
+            column: status
+            type: integer
+        applicationId:
+            column: application_id
+            type: integer
+        responseXml:
+            column: response_xml
+            type: text
+            nullable: true
+        xmlSize:
+            column: xml_size
+            type: integer
+        recordCount:
+            column: record_count
+            type: integer
+        processTime:
+            column: process_time
+            type: float
+    manyToOne:
+        application:
+            targetEntity: Application
+            joinColumn:
+                name: application_id
+                referencedColumnName: id
+    lifecycleCallbacks:
+        prePersist: [ onCreate ]
+        preUpdate: [ onUpdate ]

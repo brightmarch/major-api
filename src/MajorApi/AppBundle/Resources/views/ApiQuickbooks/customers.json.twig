@@ -1,0 +1,59 @@
+{% autoescape false %}
+[
+    {% for quickbooksCustomer in quickbooksCustomers %}
+        {
+            "created": {{ quickbooksCustomer.getCreated.format('c')|json_encode }},
+            "updated": {{ quickbooksCustomer.getUpdated.format('c')|json_encode }},
+            "status": {{ quickbooksCustomer.getStatus }},
+            "applicationName": {{ quickbooksCustomer.getApplication.getName|json_encode }},
+            "applicationUsername": {{ quickbooksCustomer.getApplication.getUsername|json_encode }},
+            "name": {{ quickbooksCustomer.getName|json_encode }},
+            "isActive": {{ quickbooksCustomer.getIsActive|json_encode }},
+            "companyName": {{ quickbooksCustomer.getCompanyName|json_encode }},
+            "salutation": {{ quickbooksCustomer.getSalutation|json_encode }},
+            "firstName": {{ quickbooksCustomer.getFirstName|json_encode }},
+            "middleName": {{ quickbooksCustomer.getMiddleName|json_encode }},
+            "lastName": {{ quickbooksCustomer.getLastName|json_encode }},
+            "jobTitle": {{ quickbooksCustomer.getJobTitle|json_encode }},
+            "billAddress": {
+                "address1": {{ quickbooksCustomer.getBillAddress1|json_encode }},
+                "address2": {{ quickbooksCustomer.getBillAddress2|json_encode }},
+                "address3": {{ quickbooksCustomer.getBillAddress3|json_encode }},
+                "address4": {{ quickbooksCustomer.getBillAddress4|json_encode }},
+                "address5": {{ quickbooksCustomer.getBillAddress5|json_encode }},
+                "city": {{ quickbooksCustomer.getBillCity|json_encode }},
+                "state": {{ quickbooksCustomer.getBillState|json_encode }},
+                "postalCode": {{ quickbooksCustomer.getBillPostalCode|json_encode }},
+                "country": {{ quickbooksCustomer.getBillCountry|json_encode }},
+                "note": {{ quickbooksCustomer.getBillNote|json_encode }}
+            },
+            "shipAddress": {
+                "address1": {{ quickbooksCustomer.getShipAddress1|json_encode }},
+                "address2": {{ quickbooksCustomer.getShipAddress2|json_encode }},
+                "address3": {{ quickbooksCustomer.getShipAddress3|json_encode }},
+                "address4": {{ quickbooksCustomer.getShipAddress4|json_encode }},
+                "address5": {{ quickbooksCustomer.getShipAddress5|json_encode }},
+                "city": {{ quickbooksCustomer.getShipCity|json_encode }},
+                "state": {{ quickbooksCustomer.getShipState|json_encode }},
+                "postalCode": {{ quickbooksCustomer.getShipPostalCode|json_encode }},
+                "country": {{ quickbooksCustomer.getShipCountry|json_encode }},
+                "note": {{ quickbooksCustomer.getShipNote|json_encode }}
+            },
+            "phone": {{ quickbooksCustomer.getPhone|json_encode }},
+            "altPhone": {{ quickbooksCustomer.getAltPhone|json_encode }},
+            "fax": {{ quickbooksCustomer.getFax|json_encode }},
+            "email": {{ quickbooksCustomer.getEmail|json_encode }},
+            "emailCc": {{ quickbooksCustomer.getEmailCc|json_encode }},
+            "notes": {{ quickbooksCustomer.getNotes|json_encode }},
+            "_links": [
+                {
+                    "rel": "self",
+                    "method": "GET",
+                    "href": {{ url('majorapi_api_quickbooks_customers_read', {'customerName': quickbooksCustomer.getName})|json_encode }}
+                }
+            ]
+        }
+        {% if loop.index != quickbooksCustomers|length %},{% endif %}
+    {% endfor %}
+]
+{% endautoescape %}

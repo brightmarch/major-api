@@ -1,0 +1,103 @@
+MajorApi\AppBundle\Entity\QuickbooksVendorContact:
+    type: entity
+    table: api_quickbooks_vendor_contact
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: SEQUENCE
+            sequenceGenerator:
+                sequenceName: api_quickbooks_vendor_contact_id_seq
+                allocationSize: 1
+                initialValue: 1 
+    fields:
+        created:
+            column: created
+            type: datetime
+        updated:
+            column: updated 
+            type: datetime
+        status:
+            column: status
+            type: integer
+        quickbooksVendorId:
+            column: quickbooks_vendor_id
+            type: integer
+        salutation:
+            column: salutation
+            type: string
+            nullable: true
+        firstName:
+            column: first_name
+            type: string
+            nullable: true
+        middleName:
+            column: middle_name
+            type: string
+            nullable: true
+        lastName:
+            column: last_name
+            type: string
+            nullable: true
+        jobTitle:
+            column: job_title
+            type: string
+            nullable: true
+        contactRefName1:
+            column: contact_ref_name1
+            type: string
+            nullable: true
+        contactRefValue1:
+            column: contact_ref_value1
+            type: string
+            nullable: true
+        contactRefName2:
+            column: contact_ref_name2
+            type: string
+            nullable: true
+        contactRefValue2:
+            column: contact_ref_value2
+            type: string
+            nullable: true
+        contactRefName3:
+            column: contact_ref_name3
+            type: string
+            nullable: true
+        contactRefValue3:
+            column: contact_ref_value3
+            type: string
+            nullable: true
+        contactRefName4:
+            column: contact_ref_name4
+            type: string
+            nullable: true
+        contactRefValue4:
+            column: contact_ref_value4
+            type: string
+            nullable: true
+        contactRefName5:
+            column: contact_ref_name5
+            type: string
+            nullable: true
+        contactRefValue5:
+            column: contact_ref_value5
+            type: string
+            nullable: true
+        quickbooksListId:
+            column: quickbooks_list_id
+            type: string
+            nullable: true
+        quickbooksEditSequence:
+            column: quickbooks_edit_sequence
+            type: string
+            nullable: true
+    manyToOne:
+        quickbooksVendor:
+            targetEntity: QuickbooksVendor
+            inversedBy: quickbooksVendorContacts
+            joinColumn:
+                name: quickbooks_vendor_id
+                referencedColumnName: id
+    lifecycleCallbacks:
+        prePersist: [ onCreate ]
+        preUpdate: [ onUpdate ]

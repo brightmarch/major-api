@@ -1,0 +1,8 @@
+{
+    "name": "MajorApi",
+    "dependencies": {
+        "underscore-amd": "latest",
+        "requirejs": "latest",
+        "eventEmitter": "latest"
+    }
+}

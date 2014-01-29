@@ -1,0 +1,63 @@
+{% set selectedMenu = 'developers' %}
+{% set developersMenu = 'introduction' %}
+{% extends 'MajorApiAppBundle:WebLayouts:default.html.twig' %}
+
+{% block title %}Major &mdash; Developers Introduction{% endblock %}
+
+{% block body %}
+    <article>
+        <div class="wrapper">
+            <div class="documentation clearfix limiter">
+                {% include 'MajorApiAppBundle:WebTemplates:developers-menu.html.twig' %}
+
+                <div class="doc">
+                    <h1>Introduction</h1>
+                    <p>
+                        Major is a service that exposes elegant REST APIs on top of more complex web-based APIs. We are currently working to make QuickBooks easier for developers, and plan on expanding to other APIs like Google AdWords and Bing AdCenter in the future.
+                    </p>
+
+                    <h2>Basics of REST</h2>
+                    <p>
+                        REST stands for Representational State Transfer and is s software architecture that defines how a client and server talk to each other in a uniform method.
+                    </p>
+                    <p>
+                        The Major REST API works over secure HTTP, or HTTPS, using HTTP Basic Authentication as the authentication method of choice.
+                    </p>
+                    <p>
+                        Additionally, the Major REST API uses several common facets of HTTP to ensure it is as simple and complete as possible.
+                    </p>
+
+                    <h3>Resources</h3>
+                    <p>
+                        The endpoints Major exposes through its REST API are called resources. These can be thought of as nouns. For example, with the Major QuickBooks REST API, <strong>/invoices</strong>, <strong>/customers</strong>, and <strong>/items</strong> are all resources.
+                    </p>
+
+                    <h3>HTTP Verbs</h3>
+                    <p>
+                        The Major REST API uses four primary HTTP request methods, or verbs, to ensure you are making the correct request. The four primary HTTP request methods are: <strong>GET</strong>, <strong>POST</strong>, <strong>PUT</strong>, and <strong>DELETE</strong>.
+                    </p>
+                    <p>
+                        GET requests are used to read a resource. POST requests are used to create a new resource. PUT requests are used to update an existing resource. DELETE requests are obviously used to delete an existing resource.
+                    </p>
+
+                    <h3>HTTP Status Codes</h3>
+                    <p>
+                        The Major REST API uses common HTTP Status Codes in its responses. For example, when making a successful POST request to create a new invoice in the Major QuickBooks REST API, a <code>201 Created</code> status code will be sent back to the client.
+                        Alternatively, a failed response for the same request might return a <code>409 Conflict</code> or a <code>400 Bad Syntax</code> status code. You can learn more about the status codes each resource uses by visiting its documentation page.
+                    </p>
+
+                    <h3>Content and Media Types</h3>
+                    <p>
+                        The Major REST API respects different content and media type headers. These include the <code>Content-Type</code> and <code>Accept</code> headers. The <code>Content-Type</code> header sent to the Major REST API should be <code>application/x-www-form-urlencoded</code>.
+                        The <code>Accept</code> header sent to the Major REST API should be <code>application/json</code>.
+                    </p>
+
+                    <h2>What's Next?</h3>
+                    <p>
+                        To use the Major REST API, you need to first <a href="{{ path('majorapi_web_registration') }}">register a new account</a>.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </article>
+{% endblock %}

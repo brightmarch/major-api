@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<QBWCXML>
+	<AppName>MajorApi</AppName>
+	<AppID></AppID>
+	<AppURL>https://majorapi.com/api/quickbooks/service/qbwc</AppURL>
+	<AppDescription>MajorApi Quickbooks Import Service</AppDescription>
+	<AppSupport>https://majorapi.com/developers/quickbooks/installing-webconnector-qwc-file</AppSupport>
+	<UserName>%s</UserName>
+	<OwnerID>{%s}</OwnerID>
+	<FileID>{%s}</FileID>
+	<QBType>QBFS</QBType>
+	<Scheduler>
+		<RunEveryNMinutes>30</RunEveryNMinutes>
+	</Scheduler>
+</QBWCXML>

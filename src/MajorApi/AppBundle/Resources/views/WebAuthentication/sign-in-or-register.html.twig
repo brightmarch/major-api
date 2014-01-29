@@ -1,0 +1,57 @@
+{% extends 'MajorApiAppBundle:WebLayouts:void.html.twig' %}
+
+{% block title %}Major &mdash; Connect Your QuickBooks Application{% endblock %}
+
+{% block body %}
+    <div class="limiter clearfix">
+        <h1>Sign In or Register to Continue</h1>
+        <a href="{{ path('majorapi_web_index') }}" class="secret-link graphic">&larr; Back to home</a>
+
+        {% include 'MajorApiAppBundle:WebTemplates:messaging.html.twig' %}
+
+        <div class="col-6 left">
+            <h2>Sign In</h2>
+            <form method="post" action="{{ path('majorapi_web_authentication_authenticate') }}" class="clearfix" novalidate>
+                <label class="clearfix">
+                    <span class="left">Email</span>
+                    <input class="right" type="email" name="_username" id="email-address">
+                </label>
+
+                <label class="left">
+                    <span class="left">Password</span>
+                    <input class="right" type="password" name="_password" id="password">
+                </label>
+
+                <input type="hidden" name="_remember_me" value="1">
+                {% if targetPath %}
+                    <input type="hidden" name="_target_path" value="{{ targetPath }}">
+                {% endif %}
+                <input type="submit" value="Sign In" class="button fat right" id="sign-in-button">
+            </form>
+        </div>
+
+        <div class="col-6 left clearfix spacing-left-1-2">
+            <h2>Register</h2>
+            <form method="post" action="{{ path('majorapi_web_registration_process') }}" class="clearfix" novalidate>
+                <div class="label clearfix">
+                    <span class="left">Full Name:</span>
+                    {{ form_widget(registrationForm.lastName, {attr: {'class': 'right half', 'placeholder': 'Last', 'tabindex': '2'}}) }}
+                    {{ form_widget(registrationForm.firstName, {attr: {'class': 'right half', 'placeholder': 'First', 'tabindex': '1'}}) }}
+                </div>
+
+                <label class="clearfix">
+                    <span class="left">Email:</span>
+                    {{ form_widget(registrationForm.email, {attr: {'class': 'right', 'tabindex': '3'}}) }}
+                </label>
+
+                <label class="clearfix">
+                    <span class="left">Password:</span>
+                    {{ form_widget(registrationForm.password, {attr: {'class': 'right', 'tabindex': '4'}}) }}
+                </label>
+
+                {{ form_rest(registrationForm) }}
+                <input type="submit" value="Register Now" class="button fat right" id="register-button" tabindex="5">
+            </form>
+        </div>
+    </div>
+{% endblock %}

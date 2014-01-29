@@ -1,0 +1,6 @@
+{% if app.session.flashbag.has('error') %}
+    <p class="message error margin-bottom-1-0">{{ app.session.flashbag.get('error')[0] }}</p>
+{% endif %}
+{% if app.session.flashbag.has('success') %}
+    <p class="message success">{{ app.session.flashbag.get('success')[0] }}</p>
+{% endif %}

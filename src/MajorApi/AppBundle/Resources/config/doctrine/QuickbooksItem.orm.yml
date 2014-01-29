@@ -1,0 +1,174 @@
+MajorApi\AppBundle\Entity\QuickbooksItem:
+    type: entity
+    table: api_quickbooks_item
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: SEQUENCE
+            sequenceGenerator:
+                sequenceName: api_quickbooks_item_id_seq
+                allocationSize: 1
+                initialValue: 1 
+    fields:
+        created:
+            column: created
+            type: datetime
+        updated:
+            column: updated 
+            type: datetime
+        status:
+            column: status
+            type: integer
+        applicationId:
+            column: application_id
+            type: integer
+        type:
+            column: type
+            type: string
+        name:
+            column: name
+            type: string
+        fullname:
+            column: fullname
+            type: string
+            nullable: true
+        isActive:
+            column: is_active
+            type: boolean
+        sublevel:
+            column: sublevel
+            type: integer
+        salesDescription:
+            column: sales_description
+            type: string
+            nullable: true
+        salesPrice:
+            column: sales_price
+            type: float
+        salesExpense:
+            column: sales_expense
+            type: float
+        salesDate:
+            column: sales_date
+            type: datetime
+            nullable: true
+        purchaseDescription:
+            column: purchase_description
+            type: string
+        purchasePrice:
+            column: purchase_price
+            type: float
+        purchaseCost:
+            column: purchase_cost
+            type: float
+        purchaseDate:
+            column: purchase_date
+            type: datetime
+            nullable: true
+        description:
+            column: description
+            type: string
+            nullable: true
+        itemDescription:
+            column: item_description
+            type: string
+            nullable: true
+        price:
+            column: price
+            type: float
+        pricePercent:
+            column: price_percent 
+            type: float
+        discountRate:
+            column: discount_rate 
+            type: float
+        discountRatePercent:
+            column: discount_rate_percent
+            type: float
+        barCode:
+            column: bar_code
+            type: string
+            nullable: true
+        manufacturerPartNumber:
+            column: manufacturer_part_number
+            type: string
+            nullable: true
+        quantityReorder:
+            column: quantity_reorder
+            type: integer
+        quantityOnHand:
+            column: quantity_on_hand
+            type: integer
+        quantityOnSalesOrder:
+            column: quantity_on_sales_order
+            type: integer
+        averageCost:
+            column: average_cost
+            type: float
+        vendorOrPayeeName:
+            column: vendor_or_payee_name
+            type: string
+            nullable: true
+        acquiredAs:
+            column: acquired_as
+            type: string
+            nullable: true
+        assetDescription:
+            column: asset_description
+            type: string
+            nullable: true
+        location:
+            column: location 
+            type: string
+            nullable: true
+        poNumber:
+            column: po_number
+            type: string
+            nullable: true
+        serialNumber:
+            column: serial_number
+            type: string
+            nullable: true
+        warrantyExpirationDate:
+            column: warranty_expiration_date
+            type: datetime
+            nullable: true
+        notes:
+            column: notes
+            type: string
+            nullable: true
+        assetNumber:
+            column: asset_number
+            type: string
+            nullable: true
+        costBasis:
+            column: cost_basis
+            type: float
+        yearEndAccumulatedDepreciation:
+            column: year_end_accumulated_depreciation
+            type: float
+        yearEndBookValue:
+            column: year_end_book_value
+            type: float
+        externalGuid:
+            column: external_guid
+            type: string
+            nullable: true
+        quickbooksListId:
+            column: quickbooks_list_id
+            type: string
+            nullable: true
+        quickbooksEditSequence:
+            column: quickbooks_edit_sequence
+            type: string
+            nullable: true
+    manyToOne:
+        application:
+            targetEntity: Application
+            joinColumn:
+                name: application_id
+                referencedColumnName: id
+    lifecycleCallbacks:
+        prePersist: [ onCreate ]
+        preUpdate: [ onUpdate ]

@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+<head>
+	<title>{% block title %}Major &mdash; QuickBooks REST API{% endblock %}</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <link rel="stylesheet" href="{{ asset('bundles/majorapiapp/css/majorapi.css') }}" media="screen, projection">
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <!-- TypeKit -->
+    <script type="text/javascript" src="//use.typekit.net/krf7mpb.js"></script><script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+</head>
+<body class="void">
+
+    {% block body %}{% endblock %}
+
+    <script data-main="{{ asset('bundles/majorapiapp/javascript/major.js') }}" src="{{ asset('bundles/majorapiapp/javascript/') }}{{ require_file }}"></script>
+
+    {% block bottomscripts %}{% endblock %}
+</body>
+</html>

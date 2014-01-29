@@ -1,0 +1,258 @@
+# API Index
+majorapi_api_index:
+    pattern: /api
+    defaults: { _controller: MajorApiAppBundle:ApiIndex:index }
+
+# QuickBooks WebConnector SOAP
+majorapi_api_quickbooks_webconnector_handle:
+    pattern: /api/quickbooks/service/qbwc
+    defaults: { _controller: MajorApiAppBundle:ApiQuickbooksWebConnectorService:handle }
+
+# QuickBooks - Accounts
+majorapi_api_quickbooks_accounts_read:
+    pattern: /api/quickbooks/accounts/{accountName}
+    defaults: { _controller: MajorApiAppBundle:ApiQuickbooksAccountsRead:read }
+    requirements:
+        _method: GET
+
+majorapi_api_quickbooks_accounts_read_all:
+    pattern: /api/quickbooks/accounts
+    defaults: { _controller: MajorApiAppBundle:ApiQuickbooksAccountsRead:readAll }
+    requirements:
+        _method: GET
+
+# QuickBooks - Customers
+majorapi_api_quickbooks_customers_read:
+    pattern: /api/quickbooks/customers/{customerName}
+    defaults: { _controller: MajorApiAppBundle:ApiQuickbooksCustomersRead:read }
+    requirements:
+        _method: GET
+
+majorapi_api_quickbooks_customers_create:
+    pattern: /api/quickbooks/customers
+    defaults: { _controller: MajorApiAppBundle:ApiQuickbooksCustomersCreate:create }
+    requirements:
+        _method: POST
+
+# QuickBooks - Invoices
+majorapi_api_quickbooks_invoices_read:
+    pattern: /api/quickbooks/invoices/{refNumber}
+    defaults: { _controller: MajorApiAppBundle:ApiQuickbooksInvoicesRead:read }
+    requirements:
+        _method: GET
+
+majorapi_api_quickbooks_invoices_create:
+    pattern: /api/quickbooks/invoices
+    defaults: { _controller: MajorApiAppBundle:ApiQuickbooksInvoicesCreate:create }
+    requirements:
+        _method: POST
+
+# QuickBooks - Items
+majorapi_api_quickbooks_items_read:
+    pattern: /api/quickbooks/items/{itemName}
+    defaults: { _controller: MajorApiAppBundle:ApiQuickbooksItemsRead:read }
+    requirements:
+        _method: GET
+
+# QuickBooks - Vendors
+majorapi_api_quickbooks_vendors_read:
+    pattern: /api/quickbooks/vendors/{vendorName}
+    defaults: { _controller: MajorApiAppBundle:ApiQuickbooksVendorsRead:read }
+    requirements:
+        _method: GET
+
+majorapi_api_quickbooks_vendors_read_all:
+    pattern: /api/quickbooks/vendors
+    defaults: { _controller: MajorApiAppBundle:ApiQuickbooksVendorsRead:readAll }
+    requirements:
+        _method: GET
+
+# Stripe Webhook
+majorapi_api_quickbooks_stripe:
+    pattern: /api/quickbooks/stripe
+    defaults: { _controller: MajorApiAppBundle:ApiQuickbooksStripe:process }
+
+# Web Index
+majorapi_web_index:
+    pattern: /
+    defaults: { _controller: MajorApiAppBundle:WebIndex:index }
+
+# Accounts and Registration
+majorapi_web_registration:
+    pattern: /register
+    defaults: { _controller: MajorApiAppBundle:WebRegistration:index }
+    requirements:
+        _method: GET
+
+majorapi_web_registration_process:
+    pattern: /register
+    defaults: { _controller: MajorApiAppBundle:WebRegistration:process }
+    requirements:
+        _method: POST
+
+# Pages
+majorapi_web_about:
+    pattern: /about
+    defaults: { _controller: MajorApiAppBundle:WebPage:index, page: 'about' }
+
+majorapi_web_pricing:
+    pattern: /pricing
+    defaults: { _controller: MajorApiAppBundle:WebPage:index, page: 'pricing' }
+
+majorapi_web_contact_us:
+    pattern: /contact-us
+    defaults: { _controller: MajorApiAppBundle:WebPage:index, page: 'contact-us' }
+
+majorapi_web_privacy:
+    pattern: /privacy
+    defaults: { _controller: MajorApiAppBundle:WebPage:index, page: 'privacy' }
+
+majorapi_web_launch:
+    pattern: /launch
+    defaults: { _controller: FrameworkBundle:Redirect:redirect, route: majorapi_web_registration, permanent: true }
+
+# Connect
+majorapi_web_connect_with:
+    pattern:  /connect-with
+    defaults: { _controller: MajorApiAppBundle:WebConnection:index }
+
+majorapi_web_connect_with_stripe:
+    pattern:  /connect-with/stripe
+    defaults: { _controller: MajorApiAppBundle:WebConnectionStripe:index }
+
+majorapi_web_connect_with_stripe_connect:
+    pattern:  /connect-with/stripe/connect
+    defaults: { _controller: MajorApiAppBundle:WebConnectionStripe:connect }
+
+majorapi_web_connect_with_stripe_authenticate:
+    pattern:  /connect-with/stripe/authenticate
+    defaults: { _controller: MajorApiAppBundle:WebConnectionStripe:authenticate }
+
+# Developers
+majorapi_web_developers:
+    pattern: /developers
+    defaults: { _controller: MajorApiAppBundle:WebDevelopers:index , page: 'introduction' }
+
+majorapi_web_developers_major_applications:
+    pattern: /developers/major-applications
+    defaults: { _controller: MajorApiAppBundle:WebDevelopers:index, page: 'major-applications' }
+
+majorapi_web_developers_quickbooks:
+    pattern: /developers/quickbooks
+    defaults: { _controller: MajorApiAppBundle:WebDevelopers:index, page: 'quickbooks' }
+
+majorapi_web_developers_quickbooks_installing_webconnector:
+    pattern: /developers/quickbooks/installing-webconnector
+    defaults: { _controller: MajorApiAppBundle:WebDevelopers:index, page: 'quickbooks-installing-webconnector' }
+
+majorapi_web_developers_quickbooks_installing_webconnector_qwc_file:
+    pattern: /developers/quickbooks/installing-webconnector-qwc-file
+    defaults: { _controller: MajorApiAppBundle:WebDevelopers:index, page: 'quickbooks-installing-webconnector-qwc-file' }
+
+majorapi_web_developers_quickbooks_connecting_with_quickbooks:
+    pattern: /developers/quickbooks/connecting-with-quickbooks
+    defaults: { _controller: MajorApiAppBundle:WebDevelopers:index, page: 'quickbooks-connecting-with-quickbooks' }
+
+majorapi_web_developers_quickbooks_api:
+    pattern: /developers/quickbooks/api
+    defaults: { _controller: MajorApiAppBundle:WebDevelopers:index, page: 'quickbooks-api' }
+
+majorapi_web_developers_quickbooks_api_authentication:
+    pattern: /developers/quickbooks/api/authentication
+    defaults: { _controller: MajorApiAppBundle:WebDevelopers:index, page: 'quickbooks-api-authentication' }
+
+majorapi_web_developers_quickbooks_api_accounts:
+    pattern: /developers/quickbooks/api/accounts
+    defaults: { _controller: MajorApiAppBundle:WebDevelopers:index, page: 'quickbooks-api-accounts' }
+
+majorapi_web_developers_quickbooks_api_invoices:
+    pattern: /developers/quickbooks/api/invoices
+    defaults: { _controller: MajorApiAppBundle:WebDevelopers:index, page: 'quickbooks-api-invoices' }
+
+majorapi_web_developers_quickbooks_api_sales_orders:
+    pattern: /developers/quickbooks/api/sales-orders
+    defaults: { _controller: MajorApiAppBundle:WebDevelopers:index, page: 'quickbooks-api-sales-orders' }
+
+majorapi_web_developers_quickbooks_api_customers:
+    pattern: /developers/quickbooks/api/customers
+    defaults: { _controller: MajorApiAppBundle:WebDevelopers:index, page: 'quickbooks-api-customers' }
+
+majorapi_web_developers_quickbooks_api_items:
+    pattern: /developers/quickbooks/api/items
+    defaults: { _controller: MajorApiAppBundle:WebDevelopers:index, page: 'quickbooks-api-items' }
+
+majorapi_web_developers_quickbooks_api_vendors:
+    pattern: /developers/quickbooks/api/vendors
+    defaults: { _controller: MajorApiAppBundle:WebDevelopers:index, page: 'quickbooks-api-vendors' }
+
+majorapi_web_developers_quickbooks_sdk:
+    pattern: /developers/quickbooks/sdk
+    defaults: { _controller: MajorApiAppBundle:WebDevelopers:index, page: 'quickbooks-sdk' }
+
+majorapi_web_developers_quickbooks_sdk_php:
+    pattern: /developers/quickbooks/sdk/php
+    defaults: { _controller: MajorApiAppBundle:WebDevelopers:index, page: 'quickbooks-sdk-php' }
+
+majorapi_web_developers_quickbooks_sdk_python:
+    pattern: /developers/quickbooks/sdk/python
+    defaults: { _controller: MajorApiAppBundle:WebDevelopers:index, page: 'quickbooks-sdk-python' }
+
+# Accounts and Authentication
+majorapi_web_authentication_sign_in:
+    pattern: /authentication/sign-in
+    defaults: { _controller: MajorApiAppBundle:WebAuthentication:signIn }
+
+majorapi_web_authentication_sign_in_or_register:
+    pattern: /authentication/sign-in-or-register
+    defaults: { _controller: MajorApiAppBundle:WebAuthentication:signInOrRegister }
+
+majorapi_web_authentication_sign_out:
+    pattern: /authentication/sign-out
+
+majorapi_web_authentication_authenticate:
+    pattern: /authentication/authenticate
+
+# Dashboard
+majorapi_web_dashboard:
+    pattern: /dashboard
+    defaults: { _controller: MajorApiAppBundle:WebDashboard:index }
+    requirements:
+        _method: GET
+
+# Account
+
+# Application - Wizard
+majorapi_web_application_wizard_index:
+    pattern: /application/wizard
+    defaults: { _controller: MajorApiAppBundle:WebApplicationWizard:index }
+    requirements:
+        _method: GET
+
+majorapi_web_application_wizard_billing:
+    pattern: /application/wizard/billing
+    defaults: { _controller: MajorApiAppBundle:WebApplicationWizard:billing }
+    requirements:
+        _method: GET
+
+majorapi_web_application_wizard_billing_process:
+    pattern: /application/wizard/billing
+    defaults: { _controller: MajorApiAppBundle:WebApplicationWizard:billingProcess }
+    requirements:
+        _method: POST
+
+majorapi_web_application_wizard_connect:
+    pattern: /application/wizard/connect
+    defaults: { _controller: MajorApiAppBundle:WebApplicationWizard:connect }
+    requirements:
+        _method: GET
+
+majorapi_web_application_download_web_connector_file:
+    pattern: /application/download-web-connector-file
+    defaults: { _controller: MajorApiAppBundle:WebApplicationWebConnector:download }
+    requirements:
+        _method: GET
+
+# Redirects
+majorapi_web_metricsapi_register:
+    pattern: /register/tour/intuit-quickbooks-rest-api
+    defaults: { _controller: FrameworkBundle:Redirect:redirect, route: majorapi_web_registration, permanent: true }

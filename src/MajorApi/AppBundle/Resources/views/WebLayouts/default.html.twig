@@ -1,0 +1,103 @@
+<!doctype html>
+<html>
+<head>
+	<title>{% block title %}Major &mdash; QuickBooks REST API{% endblock %}</title>
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <link rel="stylesheet" href="{{ asset('bundles/majorapiapp/css/majorapi.css') }}" media="screen, projection">
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <!-- Mixpanel -->
+    <script type="text/javascript">(function(e,b){if(!b.__SV){var a,f,i,g;window.mixpanel=b;a=e.createElement("script");a.type="text/javascript";a.async=!0;a.src=("https:"===e.location.protocol?"https:":"http:")+'//cdn.mxpnl.com/libs/mixpanel-2.2.min.js';f=e.getElementsByTagName("script")[0];f.parentNode.insertBefore(a,f);b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.increment people.append people.track_charge".split(" ");for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2}})(document,window.mixpanel||[]);mixpanel.init("{{ mix_panel_id }}");</script>
+
+    <!-- TypeKit -->
+    <script type="text/javascript" src="//use.typekit.net/krf7mpb.js"></script><script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+</head>
+<body>
+    <div class="site-bg">
+        {% block header %}
+            <div class="limiter top">
+                <header>
+                    <a href="{{ path('majorapi_web_index') }}">
+                        <img src="{{ asset('bundles/majorapiapp/images/logo.png') }}" alt="MajorApi" class="logo">
+                    </a>
+                    <h1 class="outline-only">QuickBooks REST API</h1>
+                </header>
+                <nav>
+                    <ul class="nav clearfix">
+                        <li {{ selectedMenu == 'about' ? 'class="current"' : '' }}><a href="{{ path('majorapi_web_about') }}">About</a></li>
+                        <li {{ selectedMenu == 'pricing' ? 'class="current"' : '' }}><a href="{{ path('majorapi_web_pricing') }}">Pricing</a></li>
+                        <li {{ selectedMenu == 'developers' ? 'class="current"' : '' }}><a href="{{ path('majorapi_web_developers') }}">Documentation</a></li>
+                        <li {{ selectedMenu == 'integrate' ? 'class="current"' : '' }}><a href="{{ path('majorapi_web_connect_with') }}">Connect</a></li>
+                        {% if app.user and is_granted('IS_AUTHENTICATED_FULLY') %}
+                            <li {{ selectedMenu == 'dashboard' ? 'class="current"' : '' }}><a href="{{ path('majorapi_web_dashboard') }}">Dashboard</a></li>
+                            {% include 'MajorApiAppBundle:WebTemplates:account-droplist.html.twig' %}
+                        {% else %}
+                            <li><a href="{{ path('majorapi_web_authentication_sign_in') }}">Sign In</a></li>
+                            <li><a href="{{ path('majorapi_web_registration') }}" class="button">Register</a></li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            </div>
+        {% endblock %}
+
+        {% block body %}{% endblock %}
+    </div>
+
+    {% block footer %}
+        <div class="footer">
+            <footer>
+                <div class="limiter">
+                    <ul class="no-bullets clearfix">
+                        <li>
+                            <strong>QuickBooks API</strong>
+                            <ul>
+                                <li><a href="{{ path('majorapi_web_developers') }}">Documentation</a></li>
+                                <li><a href="{{ path('majorapi_web_pricing') }}">Pricing</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>Company</strong>
+                            <ul>
+                                <li><a href="{{ path('majorapi_web_about') }}">About</a></li>
+                                <li><a href="{{ path('majorapi_web_contact_us') }}">Contact</a></li>
+                                <li><a href="{{ path('majorapi_web_privacy') }}">Privacy</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>Connect</strong>
+                            <ul>
+                                <li><a href="{{ path('majorapi_web_connect_with_stripe') }}">Stripe</a></li>
+                                <li><a href="{{ path('majorapi_web_connect_with') }}">Braintree</a></li>
+                                <li><a href="{{ path('majorapi_web_connect_with') }}">PayPal</a></li>
+                                <li><a href="{{ path('majorapi_web_connect_with') }}">Balanced</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>Account</strong>
+                            <ul>
+                                {% if app.user and is_granted('IS_AUTHENTICATED_FULLY') %}
+                                    <li><a href="{{ path('majorapi_web_dashboard') }}">Dashboard</a></li>
+                                    <li><a href="{{ path('majorapi_web_authentication_sign_out') }}">Sign Out</a></li>
+                                {% else %}
+                                    <li><a href="{{ path('majorapi_web_authentication_sign_in') }}">Sign In</a></li>
+                                    <li><a href="{{ path('majorapi_web_registration') }}">Register</a></li>
+                                {% endif %}
+                                <li class="copy">
+                                    &copy; {{ 'now'|date('Y') }} Major &mdash; Bright March, LLC
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </footer>
+        </div>
+    {% endblock %}
+
+    <script data-main="{{ asset('bundles/majorapiapp/javascript/major.js') }}" src="{{ asset('bundles/majorapiapp/javascript/') }}{{ require_file }}"></script>
+
+    {% block bottomscripts %}{% endblock %}
+</body>
+</html>

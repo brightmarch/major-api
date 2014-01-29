@@ -1,0 +1,9 @@
+{% autoescape false %}
+<?xml version="1.0" encoding="utf-8"?>
+<?qbxml version="{{ supportedQbxmlVersion }}" ?>
+<QBXML>
+    <QBXMLMsgsRq onError="stopOnError">
+        {{ qbxml }}
+    </QBXMLMsgsRq>
+</QBXML>
+{% endautoescape %}

@@ -1,0 +1,36 @@
+{% set selectedMenu = 'developers' %}
+{% set developersMenu = 'quickbooks-sdk' %}
+{% extends 'MajorApiAppBundle:WebLayouts:default.html.twig' %}
+
+{% block title %}Major &mdash; Developers &mdash; QuickBooks SDK{% endblock %}
+
+{% block body %}
+    <article>
+        <div class="wrapper">
+            <div class="documentation clearfix limiter">
+                {% include 'MajorApiAppBundle:WebTemplates:developers-menu.html.twig' %}
+
+                <div class="doc">
+                    <h1>QuickBooks SDK Introduction</h1>
+                    <p>
+                        The Major QuickBooks REST API offers software development kits, or SDKs in a variety of common languages. The goal of the SDK is to simplify and abstract the internals of the REST API to the end user.
+                    </p>
+
+                    <p>
+                        All official SDKs are either written by or thoroughly vetted by Bright March, the company behind Major If you find a bug or security issue with an official SDK, or wish to write an SDK in your favorite language, please contact us.
+                    </p>
+
+                    <h2>SDK Licenses</h2>
+                    <p>
+                        All official Major SDKs are licensed under the MIT License. They are free to use and distribute free of charge in both open source and proprietary software.
+                    </p>
+
+                    <h2>What's Next?</h2>
+                    <p>
+                        Select the SDK in the language of your choice, download and install it, and begin communicating with the Major QuickBooks REST API.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </article>
+{% endblock %}

@@ -1,0 +1,47 @@
+MajorApi\AppBundle\Entity\QuickbooksLog:
+    type: entity
+    table: api_quickbooks_log
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: SEQUENCE
+            sequenceGenerator:
+                sequenceName: api_quickbooks_log_id_seq
+                allocationSize: 1
+                initialValue: 1 
+    fields:
+        created:
+            column: created
+            type: datetime
+        updated:
+            column: updated 
+            type: datetime
+        dismissed:
+            column: dismissed
+            type: datetime
+            nullable: true
+        status:
+            column: status
+            type: integer
+        applicationId:
+            column: application_id
+            type: integer
+        type:
+            column: type
+            type: string
+        message:
+            column: message
+            type: string
+        subject:
+            column: subject
+            type: string
+    manyToOne:
+        application:
+            targetEntity: Application
+            joinColumn:
+                name: application_id
+                referencedColumnName: id
+    lifecycleCallbacks:
+        prePersist: [ onCreate ]
+        preUpdate: [ onUpdate ]

@@ -1,0 +1,124 @@
+{% set selectedMenu = 'developers' %}
+{% set developersMenu = 'quickbooks-api-vendors' %}
+{% extends 'MajorApiAppBundle:WebLayouts:default.html.twig' %}
+
+{% block title %}Major &mdash; Developers &mdash; QuickBooks Vendors API{% endblock %}
+
+{% block body %}
+    <article>
+        <div class="wrapper">
+            <div class="documentation clearfix limiter">
+                {% include 'MajorApiAppBundle:WebTemplates:developers-menu.html.twig' %}
+
+                <div class="doc">
+                    <h1>QuickBooks Vendors API</h1>
+                    <p>
+                        After your Major application connects with QuickBooks, all vendors stored in QuickBooks are imported into the Major database. You can query these vendors based on their name. Additionally, you can query all vendors at once.
+                    </p>
+
+                    <h2>Retrieving an Existing Vendor or Vendors</h2>
+                    <p>
+                        <code><strong>GET</strong><br>https://majorapi.com/api/quickbooks/vendors</code>
+                    </p>
+                    <p>
+                        <code><strong>GET</strong><br>https://majorapi.com/api/quickbooks/vendors/{vendorName}</code>
+                    </p>
+                    <p>
+                        <strong>Note</strong> &mdash; Vendors are retrieved by their name. If the name has a space in it, it must be URL encoded properly. The name does not have to be capitalized; Major will handle normalizing the name
+                        to best attempt to locate the vendor.
+                    </p>
+
+                    <h3>Successful Request and Response</h3>
+
+                    <h4>200 Ok</h4>
+<pre>curl -X GET \
+  -u "username:API_KEY" \
+  -H "Accept: application/json" \
+  https://majorapi.com/api/quickbooks/vendors</pre>
+
+<pre>[
+    {
+        "created": "2013-01-11T21:12:42+00:00",
+        "updated": "2013-01-11T21:12:42+00:00",
+        "status": 1,
+        "applicationName": "Major",
+        "applicationUsername": "major",
+        "name": "Apple, Inc.",
+        "fullname": "Apple, Inc.",
+        "isActive": true,
+        "companyName": "Apple Computers",
+        "salutation": null,
+        "firstName": "Apple, Inc.",
+        "middleName": null,
+        "lastName": null,
+        "jobTitle": null,
+        "vendorAddress": {
+            "address1": "1 Infinite Loop",
+            "address2": null,
+            "address3": null,
+            "address4": null,
+            "address5": null,
+            "city": "Cupertino",
+            "state": "CA",
+            "postalCode": "95014",
+            "country": "USA",
+            "note": null
+        },
+        "shipAddress": {
+            "address1": "1 Infinite Loop",
+            "address2": null,
+            "address3": null,
+            "address4": null,
+            "address5": null,
+            "city": "Cupertino",
+            "state": "CA",
+            "postalCode": "95014",
+            "country": "USA",
+            "note": null
+        },
+        "phone": "800-692-7753",
+        "altPhone": null,
+        "email": "sjobs@apple.com",
+        "emailCc": "jive@apple.com",
+        "contact": "Steve Jobs",
+        "altContact": "Jony Ive",
+        "nameOnCheck": "Steve Jobs",
+        "accountNumber": "11223344",
+        "notes": "Please do not accept checks from Apple.",
+        "creditLimit": 1500.00,
+        "vendorTaxIdentity": null,
+        "isVendorEligibleFor1099": false,
+        "balance": 156999.33,
+        "_links": [
+            {
+                "rel": "self",
+                "method": "GET",
+                "href": "https://majorapi.com/api/quickbooks/vendors/Apple%2C%20Inc."
+            }
+        ]
+    }
+]</pre>
+
+                    <p>
+                        <strong>Note</strong> &mdash; Regardless if you retrieve a single vendor or multiple vendors, all responses are returned in a JSON array.
+                    </p>
+
+                    <h3>Unsuccessful Request and Response</h3>
+
+                    <h4>404 Not Found</h4>
+<pre>curl -X GET \
+  -u "username:API_KEY" \
+  -H "Accept: application/json" \
+  https://majorapi.com/api/quickbooks/vendor/Microsoft</pre>
+
+<pre>{
+    "httpCode": 404,
+    "message": "A QuickBooks Account with the name Microsoft could not be found.",
+    "violations": []
+}</pre>
+
+                </div>
+            </div>
+        </div>
+    </article>
+{% endblock %}

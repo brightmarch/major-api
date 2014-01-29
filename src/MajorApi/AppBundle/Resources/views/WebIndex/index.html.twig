@@ -1,0 +1,59 @@
+{% set selectedMenu = 'index' %}
+{% extends 'MajorApiAppBundle:WebLayouts:default.html.twig' %}
+
+{% block title %}QuickBooks REST API &mdash; Register Now &mdash; MajorApi{% endblock %}
+
+{% block body %}
+	<div class="mast">
+		<h1>
+            Your App <em>+</em> QuickBooks
+            <br>
+            in Five Minutes
+        </h1>
+
+        <a class="button alt fat all-caps" href="{{ path('majorapi_web_registration') }}">Get Started Now</a>
+
+        <p class="italic">
+            or <a class="alt-link" href="{{ path('majorapi_web_developers') }}">peruse the docs</a>
+        </p>
+	</div>
+
+
+    <div class="limiter benefit easy" data-ui-benefit-block="easy">
+        <h2 class="tight">We&rsquo;re as easy as plug &amp; play</h2>
+        <p>
+            Major is the simplest tool for integrating QuickBooks into your application.
+        </p>
+        <a href="{{ path('majorapi_web_registration') }}" class="button all-caps fat">Start using Major now</a>
+    </div>
+
+
+    <div class="limiter benefit pay" data-ui-benefit-block="pay">
+        <h2 class="tight">You don&rsquo;t pay until you love it</h2>
+        <p>
+            Integrating with QuickBooks can be scary. That&rsquo;s why we give you a 30 day free trial to figure things out.
+            When you're ready to commit, you&rsquo;ll pay based on how much money you&rsquo;re making.
+        </p>
+        <a href="{{ path('majorapi_web_pricing') }}" class="button all-caps fat">Check our pricing</a>
+    </div>
+
+
+    <div class="limiter benefit rest" data-ui-benefit-block="rest">
+        <h2 class="tight">You can REST easy</h2>
+        <p>
+            We&rsquo;ve developed an intuitive and lightning-fast REST API. If you&rsquo;re interested in learning
+            more before signing up,
+            <a href="{{ path('majorapi_web_developers') }}">have a peek at our docs</a>.
+        </p>
+        <a href="{{ path('majorapi_web_registration') }}" class="button all-caps fat">Start using Major now</a>
+    </div>
+
+
+{% endblock %}
+
+{% block bottomscripts %}
+	<script>
+		mixpanel.track("registration#index arrive");
+		mixpanel.track_forms("#registration-form", "registration#index submit");
+	</script>
+{% endblock %}

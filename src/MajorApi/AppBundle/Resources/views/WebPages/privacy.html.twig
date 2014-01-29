@@ -1,0 +1,52 @@
+{% set selectedMenu = 'privacy' %}
+{% extends 'MajorApiAppBundle:WebLayouts:default.html.twig' %}
+
+{% block title %}Major &mdash; Privacy Policy{% endblock %}
+
+{% block body %}
+    <article>
+        <div class="wrapper">
+            <div class="clearfix limiter">
+                <div class="sidebar">
+                    <img src="{{ asset('bundles/majorapiapp/images/logo-circle.jpg') }}" alt="Major Logo" class="col-3" >
+                </div>
+
+                <div class="content">
+                    <h1>Privacy</h1>
+                    <p>
+                        Bright March, LLC. ("we", "us", or "our") values your privacy. This privacy policy is effective January 1, 2013; it summarizes what information we might collect from a registered user or other visitor ("you"), and what we will and will not do with it.
+                    </p>
+                    <p>
+                        Major is a product built by Bright March, LLC and as such, this privacy policy refers to Bright March and our products.
+                    </p>
+                    <p>
+                        <strong>The information you provide us about yourself, your company, and your customers or users will never be sold or rented to any third party without your explicit permission.</strong>
+                    </p>
+                    <p>
+                        We feel this is most imporant part of our privacy policy, and we take it seriously. Should Bright March the company or Major the product be acquired by another company, your data will be transfered to that company and subject to their privacy policy. However, you will be notified before that transfer is complete should you wish to cancel your service and retrieve your data.
+                    </p>
+
+                    <h2>Information We Gather</h2>
+                    <p>
+                        When you become a registered member of MajorApi, you are asked for your name, email address and a password. That is all that is necessary to use MajorApi. Should you become a paying member, your credit card details will need to be supplied. We do not and will never store any credit card information on any of our servers.
+                    </p>
+
+                    <h2>Cookies and Web Tracking</h2>
+                    <p>
+                        The Major website makes use of cookies for web analytics through Google Analytics and Mixpanel. You can opt out of this by disabling third party cookies when visiting this website. Any other cookies set are done so by the software running this website for session management and are necessary for the site to operate properly. Anonymous and non-identifiable information such as your IP address and browser type are logged through Google Analytics, Mixpanel, and the Major server logs.
+                    </p>
+
+                    <h2>Your Data</h2>
+                    <p>
+                        The data you add to Major is yours. You retain any and all of the rights to the data you provide Major and Bright March. When canceling your account with MajorApi, you will have the option to download your data. After your account is canceled, your data is deleted permanently from our servers.
+                    </p>
+
+                    <h2>Changes to This Policy</h2>
+                    <p>
+                        You will receive an email at the address you registered with should we make significant changes to this policy.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </article>
+{% endblock %}

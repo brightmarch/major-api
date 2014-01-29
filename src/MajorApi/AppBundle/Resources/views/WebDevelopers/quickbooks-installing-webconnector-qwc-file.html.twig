@@ -1,0 +1,58 @@
+{% set selectedMenu = 'developers' %}
+{% set developersMenu = 'quickbooks-installing-webconnector-qwc-file' %}
+{% extends 'MajorApiAppBundle:WebLayouts:default.html.twig' %}
+
+{% block title %}Major &mdash; Developers &mdash; Installing QuickBooks WebConnector .qwc File{% endblock %}
+
+{% block body %}
+    <article>
+        <div class="wrapper">
+            <div class="documentation clearfix limiter">
+                {% include 'MajorApiAppBundle:WebTemplates:developers-menu.html.twig' %}
+
+                <div class="doc">
+                    <h1>Installing QuickBooks WebConnector .qwc File</h1>
+                    <p>
+                        The QuickBooks WebConnector .qwc file is a small XML manifest that describes to QuickBooks how to pull in data. The data provided to it is the data sent to the Major QuickBooks REST API.
+                    </p>
+                    <p>
+                        After you create a Major QuickBooks Application, you can immediately download the .qwc file from the dashboard. Click the <strong>Details</strong> button next to the Major QuickBooks Application you wish to integrate with QuickBooks.
+                        On the Major QuickBooks Application dashboard, click the <strong>Save WebConnector File</strong> button to download the .qwc file.
+                    </p>
+                    <p>
+                        Ensure that QuickBooks is running and that you have opened the QuickBooks WebConnector application.
+                    </p>
+                    <p>
+                        In the QuickBooks WebConnector application, click the <strong>Add an Application</strong> button. Navigate to the location you saved the <code>web-connector-<em>username</em>.qwc</code> file and open it.
+                    </p>
+                    <p class="centered">
+                        <img src="{{ asset('bundles/majorapiapp/images/quickbooks-webconnector-dashboard.png') }}" width="690">
+                    </p>
+                    <p>
+                        You will be prompted by a dialog window similar to the one below. It has connection and support information related to the Major QuickBooks REST API. Click the <strong>OK</strong> button to accept the certificate.
+                    </p>
+                    <p class="centered">
+                        <img src="{{ asset('bundles/majorapiapp/images/quickbooks-webconnector-security-alert.png') }}">
+                    </p>
+                    <p>
+                        Next, ensure the checkbox <em>Yes, always; allow access even if QuickBooks is not running</em> is checked in the <em>QuickBooks - Application Certificate</em> dialog window.
+                    </p>
+                    <p>
+                        Once the .qwc file has been loaded, you will need to enter your Major QuickBooks Application's API Key as the password. Allow the QuickBooks WebConnector application to save the API Key.
+                    </p>
+                    <p class="centered">
+                        <img src="{{ asset('bundles/majorapiapp/images/quickbooks-webconnector-save-password.png') }}" width="690">
+                    </p>
+                    <p>
+                        You will notice you can adjust how often data is imported into QuickBooks in the <em>Every_Min</em> column of the QuickBooks WebConnector application. We ask that you do not set the value below the default 30 minutes.
+                    </p>
+
+                    <h2>What's Next?</h2>
+                    <p>
+                        Now that you have installed the QuickBooks WebConnector .qwc file, you need to <a href="{{ path('majorapi_web_developers_quickbooks_connecting_with_quickbooks') }}">connect with QuickBooks</a>.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </article>
+{% endblock %}

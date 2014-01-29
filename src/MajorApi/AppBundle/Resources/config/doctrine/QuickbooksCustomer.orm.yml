@@ -1,0 +1,191 @@
+MajorApi\AppBundle\Entity\QuickbooksCustomer:
+    type: entity
+    table: api_quickbooks_customer
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: SEQUENCE
+            sequenceGenerator:
+                sequenceName: api_quickbooks_customer_id_seq
+                allocationSize: 1
+                initialValue: 1 
+    fields:
+        created:
+            column: created
+            type: datetime
+        updated:
+            column: updated 
+            type: datetime
+        status:
+            column: status
+            type: integer
+        applicationId:
+            column: application_id
+            type: integer
+        token:
+            column: token
+            type: string
+            nullable: true
+        name:
+            column: name
+            type: string
+        isActive:
+            column: is_active
+            type: boolean
+        companyName:
+            column: company_name
+            type: string
+            nullable: true
+        salutation:
+            column: salutation
+            type: string
+            nullable: true
+        firstName:
+            column: first_name
+            type: string
+            nullable: true
+        middleName:
+            column: middle_name
+            type: string
+            nullable: true
+        lastName:
+            column: last_name
+            type: string
+            nullable: true
+        jobTitle:
+            column: job_title
+            type: string
+            nullable: true
+        billAddress1:
+            column: bill_address1
+            type: string
+            nullable: true
+        billAddress2:
+            column: bill_address2
+            type: string
+            nullable: true
+        billAddress3:
+            column: bill_address3
+            type: string
+            nullable: true
+        billAddress4:
+            column: bill_address4
+            type: string
+            nullable: true
+        billAddress5:
+            column: bill_address5
+            type: string
+            nullable: true
+        billCity:
+            column: bill_city 
+            type: string
+            nullable: true
+        billState:
+            column: bill_state
+            type: string
+            nullable: true
+        billPostalCode:
+            column: bill_postal_code 
+            type: string
+            nullable: true
+        billCountry:
+            column: bill_country
+            type: string
+            nullable: true
+        billNote:
+            column: bill_note
+            type: string
+            nullable: true
+        shipAddress1:
+            column: ship_address1
+            type: string
+            nullable: true
+        shipAddress2:
+            column: ship_address2
+            type: string
+            nullable: true
+        shipAddress3:
+            column: ship_address3
+            type: string
+            nullable: true
+        shipAddress4:
+            column: ship_address4
+            type: string
+            nullable: true
+        shipAddress5:
+            column: ship_address5
+            type: string
+            nullable: true
+        shipCity:
+            column: ship_city 
+            type: string
+            nullable: true
+        shipState:
+            column: ship_state
+            type: string
+            nullable: true
+        shipPostalCode:
+            column: ship_postal_code 
+            type: string
+            nullable: true
+        shipCountry:
+            column: ship_country
+            type: string
+            nullable: true
+        shipNote:
+            column: ship_note
+            type: string
+            nullable: true
+        phone:
+            column: phone
+            type: string
+            nullable: true
+        altPhone:
+            column: alt_phone
+            type: string
+            nullable: true
+        fax:
+            column: fax
+            type: string
+            nullable: true
+        email:
+            column: email
+            type: string
+            nullable: true
+        emailCc:
+            column: email_cc
+            type: string
+            nullable: true
+        notes:
+            column: notes
+            type: string
+            nullable: true
+        quickbooksListId:
+            column: quickbooks_list_id
+            type: string
+            nullable: true
+        quickbooksTxnId:
+            column: quickbooks_txn_id
+            type: string
+            nullable: true
+        quickbooksTxnNumber:
+            column: quickbooks_txn_number
+            type: string
+            nullable: true
+        quickbooksEditSequence:
+            column: quickbooks_edit_sequence
+            type: string
+            nullable: true
+        quickbooksNameToken:
+            column: quickbooks_name_token
+            type: string
+    manyToOne:
+        application:
+            targetEntity: Application
+            joinColumn:
+                name: application_id
+                referencedColumnName: id
+    lifecycleCallbacks:
+        prePersist: [ onCreate ]
+        preUpdate: [ onUpdate ]

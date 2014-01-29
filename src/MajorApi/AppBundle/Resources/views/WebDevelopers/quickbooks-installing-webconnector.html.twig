@@ -1,0 +1,35 @@
+{% set selectedMenu = 'developers' %}
+{% set developersMenu = 'quickbooks-webconnector' %}
+{% extends 'MajorApiAppBundle:WebLayouts:default.html.twig' %}
+
+{% block title %}Major &mdash; Developers &mdash; Installing QuickBooks WebConnector{% endblock %}
+
+{% block body %}
+    <article>
+        <div class="wrapper">
+            <div class="documentation clearfix limiter">
+                {% include 'MajorApiAppBundle:WebTemplates:developers-menu.html.twig' %}
+
+                <div class="doc">
+                    <h1>Installing QuickBooks WebConnector</h1>
+                    <p>
+                        To use the Major QuickBooks REST API, you will need to install a piece of software called the QuickBooks WebConnector. This is a piece of software written and actively maintained by Intuit and free to download and use.
+                        Intuit does not charge a monthly fee to use this software.
+                    </p>
+
+                    <p>
+                        To begin, visit the <a href="http://marketplace.intuit.com/webconnector/" target="_blank">QuickBooks WebConnector download page</a> and download the QuickBooks WebConnector application suitable for your QuickBooks installation. You will need to download this file on the computer that runs QuickBooks.
+                    </p>
+                    <p>
+                        After downloading the QuickBooks WebConnector installation .exe file, install it on the computer that is running QuickBooks.
+                    </p>
+
+                    <h2>What's Next?</h2>
+                    <p>
+                        Now that you have installed the QuickBooks WebConnector, you need to <a href="{{ path('majorapi_web_developers_quickbooks_installing_webconnector_qwc_file') }}">install the QuickBooks WebConnector .qwc file</a>.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </article>
+{% endblock %}

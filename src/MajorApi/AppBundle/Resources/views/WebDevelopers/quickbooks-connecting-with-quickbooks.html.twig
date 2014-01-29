@@ -1,0 +1,79 @@
+{% set selectedMenu = 'developers' %}
+{% set developersMenu = 'quickbooks-connecting-with-quickbooks' %}
+{% extends 'MajorApiAppBundle:WebLayouts:default.html.twig' %}
+
+{% block title %}Major &mdash; Developers &mdash; Connecting With QuickBooks{% endblock %}
+
+{% block body %}
+    <article>
+        <div class="wrapper">
+            <div class="documentation clearfix limiter">
+                {% include 'MajorApiAppBundle:WebTemplates:developers-menu.html.twig' %}
+
+                <div class="doc">
+                    <h1>Connecting With QuickBooks</h1>
+                    <p>
+                        By now, you have created a new Major Application, downloaded and installed the QuickBooks WebConnector software and .qwc file and Major is now ready to connect with QuickBooks.
+                    </p>
+                    <p>
+                        Connecting with QuickBooks happens automatically. After you create your Major QuickBooks Application and installed the QuickBooks WebConnector .qwc file, six requests are sent to QuickBooks.
+                    </p>
+                    <p>
+                        These requests are called the <code>AccountQuery</code>, <code>CustomerQuery</code>, <code>HostQuery</code>, <code>ItemQuery</code>, <code>SalesRepQuery</code>, and <code>VendorQuery</code>.
+                    </p>
+
+                    <h2>AccountQuery</h2>
+                    <p>
+                        Major needs to find out about what accounts are stored in your QuickBooks database so they can be associated to sales orders. We do not read in any confidential banking information such as bank account numbers or routing numbers.
+                    </p>
+
+                    <h2>CustomerQuery</h2>
+                    <p>
+                        Major needs to know about your existing customers stored in QuickBooks so we issue a <code>CustomerQuery</code> request. This request tells QuickBooks to send Major all of your customer information. We do not store any confidential information, such as social security numbers, credit cards, or bank account information.
+                        However, if you store confidential information in fields not meant to store confidential information (such as a generic "notes" field), this data will be stored unencrypted in the Major database. It is your responsibility to ensure that confidential data is only stored in fields designed to store confidential information.
+                    </p>
+                    <p>
+                        Once Major knows about your customers, you can create invoices and sales orders using the customer's name.
+                    </p>
+
+                    <h2>HostQuery</h2>
+                    <p>
+                        The <code>HostQuery</code> request returns information about the QuickBooks installation running. For example, it returns the version of QuickBooks installed, the version of QuickBooks XML supported, and what in country QuickBooks is installed.
+                    </p>
+                    <p>
+                        Your Major QuickBooks Application is connected to QuickBooks when the <code>HostQuery</code> information is imported.
+                    </p>
+                    <p>
+                        Once the connection to QuickBooks is successful, you can begin sending data to the Major QuickBooks REST API.
+                    </p>
+
+                    <h2>ItemQuery</h2>
+                    <p>
+                        In addition to executing a <code>HostQuery</code> request, Major also executes an <code>ItemQuery</code> request. The <code>ItemQuery</code> request tells QuickBooks to send all information stored about the items in the QuickBooks company file to Major.
+                    </p>
+                    <p>
+                        We import these items for two reasons. First, using the Major QuickBooks REST API, you can easily query item information. Second, you must reference valid items when creating a new invoice or sales order. By importing all of the items, we can ensure each invoice references a valid item in each of its lines.
+                    </p>
+                    <p>
+                        <strong>Note</strong> &mdash; Inserting all of your QuickBooks Items into the Major database can take some time if you have several thousand items.
+                    </p>
+
+                    <h2>SalesRepQuery</h2>
+                    <p>
+                        After creating a new Major Application, a <code>SalesRepQuery</code> request is executed to bring in information about the QuickBooks Sales Representatives stored in your company file. We only read in their initials and name. We do not read in any private information like bank account records or Social Security numbers.
+                    </p>
+
+                    <h2>VendorQuery</h2>
+                    <p>
+                        The <code>VendorQuery</code> request is sent to QuickBooks to read in all vendors. After the vendors have been saved in the Major database, they can be queried easily through the REST API. Additionally, vendors can be associated with sales orders and other objects.
+                    </p>
+
+                    <h2>What's Next?</h2>
+                    <p>
+                        You are now ready to learn about the <a href="{{ path('majorapi_web_developers_quickbooks_api') }}">Major QuickBooks REST API</a>.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </article>
+{% endblock %}

@@ -1,0 +1,24 @@
+imports:
+    - { resource: config.yml }
+
+#doctrine:
+#    orm:
+#        metadata_cache_driver: apc
+#        result_cache_driver: apc
+#        query_cache_driver: apc
+
+monolog:
+    handlers:
+        main:
+            type:         fingers_crossed
+            action_level: error
+            handler:      nested
+        nested:
+            type:  stream
+            path:  %kernel.root_dir%/../log/%kernel.environment%.log
+            level: debug
+
+twig:
+    globals:
+        mix_panel_id: 3300f0a19c356ba88a7c5d61adbc10a5
+        require_file: major-built.js

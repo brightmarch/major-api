@@ -1,0 +1,50 @@
+{% for quickbooksInvoice in quickbooksInvoices %}
+    <InvoiceAddRq>
+        <InvoiceAdd>
+            <CustomerRef>
+                <ListID>{{ quickbooksInvoice.getQuickbooksCustomer.getQuickbooksListId }}</ListID> 
+            </CustomerRef>
+            <TxnDate>{{ quickbooksInvoice.getInvoiceDateString }}</TxnDate>
+            <RefNumber>{{ quickbooksInvoice.getRefNumber }}</RefNumber> 
+            <BillAddress> 
+                <Addr1>{{ quickbooksInvoice.getBillAddress1 }}</Addr1> 
+                <Addr2>{{ quickbooksInvoice.getBillAddress2 }}</Addr2> 
+                <Addr3>{{ quickbooksInvoice.getBillAddress3 }}</Addr3> 
+                <Addr4>{{ quickbooksInvoice.getBillAddress4 }}</Addr4> 
+                <Addr5>{{ quickbooksInvoice.getBillAddress5 }}</Addr5> 
+                <City>{{ quickbooksInvoice.getBillCity }}</City> 
+                <State>{{ quickbooksInvoice.getBillState }}</State> 
+                <PostalCode>{{ quickbooksInvoice.getBillPostalCode }}</PostalCode> 
+                <Country>{{ quickbooksInvoice.getBillCountry }}</Country> 
+                <Note>{{ quickbooksInvoice.getBillNote }}</Note> 
+            </BillAddress>
+            <ShipAddress> 
+                <Addr1>{{ quickbooksInvoice.getShipAddress1 }}</Addr1> 
+                <Addr2>{{ quickbooksInvoice.getShipAddress2 }}</Addr2> 
+                <Addr3>{{ quickbooksInvoice.getShipAddress3 }}</Addr3> 
+                <Addr4>{{ quickbooksInvoice.getShipAddress4 }}</Addr4> 
+                <Addr5>{{ quickbooksInvoice.getShipAddress5 }}</Addr5> 
+                <City>{{ quickbooksInvoice.getShipCity }}</City> 
+                <State>{{ quickbooksInvoice.getShipState }}</State> 
+                <PostalCode>{{ quickbooksInvoice.getShipPostalCode }}</PostalCode> 
+                <Country>{{ quickbooksInvoice.getShipCountry }}</Country> 
+                <Note>{{ quickbooksInvoice.getShipNote }}</Note> 
+            </ShipAddress>
+            <IsPending>{{ quickbooksInvoice.getIsPendingString }}</IsPending> 
+            <IsFinanceCharge>{{ quickbooksInvoice.getIsFinanceChargeString }}</IsFinanceCharge> 
+            <PONumber>{{ quickbooksInvoice.getPoNumber }}</PONumber>
+            <Memo>{{ quickbooksInvoice.getMemo }}</Memo> 
+            <IsToBePrinted>{{ quickbooksInvoice.getIsToBePrintedString }}</IsToBePrinted> 
+            <IsToBeEmailed>{{ quickbooksInvoice.getIsToBeEmailedString }}</IsToBeEmailed> 
+            {% for quickbooksInvoiceLine in quickbooksInvoice.getQuickbooksInvoiceLines %}
+                <InvoiceLineAdd> 
+                    <ItemRef> 
+                        <ListID>{{ quickbooksInvoiceLine.getQuickbooksItem.getQuickbooksListId }}</ListID> 
+                    </ItemRef>
+                    <Desc>{{ quickbooksInvoiceLine.getItemDescription }}</Desc> 
+                    <Quantity>{{ quickbooksInvoiceLine.getQuantityOrdered }}</Quantity> 
+                </InvoiceLineAdd>
+            {% endfor %}
+        </InvoiceAdd>
+    </InvoiceAddRq>
+{% endfor %}

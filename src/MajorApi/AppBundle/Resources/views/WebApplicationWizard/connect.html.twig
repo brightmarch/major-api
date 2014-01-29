@@ -1,0 +1,28 @@
+{% extends 'MajorApiAppBundle:WebLayouts:void.html.twig' %}
+
+{% block title %}Major &mdash; Connect Your QuickBooks Application{% endblock %}
+
+{% block body %}
+    <div class="limiter clearfix">
+        <h1>Connect with Payment Providers</h1>
+
+        {% include 'MajorApiAppBundle:WebTemplates:messaging.html.twig' %}
+        <div class="col-12">
+            <p>
+                Almost there &mdash; last step. Your new Major application is now connected with QuickBooks. You can connect your Major application with a payment
+                provider to automate data transfer from your online store to QuickBooks at <strong>no extra charge</strong>.
+            </p>
+
+            <ul class="no-bullets">
+                <li>
+                    <img src="{{ asset('bundles/majorapiapp/images/logo-stripe-white.png') }}" alt="Connect with Stripe" width="133.5"><br>
+                    <a href="{{ path('majorapi_web_connect_with_stripe') }}" class="button alt">Connect to Stripe</a>
+                </li>
+            </ul>
+
+            <p class="right">
+                <a href="{{ path('majorapi_web_dashboard') }}">Skip This Step</a>
+            </p>
+        </div>
+    </div>
+{% endblock %}

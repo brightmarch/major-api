@@ -1,0 +1,58 @@
+{% autoescape false %}
+[
+    {% for quickbooksItem in quickbooksItems %}
+        {
+            "created": {{ quickbooksItem.getCreated.format('c')|json_encode }},
+            "updated": {{ quickbooksItem.getUpdated.format('c')|json_encode }},
+            "status": {{ quickbooksItem.getStatus }},
+            "applicationName": {{ quickbooksItem.getApplication.getName|json_encode }},
+            "applicationUsername": {{ quickbooksItem.getApplication.getUsername|json_encode }},
+            "type": {{ quickbooksItem.getType|json_encode }},
+            "name": {{ quickbooksItem.getName|json_encode }},
+            "fullname": {{ quickbooksItem.getFullname|json_encode }},
+            "isActive": {{ quickbooksItem.getIsActive|json_encode }},
+            "sublevel": {{ quickbooksItem.getSublevel }},
+            "salesDescription": {{ quickbooksItem.getSalesDescription|json_encode }},
+            "salesPrice": {{ quickbooksItem.getSalesPrice }},
+            "salesExpense": {{ quickbooksItem.getSalesExpense }},
+            "salesDate": {{ quickbooksItem.getSalesDateString|json_encode }},
+            "purchaseDescription": {{ quickbooksItem.getPurchaseDescription|json_encode }},
+            "purchasePrice": {{ quickbooksItem.getPurchasePrice }},
+            "purchaseCost": {{ quickbooksItem.getPurchaseCost }},
+            "purchaseDate": {{ quickbooksItem.getPurchaseDateString|json_encode }},
+            "description": {{ quickbooksItem.getDescription|json_encode }},
+            "price": {{ quickbooksItem.getPrice }},
+            "pricePercent": {{ quickbooksItem.getPricePercent }},
+            "discountRate": {{ quickbooksItem.getDiscountRate }},
+            "discountRatePercent": {{ quickbooksItem.getDiscountRatePercent }},
+            "barCode": {{ quickbooksItem.getBarCode|json_encode }},
+            "manufacturerPartNumber": {{ quickbooksItem.getManufacturerPartNumber|json_encode }},
+            "quantityReorder": {{ quickbooksItem.getQuantityReorder }},
+            "quantityOnHand": {{ quickbooksItem.getQuantityOnHand }},
+            "quantityOnOrder": {{ quickbooksItem.getQuantityOnOrder }},
+            "quantityOnSalesOrder": {{ quickbooksItem.getQuantityOnSalesOrder }},
+            "averageCost": {{ quickbooksItem.getAverageCost }},
+            "vendorOrPayeeName": {{ quickbooksItem.getVendorOrPayeeName|json_encode }},
+            "acquiredAs": {{ quickbooksItem.getAcquiredAs|json_encode }},
+            "assetDescription": {{ quickbooksItem.getAssetDescription|json_encode }},
+            "location": {{ quickbooksItem.getLocation|json_encode }},
+            "po_number": {{ quickbooksItem.getPoNumber|json_encode }},
+            "serialNumber": {{ quickbooksItem.getSerialNumber|json_encode }},
+            "warrantyExpirationDate": {{ quickbooksItem.getWarrantyExpirationDateString|json_encode }},
+            "notes": {{ quickbooksItem.getNotes|json_encode }},
+            "assetNumber": {{ quickbooksItem.getAssetNumber|json_encode }},
+            "costBasis": {{ quickbooksItem.getCostBasis }},
+            "yearEndAccumulatedDepreciation": {{ quickbooksItem.getYearEndAccumulatedDepreciation }},
+            "yearEndBookValue": {{ quickbooksItem.getYearEndBookValue }},
+            "_links": [
+                {
+                    "rel": "self",
+                    "method": "GET",
+                    "href": {{ url('majorapi_api_quickbooks_items_read', {'itemName': quickbooksItem.getName})|json_encode }}
+                }
+            ]
+        }
+        {% if loop.index != quickbooksItems|length %},{% endif %}
+    {% endfor %}
+]
+{% endautoescape %}

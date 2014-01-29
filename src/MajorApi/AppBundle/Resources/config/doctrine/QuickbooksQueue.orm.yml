@@ -1,0 +1,59 @@
+MajorApi\AppBundle\Entity\QuickbooksQueue:
+    type: entity
+    table: api_quickbooks_queue
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: SEQUENCE
+            sequenceGenerator:
+                sequenceName: api_quickbooks_queue_id_seq
+                allocationSize: 1
+                initialValue: 1 
+    fields:
+        created:
+            column: created
+            type: datetime
+        updated:
+            column: updated 
+            type: datetime
+        processed:
+            column: processed
+            type: datetime
+            nullable: true
+        status:
+            column: status
+            type: integer
+        applicationId:
+            column: application_id
+            type: integer
+        command:
+            column: command
+            type: string
+        persister:
+            column: persister
+            type: string
+        token:
+            column: token
+            type: string
+            nullable: true
+        requestXml:
+            column: request_xml
+            type: text
+            nullable: true
+        isIpp:
+            column: is_ipp
+            type: boolean
+        queueToken:
+            column: queue_token
+            type: string
+            nullable: true
+    manyToOne:
+        application:
+            targetEntity: Application
+            joinColumn:
+                name: application_id
+                referencedColumnName: id
+    lifecycleCallbacks:
+        prePersist: [ onCreate ]
+        preUpdate: [ onUpdate ]

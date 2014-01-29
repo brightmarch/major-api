@@ -1,0 +1,103 @@
+MajorApi\AppBundle\Entity\Application:
+    type: entity
+    table: web_application
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: SEQUENCE
+            sequenceGenerator:
+                sequenceName: web_application_id_seq 
+                allocationSize: 1
+                initialValue: 1 
+    fields:
+        created:
+            column: created
+            type: datetime
+        updated:
+            column: updated 
+            type: datetime
+        status:
+            column: status
+            type: integer
+        accountId:
+            column: account_id
+            type: integer
+        name:
+            column: name
+            type: string
+        username:
+            column: username
+            type: string
+        apiKey:
+            column: api_key
+            type: string
+        quickbooksToken:
+            column: quickbooks_token
+            type: string
+            nullable: true
+        quickbooksProductName:
+            column: quickbooks_product_name
+            type: string
+            nullable: true
+        quickbooksMajorVersion:
+            column: quickbooks_major_version
+            type: string
+            nullable: true
+        quickbooksMinorVersion:
+            column: quickbooks_minor_version
+            type: string
+            nullable: true
+        quickbooksCountry:
+            column: quickbooks_country
+            type: string
+            nullable: true
+        quickbooksSupportedQbxmlVersion:
+            column: quickbooks_supported_qbxml_version
+            type: string
+            nullable: true
+        quickbooksIsAutomaticLogin:
+            column: quickbooks_is_automatic_login
+            type: boolean
+        quickbooksQbFileMode:
+            column: quickbooks_qb_file_mode
+            type: string
+            nullable: true
+        quickbooksOwnerId:
+            column: quickbooks_owner_id
+            type: string
+            nullable: true
+        quickbooksFileId:
+            column: quickbooks_file_id 
+            type: string
+            nullable: true
+        quickbooksType:
+            column: quickbooks_type
+            type: string
+            nullable: true
+        quickbooksRealmId:
+            column: quickbooks_realm_id
+            type: integer
+            nullable: true
+        quickbooksOauthToken:
+            column: quickbooks_oauth_token
+            type: string
+            nullable: true
+        quickbooksOauthTokenSecret:
+            column: quickbooks_oauth_token_secret
+            type: string
+            nullable: true
+        quickbooksOauthTokenExpiration:
+            column: quickbooks_oauth_token_expiration
+            type: date
+            nullable: true
+    manyToOne:
+        account:
+            targetEntity: Account
+            inversedBy: applications
+            joinColumn:
+                name: account_id
+                referencedColumnName: id
+    lifecycleCallbacks:
+        prePersist: [ onCreate ]
+        preUpdate: [ onUpdate ]

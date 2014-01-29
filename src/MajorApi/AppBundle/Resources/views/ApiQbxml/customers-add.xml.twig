@@ -1,0 +1,42 @@
+{% for quickbooksCustomer in quickbooksCustomers %}
+    <CustomerAddRq>
+        <CustomerAdd>
+            <Name>{{ quickbooksCustomer.getName }}</Name>
+            <IsActive>{{ quickbooksCustomer.getIsActiveString }}</IsActive>
+            <CompanyName>{{ quickbooksCustomer.getCompanyName }}</CompanyName>
+            <Salutation>{{ quickbooksCustomer.getSalutation }}</Salutation>
+            <FirstName>{{ quickbooksCustomer.getFirstName }}</FirstName>
+            <MiddleName>{{ quickbooksCustomer.getMiddleName }}</MiddleName>
+            <LastName>{{ quickbooksCustomer.getLastName }}</LastName>
+            <BillAddress>
+                <Addr1>{{ quickbooksCustomer.getBillAddress1 }}</Addr1>
+                <Addr2>{{ quickbooksCustomer.getBillAddress2 }}</Addr2>
+                <Addr3>{{ quickbooksCustomer.getBillAddress3 }}</Addr3>
+                <Addr4>{{ quickbooksCustomer.getBillAddress4 }}</Addr4>
+                <Addr5>{{ quickbooksCustomer.getBillAddress5 }}</Addr5>
+                <City>{{ quickbooksCustomer.getBillCity }}</City>
+                <State>{{ quickbooksCustomer.getBillState }}</State>
+                <PostalCode>{{ quickbooksCustomer.getBillPostalCode }}</PostalCode>
+                <Country>{{ quickbooksCustomer.getBillCountry }}</Country>
+                <Note>{{ quickbooksCustomer.getBillNote }}</Note>
+            </BillAddress>
+            <ShipAddress>
+                <Addr1>{{ quickbooksCustomer.getShipAddress1 }}</Addr1>
+                <Addr2>{{ quickbooksCustomer.getShipAddress2 }}</Addr2>
+                <Addr3>{{ quickbooksCustomer.getShipAddress3 }}</Addr3>
+                <Addr4>{{ quickbooksCustomer.getShipAddress4 }}</Addr4>
+                <Addr5>{{ quickbooksCustomer.getShipAddress5 }}</Addr5>
+                <City>{{ quickbooksCustomer.getShipCity }}</City>
+                <State>{{ quickbooksCustomer.getShipState }}</State>
+                <PostalCode>{{ quickbooksCustomer.getShipPostalCode }}</PostalCode>
+                <Country>{{ quickbooksCustomer.getShipCountry }}</Country>
+                <Note>{{ quickbooksCustomer.getShipNote }}</Note>
+            </ShipAddress>
+            <Phone>{{ quickbooksCustomer.getPhone }}</Phone>
+            <AltPhone>{{ quickbooksCustomer.getAltPhone }}</AltPhone>
+            <Fax>{{ quickbooksCustomer.getFax }}</Fax>
+            <Email>{{ quickbooksCustomer.getEmail }}</Email>
+            <Notes>{{ quickbooksCustomer.getNotes }}</Notes>
+        </CustomerAdd>
+    </CustomerAddRq>
+{% endfor %}

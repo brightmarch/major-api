@@ -1,0 +1,109 @@
+{% set selectedMenu = 'developers' %}
+{% set developersMenu = 'quickbooks-api-items' %}
+{% extends 'MajorApiAppBundle:WebLayouts:default.html.twig' %}
+
+{% block title %}Major &mdash; Developers &mdash; QuickBooks Items API{% endblock %}
+
+{% block body %}
+    <article>
+        <div class="wrapper">
+            <div class="documentation clearfix limiter">
+                {% include 'MajorApiAppBundle:WebTemplates:developers-menu.html.twig' %}
+
+                <div class="doc">
+                    <h1>QuickBooks Items API</h1>
+                    <p>
+                        The Major QuickBooks REST API allows you to read items that have been created in QuickBooks and imported into Major.
+                    </p>
+                    <p>
+                        Reading item information requires a GET request.
+                    </p>
+
+                    <h2>Retrieving an Existing Item</h2>
+                    <p>
+                        <code><strong>GET</strong><br>https://majorapi.com/api/quickbooks/items/{itemName}</code>
+                    </p>
+                    <p>
+                        <strong>Note</strong> &mdash; Retrieving an item uses the unique name configured in QuickBooks and not the ID of the item in the Major database. If the name of the item has a space in it, it must be URL encoded properly.
+                    </p>
+
+                    <h3>Successful Request and Response</h3>
+
+                    <h4>200 Ok</h4>
+<pre>curl -X GET \
+    -u "username:API_KEY" \
+    -H "Accept: application/json" \
+    https://majorapi.com/api/quickbooks/items/BMServicePro</pre>
+
+<pre>[
+    {
+        "created": "2013-01-11T21:12:42+00:00",
+        "updated": "2013-01-11T21:12:42+00:00",
+        "status": 1,
+        "applicationName": "Major",
+        "applicationUsername": "major",
+        "type": "service",
+        "name": "BMServicePro",
+        "fullname": "Bright March Service Professional",
+        "isActive": true,
+        "sublevel": 0,
+        "salesDescription": "Hourly service charge",
+        "salesPrice": 100.00,
+        "salesExpense": 54.33,
+        "salesDate": "2012-12-23T00:00:00+00:00",
+        "purchaseDescription": "The very best item to purchase",
+        "purchasePrice": 100.00,
+        "purchaseCost": 54.33,
+        "purchaseDate": "2012-12-23T00:00:00+00:00",
+        "description": "Hourly service charge for our professional services.",
+        "price": 100.00,
+        "pricePercent": 0,
+        "discountRate": 0,
+        "discountRatePercent": 0,
+        "barCode": null,
+        "manufacturerPartNumber": null,
+        "quantityReorder": 0,
+        "quantityOnHand": 0,
+        "quantityOnOrder": 0,
+        "quantityOnSalesOrder": 0,
+        "averageCost": 0,
+        "vendorOrPayeeName": null,
+        "acquiredAs": null,
+        "assetDescription": null,
+        "location": "Dallas, TX",
+        "poNumber": null,
+        "serialNumber": null,
+        "warrantyExpirationDate": null,
+        "notes": null,
+        "assetNumber": null,
+        "costBasis": 0,
+        "yearEndAccumulatedDepreciation": 0,
+        "yearEndBookValue": 0,
+        "_links": [
+            {
+                "rel": "self",
+                "method": "GET",
+                "href": "https://majorapi.com/api/quickbooks/items/BMServicePro"
+            }
+        ]
+    }
+]</pre>
+                    <h3>Unsuccessful Request and Response</h3>
+
+                    <h4>404 Not Found</h4>
+<pre>curl -X GET \
+    -u "username:API_KEY" \
+    -H "Accept: application/json" \
+    https://majorapi.com/api/quickbooks/items/InvalidItem</pre>
+
+<pre>{
+    "httpCode": 404,
+    "message": "A QuickBooks Item with the name InvalidItem could not be found.",
+    "violations": []
+}</pre>
+
+                </div>
+            </div>
+        </div>
+    </article>
+{% endblock %}

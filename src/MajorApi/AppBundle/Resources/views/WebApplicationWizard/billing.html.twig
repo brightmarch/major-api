@@ -1,0 +1,64 @@
+{% set fakeOrderCount = 48 %}
+{% extends 'MajorApiAppBundle:WebLayouts:void.html.twig' %}
+
+{% block title %}Major &mdash; Start Using Your QuickBooks Application{% endblock %}
+
+{% block body %}
+    <div class="limiter col-12 clearfix">
+        <h1>Billing</h1>
+
+        {% include 'MajorApiAppBundle:WebTemplates:messaging.html.twig' %}
+        <form method="post" action="{{ path('majorapi_web_application_wizard_billing_process') }}" class="clearfix col-6 left margin-right-6-2" novalidate>
+            <div class="hidden message error" data-ui-billing-errors="card"></div>
+
+            <label class="clearfix">
+                <span class="left">Card number:</span>
+                {{ form_widget(accountBillingForm.cardNumber, {attr: {'class': 'right', 'maxlength': '48', 'tabindex': '1'}}) }}
+            </label>
+
+            <div class="label clearfix">
+                <span class="left">Expiration:</span>
+                {{ form_widget(accountBillingForm.expirationYear, {attr: {'class': 'right half', 'placeholder': 'YYYY', 'maxlength': '4', 'tabindex': '3'}}) }}
+                {{ form_widget(accountBillingForm.expirationMonth, {attr: {'class': 'right half', 'placeholder': 'MM', 'maxlength': '2', 'tabindex': '2'}}) }}
+            </div>
+
+            <label class="clearfix">
+                <span class="left">CVC:</span>
+                {{ form_widget(accountBillingForm.cvc, {attr: {'class': 'right', 'maxlength': '3'}}) }}
+            </label>
+
+            {{ form_rest(accountBillingForm) }}
+            <input type="submit" value="Use this card" class="button right" id="billing-button">
+
+            <div class="shield">Processing&hellip;</div>
+        </form>
+
+        <div class="left col-5">
+            <h2 class="font-size-1-0">Why do we ask for a credit card?</h2>
+            <p>
+                Major is free for the first month and, if you decide we have nothing for you,
+                cancelling is easy. From our perspective it's better to ask for the card now
+                and avoid any interruptions in service later.
+            </p>
+
+            <h2 class="font-size-1-0">How does this work?</h2>
+            <p>
+                We actually don't store your credit card. We store a token value from the service we use to process payments. Additionally, we'll only charge you every month for the previous month's usage.
+            </p>
+
+            <h2 class="font-size-1-0">How much will I be billed?</h2>
+            <p>
+                You will be billed a flat rate of <strong>{{ account.getPlanAmount|number_format_currency('USD') }}</strong> per month and <strong>{{ account.getTransactionRate|number_format_currency('USD') }}</strong> per invoice, sales order, and bill you create through Major.
+            </p>
+            <p>
+                For example: {{ account.getPlanAmount }} + ({{ account.getTransactionRate|number_format(2) }} * {{ fakeOrderCount }}) = {{ (account.getPlanAmount + (account.getTransactionRate * fakeOrderCount))|number_format_currency('USD') }}
+            </p>
+            <p class="tiny">
+                <em>You will be charged monthly on the <strong>1st</strong>.</em>
+            </p>
+            <p class="tiny">
+                <a href="{{ path('majorapi_web_dashboard') }}">Skip This Step</a>
+            </p>
+        </div>
+    </div>
+{% endblock %}

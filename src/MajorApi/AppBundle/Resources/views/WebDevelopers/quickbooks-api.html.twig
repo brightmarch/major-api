@@ -1,0 +1,48 @@
+{% set selectedMenu = 'developers' %}
+{% set developersMenu = 'quickbooks-api' %}
+{% extends 'MajorApiAppBundle:WebLayouts:default.html.twig' %}
+
+{% block title %}Major &mdash; Developers &mdash; QuickBooks API{% endblock %}
+
+{% block body %}
+    <article>
+        <div class="wrapper">
+            <div class="documentation clearfix limiter">
+                {% include 'MajorApiAppBundle:WebTemplates:developers-menu.html.twig' %}
+
+                <div class="doc">
+                    <h1>QuickBooks API Introduction</h1>
+                    <p>
+                        The Major QuickBooks REST API is the first API added in the suite of Major products. Its goal is to radically simplify integrating your custom application into QuickBooks.
+                    </p>
+
+                    <h2>URL Root</h2>
+                    <p>
+                        <code>https://majorapi.com/api/quickbooks</code>
+                    </p>
+
+                    <h2>Links</h2>
+                    <p>
+                        In keeping with valid REST definitions, responses from requests will a <code>_links</code> property which is an array to different links to that resource. You can use this to perform additional operations on that resource.
+                    </p>
+
+                    <h2>Dates and Times</h2>
+                    <p>
+                        The production Major servers store all dates in the UTC timezone. An example date format is <code>2013-01-11T12:23:45+00:00</code>.
+                    </p>
+
+                    <h2>Errors and Violations</h2>
+                    <p>
+                        All errors returned by the Major API for a create (POST) action include a <code>violations</code> array that contains a detailed key value list of what fields failed to validate. For example, when creating
+                        a new customer, if the <code>billAddress1</code> and <code>shipAddress1</code> fields are left empty, the <code>violations</code> array would indicate that request parameter can not be empty.
+                    </p>
+
+                    <h2>What's Next?</h2>
+                    <p>
+                        You are now ready to make your <a href="{{ path('majorapi_web_developers_quickbooks_api_authentication') }}">first authenticated request against the Major QuickBooks REST API</a>.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </article>
+{% endblock %}

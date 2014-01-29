@@ -1,0 +1,28 @@
+imports:
+    - { resource: config.yml }
+
+framework:
+    router:   { resource: "%kernel.root_dir%/config/routing_dev.yml" }
+    profiler: { only_exceptions: false }
+
+web_profiler:
+    toolbar: true
+    intercept_redirects: false
+
+monolog:
+    handlers:
+        main:
+            type:  stream
+            path:  %kernel.root_dir%/../log/%kernel.environment%.log
+            level: debug
+        firephp:
+            type:  firephp
+            level: info
+
+assetic:
+    use_controller: true
+
+twig:
+    globals:
+        mix_panel_id: 3a5398b02fbd9f751eebee17234ab96b
+        require_file: components/requirejs/require.js

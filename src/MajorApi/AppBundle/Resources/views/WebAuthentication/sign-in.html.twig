@@ -1,0 +1,30 @@
+{% extends 'MajorApiAppBundle:WebLayouts:void.html.twig' %}
+
+{% block title %}MajorApi &mdash; Sign In{% endblock %}
+
+{% block body %}
+    <div class="holder" data-ui-void-holder="sign-in">
+        <h1>Sign In</h1>
+        <a href="{{ path('majorapi_web_index') }}" class="secret-link graphic">&larr; Back to home</a>
+        {% include 'MajorApiAppBundle:WebTemplates:messaging.html.twig' %}
+
+    	<form method="post" action="{{ path('majorapi_web_authentication_authenticate') }}" class="clearfix" novalidate>
+            <label class="clearfix">
+                <span class="left">Email</span>
+                <input class="right" type="email" name="_username" id="email-address">
+            </label>
+
+            <label class="left">
+                <span class="left">Password</span>
+                <input class="right" type="password" name="_password" id="password">
+            </label>
+
+            <input type="hidden" name="_remember_me" value="1">
+    		<input type="submit" value="Sign In" class="button fat right" id="sign-in-button">
+            <p class="clear right-aligned">
+                or <a href="{{ path('majorapi_web_registration') }}">register</a>
+            </p>
+    	</form>
+
+    </div>
+{% endblock %}

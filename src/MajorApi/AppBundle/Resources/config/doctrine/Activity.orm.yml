@@ -1,0 +1,43 @@
+MajorApi\AppBundle\Entity\Activity:
+    type: entity
+    table: web_activity
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: SEQUENCE
+            sequenceGenerator:
+                sequenceName: web_activity_id_seq 
+                allocationSize: 1
+                initialValue: 1 
+    fields:
+        created:
+            column: created
+            type: datetime
+        updated:
+            column: updated 
+            type: datetime
+        status:
+            column: status
+            type: integer
+        accountId:
+            column: account_id
+            type: integer
+        type:
+            column: type
+            type: string
+        subject:
+            column: subject 
+            type: string
+        message:
+            column: message
+            type: string
+    manyToOne:
+        account:
+            targetEntity: Account
+            joinColumn:
+                name: account_id
+                referencedColumnName: id
+    lifecycleCallbacks:
+        prePersist: [ onCreate ]
+        preUpdate: [ onUpdate ]

@@ -1,0 +1,45 @@
+{% set selectedMenu = 'dashboard' %}
+{% extends 'MajorApiAppBundle:WebLayouts:default.html.twig' %}
+
+{% block title %}MajorApi &mdash; QuickBooks Dashboard{% endblock %}
+
+{% block body %}
+    <div class="wrapper admin">
+    	<div class="limiter">
+            {% include 'MajorApiAppBundle:WebTemplates:messaging.html.twig' %}
+
+    		<section>
+                <h1 class="tight">Your Events Stream</h1>
+
+                <div class="box">
+                    <strong>Application Username:</strong>
+                    {{ application.getUsername }}
+                    <strong>API Key:</strong>
+                    <code>{{ application.getApiKey }}</code>
+
+                    <a href="{{ path('majorapi_web_application_download_web_connector_file') }}" class="right">Download .qwc File</a>
+                </div>
+
+                <table>
+                    <tbody>
+                        {% for activity in activities %}
+                            <tr>
+                                <td class="col-4">
+                                    <p class="event {{ activity.getCssClassFromType }}">{{ activity.getSubject }}</p>
+                                </td>
+                                <td class="date padding-top-1-0">{{ activity.getCreated.format('Y-m-d H:i:s') }}</td>
+                                <td class="padding-top-1-0">{{ activity.getMessage }}</td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td class="padding-top-1-0">
+                                    No events have been registered for your Major Application yet. Please make sure your application is connected to QuickBooks.
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </section>
+    	</div>
+    </div>
+{% endblock %}

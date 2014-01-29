@@ -1,0 +1,1276 @@
+$site_bg: #fff;
+$site_text: #333;
+$action: #00aeef;
+$dark: #144859;
+$dark_action: #e6420b;
+
+$base: #39b8e6;
+
+$accent: #4db848;
+$normal: #e5f8ff;
+$success: #51b848;
+$warning: #e0b400;
+$error: #d75f5f;
+
+@mixin font-family() {
+    font-family: "museo-sans", "Museo Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+@mixin border-radius($radius: .3em) {
+    -webkit-border-radius: $radius;
+    -moz-border-radius: $radius;
+    border-radius: $radius;
+}
+
+@mixin border-what-radius($what, $radius: .3em) {
+    -webkit-border-#{$what}-radius: $radius;
+    -moz-border-#{$what}-radius: $radius;
+    border-#{$what}-radius: $radius;
+}
+
+@mixin text-shadow($distance: 1px, $size: 0, $color: lighten($base, 75%)) {
+    -webkit-text-shadow: 0px $distance $size $color;
+    -moz-text-shadow: 0px $distance $size $color;
+    text-shadow: 0px $distance $size $color;
+}
+
+@mixin box-shadow($x, $y, $blur, $color, $inset:false) {
+    @if $inset {
+        -webkit-box-shadow: inset $x $y $blur $color;
+        -moz-box-shadow: inset $x $y $blur $color;
+        box-shadow: inset $x $y $blur $color;
+    } @else {
+        -webkit-box-shadow: $x $y $blur $color;
+        -moz-box-shadow: $x $y $blur $color;
+        box-shadow: $x $y $blur $color;
+    }
+}
+
+@mixin vertical-gradient($top, $bottom) {
+    background: $bottom; /* Old browsers */
+    background: -moz-linear-gradient(top, $top 0%, $bottom 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, $top), color-stop(100%, $bottom)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, $top 0%, $bottom 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, $top 0%, $bottom 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, $top 0%, $bottom 100%); /* IE10+ */
+    background: linear-gradient(to bottom, $top 0%, $bottom 100%); /* W3C */
+}
+
+@mixin transition($property, $duration, $function: linear) {
+    -o-transition-property: $property;
+    -moz-transition-property: $property;
+    -webkit-transition-property: $property;
+    transition-property: $property;
+
+    -o-transition-duration: $duration;
+    -moz-transition-duration: $duration;
+    -webkit-transition-duration: $duration;
+    transition-duration: $duration;
+
+    -o-transition-timing-function: $function;
+    -moz-transition-timing-function: $function;
+    -webkit-transition-timing-function: $function;
+    transition-timing-function: $function;
+}
+
+@mixin transition-multiple($properties, $duration, $function: linear) {
+    -o-transition-property: $property;
+    -moz-transition-property: $property;
+    -webkit-transition-property: $property;
+    transition-property: $property;
+
+    -o-transition-duration: $duration;
+    -moz-transition-duration: $duration;
+    -webkit-transition-duration: $duration;
+    transition-duration: $duration;
+
+    -o-transition-timing-function: $function;
+    -moz-transition-timing-function: $function;
+    -webkit-transition-timing-function: $function;
+    transition-timing-function: $function;
+}
+
+@mixin opacity($amount) {
+    filter: alpha(opacity=$amount);
+    opacity: $amount / 100;
+}
+
+@function get-col-width($col_count) {
+    @return $col_count * 3.75em + ($col_count - 1) * 1.25em;
+}
+
+* {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+html, body, h1, h2, h3, h4, h5, h6, ul, li, p, input, a img, pre {
+    outline: none;
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    height: 100%;
+    overflow-y: scroll;
+}
+
+body {
+    position: relative;
+    height: 100%;
+    background-color: $site_bg;
+    @include font-family();
+    font-size: 100%;
+    line-height: 1.5em;
+    font-weight: 500;
+    -webkit-font-smoothing: antialiased;
+    color: $site_text;
+    background-color: $dark;
+}
+
+input {
+    @include font-family();
+    font-size: 1em;
+    line-height: 1.5em;
+}
+
+input[type="password"],
+input[type="text"],
+input[type="email"] {
+    padding: .5em;
+    line-height: 1.3em;
+    background-color: $site_bg;
+    border: 1px solid darken($action, 50%);
+
+    @include border-radius(.3em);
+
+    &:focus {
+        border-color: $base;
+    }
+}
+
+p {
+    padding: 0 0 1.5em;
+}
+
+ul {
+    list-style-position: inside;
+    list-style-type: disc;
+    line-height: 1.5em;
+}
+
+pre {
+    margin: 0 0 1.5em;
+    padding: .5em;
+    border: 1px solid darken($site_bg, 10%);
+    background-color: darken($site_bg, 5%);
+    overflow: auto;
+}
+
+a {
+    color: $action;
+    text-decoration: none;
+
+    &:hover {
+        color: lighten($action, 10%);
+    }
+    &:active {
+        color: darken($action, 10%);
+    }
+
+    &.alt-link {
+        color: lighten($dark_action, 25%);
+        border-bottom: 1px dotted lighten($dark_action, 25%);
+
+        &:hover {
+            color: lighten($dark_action, 10%);
+            border-color: lighten($dark_action, 10%);
+        }
+        &:active {
+            color: darken($dark_action, 10%);
+            border-color: darken($dark_action, 10%);
+        }
+    }
+}
+a.help {
+    float: right;
+}
+
+
+h1, .h1, h2, h3, h4, h5, h6 {
+    line-height: 1.5em;
+}
+
+h1,
+.h1 {
+    font-size: 2.5em;
+    padding-bottom: .3em;
+}
+h2 {
+    font-size: 1.875em;
+    padding: .5em 0;
+}
+h3,
+.h3 {
+    font-size: 1.563em;
+    padding: .75em 0;
+}
+h4,
+.h4 {
+    font-size: 1.15em;
+    padding: .75em 0;
+}
+h5 {
+    font-size: 1.05em;
+    padding-top: .75em;
+}
+h6 {
+    font-size: 1em;
+}
+
+form {
+    position: relative;
+}
+
+table {
+    width: 100%;
+    margin: 0;
+    border-collapse: collapse;
+
+    thead {
+        text-align: left;
+    }
+
+    th {
+        background-color: desaturate(lighten($base, 30%), 40%);
+        @include text-shadow(1px, 0, lighten($base, 50%));
+    }
+
+    th, td {
+        padding: .5em .5em 1.5em;
+        vertical-align: top;
+
+        &.date {
+            width: get-col-width(2.6);
+            color: lighten($site_text, 30%);
+        }
+    }
+}
+
+.outline-only {
+    overflow: hidden;
+    height: 0;
+    width: 0;
+    padding: 0;
+    margin: 0;
+}
+
+.clearfix:before,
+.clearfix:after {
+    content: "";
+    display: table;
+} 
+.clearfix:after {
+    clear: both;
+}
+.clearfix {
+    zoom: 1;
+}
+
+.site-bg {
+    background-color: $site_bg;
+}
+
+.button {
+    display: inline-block;
+    padding: .3em .6em;
+    cursor: pointer;
+    color: $site_bg;
+    background-color: $action;
+    font-weight: 700;
+
+    @include border-radius(.2em);
+
+    &:hover {
+        color: $site_bg;
+        background: lighten($action, 15%);
+    }
+    &:active {
+        background: darken($action, 10%);
+    }
+
+    &.fat {
+        padding: .6em .75em .5em;
+    }
+
+    &.alt {
+        background-color: $dark_action;
+
+        &:hover {
+            background: lighten($dark_action, 5%);
+        }
+        &:active {
+            background: darken($dark_action, 10%);
+        }
+    }
+}
+input[type="submit"].button {
+    font-weight: 300;
+    letter-spacing: .07em;
+}
+
+.event,
+.message {
+    padding: .5em .75em;
+    text-shadow: none;
+
+    @include border-radius(.3em);
+
+    code {
+        font-size: 1.25em;
+        font-weight: bold;
+    }
+
+    p:last-child {
+        padding: 0;
+    }
+
+    &.error,
+    &.alert {
+        background-color: $error;
+        color: $site_bg;
+    }
+
+    &.success {
+        background-color: $success;
+        color: $site_bg;
+    }
+
+    &.warning {
+        background-color: $warning;
+        color: $site_bg;
+    }
+
+    &.normal {
+        background-color: lighten($success, 35%);
+    }
+}
+.message {
+    margin-bottom: 1em;
+}
+
+.hidden {
+    display: none;
+}
+.block {
+    display: block;
+}
+.inline-block {
+    display: inline-block;
+}
+.centered {
+    text-align: center;
+}
+.right-aligned {
+    text-align: right;
+}
+.all-caps {
+    text-transform: uppercase;
+}
+.tight {
+    letter-spacing: -1px;
+}
+.bump {
+    font-size: 1.1em;
+}
+.shrink {
+    font-size: .9em;
+}
+.tiny {
+    font-size: .75em;
+}
+.left {
+    float: left;
+}
+.right {
+    float: right;
+}
+.clear {
+    clear: both;
+}
+.italic {
+    font-style: italic;
+}
+.relative {
+    position: relative;
+}
+
+@for $i from 0 through 14 {
+    @for $x from 0 through 9 {
+        // * 1em here is a hack to get sass to attach the em value correctly
+        .spacing-top-#{$i}-#{$x} {
+            display: inline-block;
+            margin-top: $i + ($x / 10) * 1em;
+        }
+        .spacing-bottom-#{$i}-#{$x} {
+            display: inline-block;
+            margin-bottom: $i + ($x / 10) * 1em;
+        }
+        .spacing-left-#{$i}-#{$x} {
+            display: inline-block;
+            margin-left: $i + ($x / 10) * 1em;
+        }
+        .spacing-right-#{$i}-#{$x} {
+            display: inline-block;
+            margin-right: $i + ($x / 10) * 1em;
+        }
+
+        .margin-top-#{$i}-#{$x} {
+            margin-top: $i + ($x / 10) * 1em;
+        }
+        .margin-bottom-#{$i}-#{$x} {
+            margin-bottom: $i + ($x / 10) * 1em;
+        }
+        .margin-left-#{$i}-#{$x} {
+            margin-left: $i + ($x / 10) * 1em;
+        }
+        .margin-right-#{$i}-#{$x} {
+            margin-right: $i + ($x / 10) * 1em;
+        }
+
+        .padding-#{$i}-#{$x} {
+            padding: $i + ($x / 10) * 1em;
+        }
+        .padding-top-#{$i}-#{$x} {
+            padding-top: $i + ($x / 10) * 1em;
+        }
+        .padding-bottom-#{$i}-#{$x} {
+            padding-bottom: $i + ($x / 10) * 1em;
+        }
+        .padding-left-#{$i}-#{$x} {
+            padding-left: $i + ($x / 10) * 1em;
+        }
+        .padding-right-#{$i}-#{$x} {
+            padding-right: $i + ($x / 10) * 1em;
+        }
+
+        .font-size-#{$i}-#{$x} {
+            font-size: $i + ($x / 10) * 1em;
+        }
+    }
+}
+
+// Generate some columns
+@for $i from 1 through 12 {
+    .col-#{$i} {
+        width: get-col-width($i);
+    }
+}
+
+.no-bullets,
+.no-bullets ul {
+    list-style: none;
+}
+
+.close {
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    width: 10px;
+    height: 10px;
+    background: transparent url('images/x.png') top center no-repeat;
+    background-size: cover;
+}
+
+.graphic {
+    display: block;
+    overflow: hidden;
+    text-indent: -9999px;
+}
+
+.box {
+    padding: .65em;
+    background-color: $normal;
+
+    @include border-radius(.2em);
+
+    .h4 {
+        padding: .5em 0;
+    }
+
+    &.application-details {
+        width: 100%;
+    }
+}
+
+.shield {
+    display: none;
+    visibility: hidden;
+
+    .async & {
+        display: block;
+        visibility: visible;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(lighten($base, 50%), .8);
+        text-align: center;
+        font-weight: 700;
+        line-height: 12em;
+    }
+}
+
+.wrapper {
+    position: relative;
+    min-height: 40em;
+    padding-top: 6.25em;
+    margin-top: -1px;
+    border-top: 1px solid darken($site_bg, 10%);
+    background-color: $site_bg;
+
+    &.admin {
+        padding-top: 3em;
+    }
+}
+
+.limiter {
+    max-width: 60em;
+    margin: 0 auto;
+}
+
+.top {
+    position: relative;
+    height: 6.25em;
+    z-index: 400;
+
+    @media screen and (max-width: 34.4em) {
+        height: auto;
+        text-align: center;
+    }
+
+    .logo {
+        width: get-col-width(2);
+        margin-top: 1.75em;
+        margin-left: .625em;
+
+        @media screen and (max-width: 34.4em) {
+            float: none;
+            margin: none;
+        }
+    }
+}
+
+.nav {
+    position: absolute;
+    top: 0;
+    right: .625em;
+    list-style: none;
+    text-align: right;
+
+    @include text-shadow(0, 0, transparent);
+
+    ul {
+        display: inline;
+    }
+
+    li {
+        display: inline-block;
+        vertical-align: top;
+        height: 6.25em;
+        padding-top: 2.25em;
+
+        &.current {
+            border-bottom: 2px solid $action;
+        }
+    }
+
+    li > a {
+        padding: .625em;
+        font-size: .875em;
+        text-transform: uppercase;
+
+        &:hover {
+            color: lighten($dark, 10%);
+        }
+
+        &.button {
+            color: $site_bg;
+            margin: {
+                top: -.625em;
+                left: .625em;
+            }
+
+            &:hover {
+                color: $site_bg;
+            }
+        }
+    }
+
+    a {
+        color: $dark;
+    }
+
+    @media screen and (max-width: 34.4em) {
+        padding: 2.5em;
+        text-align: center;
+    }
+
+    .drop-list {
+        height: auto;
+        padding-top: 0;
+        margin: 1.5em 0 0 .625em;
+
+        .prompt {
+            font-size: .875em;
+        }
+
+        li {
+            height: auto;
+            text-align: left;
+        }
+
+        a {
+            text-transform: none;
+        }
+    }
+}
+
+.mast {
+    height: 31.25em;
+    padding-top: 8.28em;
+    background: $dark url("images/bg-tile.jpg") center center repeat;
+    background-size: 240px 120px;
+    text-align: center;
+    color: $site_bg;
+
+    &.integrate {
+        height: 18.75em;
+        padding-top: 5.5em;
+        margin-bottom: 3.5em;
+    }
+
+    h1 {
+        padding-bottom: .5em;
+        text-transform: uppercase;
+        font-size: 3em;
+        line-height: 1.28em;
+        font-weight: 500;
+    }
+
+    .button {
+        font-size: 1.56em;
+    }
+
+    p.italic {
+        margin-top: 1em;
+        font-size: 1.25em;
+    }
+
+    @media screen and (max-width: 34.4em) {
+        padding: 1.5em 0px 2.5em;
+        font-size: 1.3em;
+    }
+
+    @media screen and (max-width: 25em) {
+        font-size: 1.2em;
+    }
+
+    p {
+        padding: 0 0 .75em;
+        margin: 0 auto;
+    }
+
+    .box.error {
+        padding: 0;
+        text-shadow: none;
+        margin-bottom: .75em;
+    }
+}
+
+.void {
+    position: relative;
+    height: 100%;
+    background: $dark url("images/bg-tile.jpg") top center repeat;
+    background-size: 240px 120px;
+    color: $site_bg;
+
+    .holder {
+        position: absolute;
+        top: 25%;
+        left: 50%;
+        width: get-col-width(6);
+        margin-left: (get-col-width(6) / 2) * -1;
+    }
+
+    .limiter {
+        position: relative;
+        margin-top: 7em;
+
+        h1 {
+            padding-bottom: 2em;
+        }
+    }
+
+    h1 {
+        padding: .2em 0 .75em 2.35em;
+        margin-left: .333em;
+        background: transparent url("images/footer-m.png") top left no-repeat;
+        background-size: get-col-width(1) / 1.875 auto;
+        font-size: 1.875em;
+        font-weight: 500;
+        text-transform: uppercase;
+    }
+
+    .label,
+    label {
+        display: block;
+        margin-bottom: .75em;
+        background-color: lighten($dark, 70%);
+        color: $dark;
+
+        @include border-radius(.2em);
+
+        span {
+            display: block;
+            width: get-col-width(2);
+            padding: .75em 1.25em .75em .5em;
+            line-height: 1.3em;
+            text-align: right;
+        }
+    }
+
+    input[type="password"],
+    input[type="text"],
+    input[type="email"] {
+        width: get-col-width(4) + 1.25em;
+        padding: {
+            top: .75em;
+            bottom: .75em;
+        };
+        border: 0;
+        color: $dark;
+
+        @include border-what-radius(top-right, .2em);
+        @include border-what-radius(bottom-right, .2em);
+        @include border-what-radius(top-left, 0);
+        @include border-what-radius(bottom-left, 0);
+
+        &.half {
+            width: 10em;
+        }
+    }
+
+    .two-lines {
+        margin-bottom: .2em;
+
+        span {
+            width: auto;
+            text-align: left;
+        }
+
+        input[type="password"],
+        input[type="text"],
+        input[type="email"] {
+            width: 100%;
+
+            @include border-what-radius(top-right, 0);
+            @include border-what-radius(bottom-right, .2em);
+            @include border-what-radius(top-left, 0);
+            @include border-what-radius(bottom-left, .2em);
+        }
+    }
+
+    .button {
+        min-width: get-col-width(2);
+        padding: {
+            top: .75em;
+            bottom: .75em;
+        };
+        margin-bottom: .5em;
+    }
+
+    .secret-link {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 4.5em;
+        height: 3.5em;
+    }
+}
+
+.benefit {
+    width: get-col-width(8);
+    padding: 8em 0;
+    text-align: center;
+
+    @include transition(padding-top, .25s);
+
+    h2 {
+        color: $dark;
+        font-size: 2.5em;
+        font-weight: 500;
+    }
+
+    p {
+        line-height: 1.5em;
+    }
+
+    .button {
+        line-height: 1.5em;
+        font-size: 1.125em;
+        margin-top: .5em;
+    }
+
+    &.easy {
+        h2 {
+            padding-top: 70px;
+            background: transparent url('images/benefit-easy.jpg') top center no-repeat;
+            background-size: 140px 47px;
+        }
+    }
+
+    &.pay {
+        h2 {
+            padding-top: 70px;
+            background: transparent url('images/benefit-pay.jpg') top center no-repeat;
+            background-size: 140px 47px;
+        }
+    }
+
+    &.rest {
+        h2 {
+            padding-top: 70px;
+            background: transparent url('images/benefit-rest.jpg') top center no-repeat;
+            background-size: 140px 47px;
+        }
+    }
+}
+
+.register {
+    width: 18em;
+    margin: 0 auto;
+    padding: 1em 0 0;
+    border-top: 1px solid darken($base, 30%);
+
+    .message {
+        font-size: .75em;
+        margin-bottom: 1em;
+    }
+
+    @media screen and (max-width: 25em) {
+        width: 90%;
+        margin: 0 auto;
+    }
+
+    label {
+        float: left;
+        width: 5.4em;
+        text-align: right;
+        line-height: 2.2em;
+        clear: both;
+
+        @media screen and (max-width: 25em) {
+            float: none;
+            display: block;
+            text-align: left;
+        }
+    }
+
+    input[type="password"],
+    input[type="text"],
+    input[type="email"] {
+        float: left;
+        width: 12.1em;
+        margin: 0 0 .5em .5em;
+
+        @media screen and (max-width: 25em) {
+            float: none;
+            display: block;
+            width: 100%;
+            margin-left: 0;
+        }
+
+        &.half {
+            width: 5.75em;
+
+            @media screen and (max-width: 25em) {
+                width: 100%;
+            }
+        }
+    }
+
+    .button {
+        float: right;
+    }
+}
+
+.documentation {
+    margin-top: -6.25em;
+
+    .doc-nav {
+        width: get-col-width(3.37);
+        padding-top: 6.25em;
+        float: left;
+
+        strong a {
+            color: $site_text;
+        }
+
+        a {
+            display: block;
+            padding: .5em 0 .5em .625em;
+            color: lighten($site_text, 10%);
+
+            &:hover {
+                background-color: darken($site_bg, 2%);
+            }
+
+            &.current {
+                background-color: darken($site_bg, 5%);
+            }
+        }
+    }
+
+    .doc {
+        width: get-col-width(9);
+        min-height: 60em;
+        padding: {
+            top: 6.25em;
+            bottom: 6.25em;
+            left: get-col-width(1.25);
+        }
+        margin-left: get-col-width(3.37);
+        border-left: 1px solid darken($site_bg, 10%);
+
+        h1, h2 {
+            letter-spacing: -1px;
+        }
+
+        img {
+            max-width: get-col-width(8);
+        }
+
+        ol {
+            margin-top: 0;
+        }
+
+        table, table td {
+            border: 0;
+            font-size: .9em;
+
+            &.field {
+                font-style: italic;
+                width: 10em;
+                text-align: right;
+            }
+
+            &.max {
+                width: 12em;
+            }
+        }
+
+        code {
+            font-size: 1.25em;
+        }
+    }
+}
+
+.footer {
+    padding: 3em 0 6em;
+    background-color: $dark;
+    color: $site_bg;
+
+    a {
+        color: lighten($action, 30%);
+
+        &:hover {
+            color: lighten($action, 50%);
+        }
+        &:active {
+            color: $action;
+        }
+    }
+
+    & ul li {
+        float: left;
+        width: 25%;
+        vertical-align: top;
+
+        @media screen and (max-width: 53em) {
+            width: 50%;
+            padding: 0 1em 2em;
+        }
+
+        @media screen and (max-width: 24em) {
+            float: none;
+            width: auto;
+            max-width: 16em;
+            margin: 0 auto;
+        }
+
+        &:first-child {
+            padding-left: 1em;
+        }
+
+        & ul {
+            padding-top: .5em;
+        }
+
+        & li {
+            float: none;
+            width: auto;
+            padding: 0;
+
+            &:first-child {
+                padding-left: 0;
+            }
+        }
+
+        & .copy {
+            font-size: .75em;
+
+            @media screen and (max-width: 53em) {
+                text-align: left;
+                background-position: bottom left;
+            }
+        }
+
+        & strong,
+        & li {
+            font-size: .875em;
+        }
+    }
+}
+
+.sidebar {
+    width: get-col-width(4);
+    float: left;
+    z-index: 20;
+
+    .drop-list {
+        position: absolute;
+        top: 1em;
+        left: 1em;
+        right: 1em;
+    }
+
+    .application-link {
+        padding: 1em;
+        border-top: 1px solid desaturate(lighten($base, 25%), 40%);
+
+        @include text-shadow(1px, 0, lighten($base, 50%));
+
+        &:hover {
+            background-color: desaturate(lighten($base, 35%), 15%);
+        }
+
+        &.current {
+            background-color: desaturate(lighten($base, 30%), 40%);
+        }
+    }
+}
+
+.content {
+    width: get-col-width(8);
+
+    padding: {
+        bottom: 6.25em;
+    }
+    margin-left: get-col-width(4) + 1.25em;
+
+    &.single-col {
+        margin: 0 auto;
+    }
+}
+
+.people {
+    li {
+        padding-bottom: 3.125em;
+
+        img {
+            display: inline-block;
+            margin-right: 1.25em;
+            vertical-align: middle;
+        }
+
+        p {
+            display: inline-block;
+            padding: 0;
+            vertical-align: middle;
+            font-size: 1.56em;
+            line-height: 1.5em;
+            color: lighten($site_text, 20%);
+
+            strong {
+                color: $site_text;
+            }
+        }
+    }
+}
+
+.integrations-list {
+    padding-top: 2em;
+
+    & li {
+        display: inline-block;
+        vertical-align: middle;
+        width: 48%;
+        padding-bottom: 2em;
+    }
+
+    & a {
+        display: block;
+        background: transparent url("images/integrate-sprite.jpg") top left no-repeat;
+        background-size: 211px 204px;
+
+        &.stripe {
+            height: 55px;
+            background-position: 0 0;
+        }
+
+        &.balanced {
+            height: 23.5px;
+            background-position: 0 -123px;
+        }
+
+        &.paypal {
+            height: 58px;
+            margin-top: 1.25em;
+            background-position: 0 -60px;
+        }
+
+        &.braintree {
+            height: 52.5px;
+            background-position: 0 -151px;
+        }
+    }
+}
+
+.major-stripe {
+    height: 90px;
+    background: transparent url("images/integrate-major-stripe.png") top center no-repeat;
+    background-size: 445px 65px;
+}
+
+.info {
+    margin-left: get-col-width(3);
+    padding: .5em .7em;
+    border-bottom: 1px solid desaturate(lighten($base, 30%), 40%);
+    background-color: desaturate(lighten($base, 40%), 40%);
+    text-align: right;
+
+    @include text-shadow(1px, 0, lighten($base, 50%));
+
+    li {
+        display: inline-block;
+        margin-left: 1em;
+    }
+}
+
+.drop-list {
+    background-color: saturate(darken($base, 35%), 20%);
+    color: lighten($base, 50%);
+
+    @include border-radius(.3em);
+    @include text-shadow(-1px, 0, darken($base, 40%));
+    @include box-shadow(0, 1px, 0, darken($base, 40%));
+
+    &:hover {
+        background-color: saturate(darken($base, 30%), 20%);
+    }
+    
+    .prompt {
+        display: block;
+        cursor: pointer;
+        padding: .75em;
+    }
+
+    & > ul {
+        display: block;
+        visibility: hidden;
+        height: 0;
+        overflow: hidden;
+        border-top: 1px solid darken($base, 40%);
+
+        @include transition(height, .05s, ease-out);
+    }
+
+    li {
+        padding: .5em .75em;
+    }
+
+    li.big-link {
+        display: block;
+        padding: 0;
+
+        & a {
+            display: block;
+            padding: .5em .75em;
+            border: {
+                top: 1px solid darken($base, 30%);
+                bottom: 1px solid darken($base, 40%);
+            };
+            color: lighten($base, 50%);
+
+            &:hover {
+                background-color: darken($base, 30%);
+            }
+        }
+
+        &:last-child a {
+            @include border-what-radius(bottom-right, .3em);
+            @include border-what-radius(bottom-left, .3em);
+        }
+    }
+
+    &.open {
+        &:hover {
+            background-color: saturate(darken($base, 35%), 20%);
+        }
+
+        & > ul {
+            visibility: visible;
+            height: auto;
+        }
+    }
+}
+
+.help-panel {
+    position: absolute;
+    top: 0;
+    left: 100px;
+    padding: 1em;
+    background-color: darken($dark, 10%);
+    z-index: 100;
+
+    @include opacity(0);
+    @include transition("left, opacity", .5s, ease-out);
+    @include border-radius(.2em);
+
+    p {
+        padding: 0;
+    }
+
+    .close {
+        display: none;
+        visibility: hidden;
+    }
+
+    &.open {
+        left: 0;
+        z-index: 200;
+
+        @include opacity(100);
+
+        .close {
+            display: block;
+            visibility: visible;
+        }
+    }
+}

@@ -1,0 +1,42 @@
+{% extends 'MajorApiAppBundle:WebLayouts:void.html.twig' %}
+
+{% block title %}QuickBooks REST API &mdash; Register Now &mdash; MajorApi{% endblock %}
+
+{% block body %}
+    <div class="holder" data-ui-void-holder="sign-in">
+        <h1>Register</h1>
+        <a href="{{ path('majorapi_web_index') }}" class="secret-link graphic">&larr; Back to home</a>
+        <form method="post" action="{{ path('majorapi_web_registration_process') }}" class="clearfix" novalidate>
+            {% include 'MajorApiAppBundle:WebTemplates:messaging.html.twig' %}
+
+            <div class="label clearfix">
+                <span class="left">Full Name:</span>
+                {{ form_widget(registrationForm.lastName, {attr: {'class': 'right half', 'placeholder': 'Last', 'tabindex': '2'}}) }}
+                {{ form_widget(registrationForm.firstName, {attr: {'class': 'right half', 'placeholder': 'First', 'tabindex': '1'}}) }}
+            </div>
+
+            <label class="clearfix">
+                <span class="left">Email:</span>
+                {{ form_widget(registrationForm.email, {attr: {'class': 'right', 'tabindex': '3'}}) }}
+            </label>
+
+            <label class="clearfix">
+                <span class="left">Password:</span>
+                {{ form_widget(registrationForm.password, {attr: {'class': 'right', 'tabindex': '4'}}) }}
+            </label>
+
+            {{ form_rest(registrationForm) }}
+            <input type="submit" value="Register Now" class="button fat right" id="register-button" tabindex="5">
+            <p class="clear right-aligned">
+                or <a href="{{ path('majorapi_web_authentication_sign_in') }}">sign in</a>
+            </p>
+        </form>
+    </div>
+{% endblock %}
+
+{% block bottomscripts %}
+	<script>
+		mixpanel.track("registration#index arrive");
+		mixpanel.track_forms("#registration-form", "registration#index submit");
+	</script>
+{% endblock %}

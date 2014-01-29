@@ -1,0 +1,47 @@
+{% set selectedMenu = 'developers' %}
+{% set developersMenu = 'major-applications' %}
+{% extends 'MajorApiAppBundle:WebLayouts:default.html.twig' %}
+
+{% block title %}Major &mdash; Developers &mdash; Major Applications{% endblock %}
+
+{% block body %}
+    <article>
+        <div class="wrapper">
+            <div class="documentation clearfix limiter">
+                {% include 'MajorApiAppBundle:WebTemplates:developers-menu.html.twig' %}
+
+                <div class="doc">
+                    <h1>Major Applications</h1>
+
+                    <p>
+                        After creating your account, you will go through the Application Wizard. This simple four step process will guide you through connecting your application with QuickBooks. You do not need to connect your application with QuickBooks at this time.
+                        You can still use the API without your application being connected to QuickBooks. Of course, no data will flow between Major and your QuickBooks database until the connection is complete. Major will attempt to establish a connection before any data
+                        is sent to QuickBooks.
+                    </p>
+
+                    <p>
+                        Making requests to the Major REST APIs requires you to create an application. An application is comprised of an easy to remember name and a unique username. Each application is assigned a randomly generated API Key. This API Key is what you will use to make authenticated calls to each of the Major REST APIs.
+                    </p>
+
+                    <h3>Creating a QuickBooks Application</h3>
+                    <p>
+                        Creating an application for QuickBooks integration is simple.
+                    </p>
+                    <ol>
+                        <li>
+                            Create a <a href="{{ path('majorapi_web_registration') }}">new account</a>.
+                        </li>
+                        <li>
+                            Follow the new application wizard to create a new application. Applications must have a unique name and username. The username can only use alpha-numeric characters, dashes, and underscores.
+                        </li>
+                    </ol>
+
+                    <h2>What's Next?</h2>
+                    <p>
+                        Now that you have created your first application, you can begin creating customers and invoices.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </article>
+{% endblock %}

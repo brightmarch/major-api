@@ -1,0 +1,83 @@
+{% autoescape false %}
+[
+    {% for quickbooksInvoice in quickbooksInvoices %}
+        {
+            "created": {{ quickbooksInvoice.getCreated.format('c')|json_encode }},
+            "updated": {{ quickbooksInvoice.getUpdated.format('c')|json_encode }},
+            "status": {{ quickbooksInvoice.getStatus }},
+            "applicationName": {{ quickbooksInvoice.getApplication.getName|json_encode }},
+            "applicationUsername": {{ quickbooksInvoice.getApplication.getUsername|json_encode }},
+            "customerName": {{ quickbooksInvoice.getQuickbooksCustomer.getName|json_encode }},
+            "refNumber": {{ quickbooksInvoice.getRefNumber|json_encode }},
+            "invoiceDate": {{ quickbooksInvoice.getInvoiceDateString|json_encode }},
+            "dueDate": {{ quickbooksInvoice.getDueDateString|json_encode }},
+            "shipDate": {{ quickbooksInvoice.getShipDateString|json_encode }},
+            "poNumber": {{ quickbooksInvoice.getPoNumber|json_encode }},
+            "isPending": {{ quickbooksInvoice.getIsPending|json_encode }},
+            "isFinanceCharge": {{ quickbooksInvoice.getIsFinanceCharge|json_encode }},
+            "isToBePrinted": {{ quickbooksInvoice.getIsToBePrinted|json_encode }},
+            "isToBeEmailed": {{ quickbooksInvoice.getIsToBeEmailed|json_encode }},
+            "billAddress": {
+                "address1": {{ quickbooksInvoice.getBillAddress1|json_encode }},
+                "address2": {{ quickbooksInvoice.getBillAddress2|json_encode }},
+                "address3": {{ quickbooksInvoice.getBillAddress3|json_encode }},
+                "address4": {{ quickbooksInvoice.getBillAddress4|json_encode }},
+                "address5": {{ quickbooksInvoice.getBillAddress5|json_encode }},
+                "city": {{ quickbooksInvoice.getBillCity|json_encode }},
+                "state": {{ quickbooksInvoice.getBillState|json_encode }},
+                "postalCode": {{ quickbooksInvoice.getBillPostalCode|json_encode }},
+                "country": {{ quickbooksInvoice.getBillCountry|json_encode }},
+                "note": {{ quickbooksInvoice.getBillNote|json_encode }}
+            },
+            "shipAddress": {
+                "address1": {{ quickbooksInvoice.getShipAddress1|json_encode }},
+                "address2": {{ quickbooksInvoice.getShipAddress2|json_encode }},
+                "address3": {{ quickbooksInvoice.getShipAddress3|json_encode }},
+                "address4": {{ quickbooksInvoice.getShipAddress4|json_encode }},
+                "address5": {{ quickbooksInvoice.getShipAddress5|json_encode }},
+                "city": {{ quickbooksInvoice.getShipCity|json_encode }},
+                "state": {{ quickbooksInvoice.getShipState|json_encode }},
+                "postalCode": {{ quickbooksInvoice.getShipPostalCode|json_encode }},
+                "country": {{ quickbooksInvoice.getShipCountry|json_encode }},
+                "note": {{ quickbooksInvoice.getShipNote|json_encode }}
+            },
+            "fob": {{ quickbooksInvoice.getFob|json_encode }},
+            "memo": {{ quickbooksInvoice.getMemo|json_encode }},
+            "importable": {{ quickbooksInvoice.getImportable|json_encode }},
+            "invoiceLines": [
+                {% for quickbooksInvoiceLine in quickbooksInvoice.getQuickbooksInvoiceLines %}
+                    {
+                        "itemName": {{ quickbooksInvoiceLine.getItemName|json_encode }},
+                        "itemDescription": {{ quickbooksInvoiceLine.getItemDescription|json_encode }},
+                        "quantityOrdered": {{ quickbooksInvoiceLine.getQuantityOrdered }},
+                        "unitOfMeasure": {{ quickbooksInvoiceLine.getUnitOfMeasure|json_encode }},
+                        "rate": {{ quickbooksInvoiceLine.getRate }},
+                        "ratePercent": {{ quickbooksInvoiceLine.getRatePercent }},
+                        "amount": {{ quickbooksInvoiceLine.getAmount }},
+                        "serialNumber": {{ quickbooksInvoiceLine.getSerialNumber|json_encode }},
+                        "lotNumber": {{ quickbooksInvoiceLine.getLotNumber|json_encode }},
+                        "other1": {{ quickbooksInvoiceLine.getOther1|json_encode }},
+                        "other2": {{ quickbooksInvoiceLine.getOther2|json_encode }},
+                        "unitPrice": {{ quickbooksInvoiceLine.getUnitPrice }},
+                        "cost": {{ quickbooksInvoiceLine.getCost }}
+                    }
+                    {% if loop.index != quickbooksInvoice.getQuickbooksInvoiceLines|length %},{% endif %}
+                {% endfor %}
+            ],
+            "_links": [
+                {
+                    "rel": "self",
+                    "method": "GET",
+                    "href": {{ url('majorapi_api_quickbooks_invoices_read', {'refNumber': quickbooksInvoice.getRefNumber})|json_encode }}
+                },
+                {
+                    "rel": "customer",
+                    "method": "GET",
+                    "href": {{ url('majorapi_api_quickbooks_customers_read', {'customerName': quickbooksInvoice.getQuickbooksCustomer.getName})|json_encode }}
+                }
+            ]
+        }
+        {% if loop.index != quickbooksInvoices|length %},{% endif %}
+    {% endfor %}
+]
+{% endautoescape %}

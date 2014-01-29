@@ -1,0 +1,64 @@
+services:
+    redis:
+        class: MajorApi\AppBundle\Library\Service\Redis
+        arguments: [%redis_host%, %redis_port%]
+
+    majorapi_api.listener.action_listener:
+        class: MajorApi\AppBundle\EventListener\ApiActionListener
+        tags:
+            - { name: kernel.event_listener, event: kernel.controller, method: handleKernelController }
+            - { name: kernel.event_listener, event: kernel.response, method: handleKernelResponse }
+
+    majorapi_web.listener.action_listener:
+        class: MajorApi\AppBundle\EventListener\WebActionListener
+        tags:
+            - { name: kernel.event_listener, event: kernel.controller, method: handleKernelController }
+            - { name: kernel.event_listener, event: kernel.response, method: handleKernelResponse }
+
+    majorapi_api.listener.exception_listener:
+        class: MajorApi\AppBundle\EventListener\ApiExceptionListener
+        arguments: [@service_container]
+        tags:
+            - { name: kernel.event_listener, event: kernel.exception, method: handleKernelException }
+
+    majorapi_web.listener.exception_listener:
+        class: MajorApi\AppBundle\EventListener\WebExceptionListener
+        arguments: [@service_container]
+        tags:
+            - { name: kernel.event_listener, event: kernel.exception, method: handleKernelException }
+
+    majorapi_quickbooks_web_connector_service:
+        class: MajorApi\AppBundle\Service\QuickbooksWebConnectorService
+        arguments: [@service_container]
+
+    majorapi_quickbooks_account_finder_service:
+        class: MajorApi\AppBundle\Library\Service\Quickbooks\AccountFinderService
+        arguments: [@service_container]
+
+    majorapi_quickbooks_customer_finder_service:
+        class: MajorApi\AppBundle\Library\Service\Quickbooks\CustomerFinderService
+        arguments: [@service_container]
+
+    majorapi_quickbooks_invoice_finder_service:
+        class: MajorApi\AppBundle\Library\Service\Quickbooks\InvoiceFinderService
+        arguments: [@service_container]
+
+    majorapi_quickbooks_item_finder_service:
+        class: MajorApi\AppBundle\Library\Service\Quickbooks\ItemFinderService
+        arguments: [@service_container]
+
+    majorapi_quickbooks_log_finder_service:
+        class: MajorApi\AppBundle\Library\Service\Quickbooks\LogFinderService
+        arguments: [@service_container]
+
+    majorapi_quickbooks_vendor_finder_service:
+        class: MajorApi\AppBundle\Library\Service\Quickbooks\VendorFinderService
+        arguments: [@service_container]
+
+    majorapi_activity_finder_service:
+        class: MajorApi\AppBundle\Library\Service\MajorApi\ActivityFinderService
+        arguments: [@service_container]
+
+    majorapi_activity_manager_service:
+        class: MajorApi\AppBundle\Library\Service\MajorApi\ActivityManagerService
+        arguments: [@service_container]

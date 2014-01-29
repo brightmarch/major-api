@@ -1,0 +1,43 @@
+MajorApi\AppBundle\Entity\QuickbooksStripeEvent:
+    type: entity
+    table: api_quickbooks_stripe_event
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: SEQUENCE
+            sequenceGenerator:
+                sequenceName: api_quickbooks_stripe_event_id_seq
+                allocationSize: 1
+                initialValue: 1 
+    fields:
+        created:
+            column: created
+            type: datetime
+        updated:
+            column: updated 
+            type: datetime
+        status:
+            column: status
+            type: integer
+        accountId:
+            column: account_id
+            type: integer
+        stripeEventId:
+            column: stripe_event_id
+            type: string
+        stripeEventPayload:
+            column: stripe_event_payload
+            type: text
+        stripeEventType:
+            column: stripe_event_type
+            type: text
+    manyToOne:
+        account:
+            targetEntity: Account
+            joinColumn:
+                name: account_id
+                referencedColumnName: id
+    lifecycleCallbacks:
+        prePersist: [ onCreate ]
+        preUpdate: [ onUpdate ]

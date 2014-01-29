@@ -1,0 +1,53 @@
+{% set selectedMenu = 'about' %}
+{% extends 'MajorApiAppBundle:WebLayouts:default.html.twig' %}
+
+{% block title %}Major &mdash; QuickBooks REST API &mdash; About{% endblock %}
+
+{% block body %}
+    <article>
+        <div class="wrapper">
+            <div class="clearfix limiter">
+                <div class="sidebar">
+                    <img src="{{ asset('bundles/majorapiapp/images/logo-circle.jpg') }}" alt="MajorApi Logo" class="col-3" >
+                </div>
+
+                <div class="content">
+                    <h1>About</h1>
+                    <p>
+                        We built MajorApi because we were tired of attempting to use outdated and difficult APIs.
+                    </p>
+                    <p>
+                        <strong>Admit it</strong> &mdash; you've found yourself with hundreds of Stack Overflow tab open attempting to find what the arcane reason code you're getting means. We've all been there: frustrated with bad documentation, poor code examples, and buggy APIs.
+                    </p>
+                    <p>
+                        MajorApi solves this headache. We are building easy to use, well documented, and well tested REST APIs on top of popular services. We are <strong>starting with QuickBooks</strong> and plan on adding new services like Google AdWords and Bing AdCenter soon.
+                    </p>
+                    <p>
+                        If using an <strong>easy and well documented REST API</strong> to create items, customers, and invoices in QuickBooks sounds better than writing your own SOAP server, <strong>register now</strong>.
+                    </p>
+                    
+                    <h2>People</h2>
+
+                    <ul class="no-bullets people">
+                        <li>
+                            <img src="{{ asset('bundles/majorapiapp/images/people-vic.jpg') }}" alt="Vic Cherubini, Co-Founder" class="col-3" >
+                            <p>
+                                <strong>Vic Cherubini</strong>
+                                <br>
+                                Co-Founder
+                            </p>
+                        </li>
+                        <li>
+                            <img src="{{ asset('bundles/majorapiapp/images/people-neil.jpg') }}" alt="Neil Duffy, Co-Founder" class="col-3" >
+                            <p>
+                                <strong>Neil Duffy</strong>
+                                <br>
+                                Co-Founder
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </article>
+{% endblock %}

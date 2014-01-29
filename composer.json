@@ -1,0 +1,55 @@
+{
+    "name": "MajorApi",
+    "autoload": {
+        "psr-0": { "": "src/" }
+    },
+    "require": {
+        "php": ">=5.4.0",
+        "ext-redis": "*",
+        "symfony/symfony": "v2.2.0",
+        "doctrine/orm": "2.3.2",
+        "doctrine/doctrine-bundle": "1.2.*",
+        "twig/extensions": "v1.0.0",
+        "symfony/assetic-bundle": "v2.1.2",
+        "symfony/monolog-bundle": "v2.2.0",
+        "sensio/distribution-bundle": "v2.2.0",
+        "sensio/framework-extra-bundle": "v2.2.0",
+        "sensio/generator-bundle": "v2.2.0",
+        "jms/security-extra-bundle": "1.4.0",
+        "jms/di-extra-bundle": "1.3.0",
+        "doctrine/doctrine-migrations-bundle": "dev-master",
+        "doctrine/doctrine-fixtures-bundle": "dev-master",
+        "brightmarch/rest-easy": "dev-master",
+        "colinmollenhour/credis": "dev-master",
+        "chrisboulton/php-resque": "dev-master",
+        "sonata-project/intl-bundle": "dev-master",
+        "stripe/stripe-php": "v1.7.15",
+        "rmccue/requests": "dev-master"
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile"
+        ],
+        "post-update-cmd": [
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile"
+        ]
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "minimum-stability": "alpha",
+    "extra": {
+        "symfony-app-dir": "app",
+        "symfony-web-dir": "web",
+        "symfony-assets-install": "symlink",
+        "branch-alias": {
+            "dev-master": "2.2-dev"
+        }
+    }
+}

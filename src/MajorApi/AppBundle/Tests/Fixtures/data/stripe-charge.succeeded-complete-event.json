@@ -1,0 +1,58 @@
+{
+  "id": "evt_1hT5anTRyJOsBu",
+  "created": 1366714806,
+  "livemode": false,
+  "type": "charge.succeeded",
+  "data": {
+    "object": {
+      "id": "ch_1hT5535O7St9qi",
+      "object": "charge",
+      "created": 1366714805,
+      "livemode": false,
+      "paid": true,
+      "amount": 2950,
+      "currency": "usd",
+      "refunded": false,
+      "fee": 116,
+      "fee_details": [
+        {
+          "amount": 116,
+          "currency": "usd",
+          "type": "stripe_fee",
+          "description": "Stripe processing fees",
+          "application": null,
+          "amount_refunded": 0
+        }
+      ],
+      "card": {
+        "object": "card",
+        "last4": "4242",
+        "type": "Visa",
+        "exp_month": 1,
+        "exp_year": 2014,
+        "fingerprint": "QQDWqkkxCZEqo5Y4",
+        "country": "US",
+        "name": "Billy Jones",
+        "address_line1": null,
+        "address_line2": null,
+        "address_city": null,
+        "address_state": null,
+        "address_zip": null,
+        "address_country": null,
+        "cvc_check": "pass",
+        "address_line1_check": null,
+        "address_zip_check": null
+      },
+      "captured": true,
+      "failure_message": null,
+      "amount_refunded": 0,
+      "customer": null,
+      "invoice": null,
+      "description": "Charge for test@example.com",
+      "dispute": null
+    }
+  },
+  "object": "event",
+  "pending_webhooks": 1,
+  "user_id": "acct_1QE1OB1VDXKvTU4yJrkd"
+}

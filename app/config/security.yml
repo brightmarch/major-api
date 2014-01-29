@@ -1,0 +1,40 @@
+jms_security_extra:
+    secure_all_services: false
+    expressions: true
+
+security:
+    encoders:
+        MajorApi\AppBundle\Entity\Account:
+            algorithm: bcrypt
+            cost: 12
+
+    providers:
+        accounts:
+            entity: { class: MajorApiAppBundle:Account, property: email }
+
+    firewalls:
+        dev:
+            pattern:  ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        secured_area:
+            pattern: ^/
+            anonymous: true
+            form_login:
+                login_path:                     /authentication/sign-in
+                check_path:                     /authentication/authenticate
+                default_target_path:            /dashboard
+                #always_use_default_target_path: true
+            logout:
+                path:   /authentication/sign-out
+                target: /authentication/sign-in
+            remember_me:
+                key:      "%secret%"
+                lifetime: 1209600
+                path:     /
+                domain:   ~
+
+    access_control:
+        - { path: ^/, roles: [IS_AUTHENTICATED_ANONYMOUSLY] }
+        - { path: ^/dashboard, roles: [IS_AUTHENTICATED_FULLY, ROLE_ACCOUNT] }
+        - { path: ^/application, roles: [IS_AUTHENTICATED_FULLY, ROLE_ACCOUNT] }

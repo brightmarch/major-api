@@ -1,0 +1,90 @@
+MajorApi\AppBundle\Entity\QuickbooksAccount:
+    type: entity
+    table: api_quickbooks_account
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: SEQUENCE
+            sequenceGenerator:
+                sequenceName: api_quickbooks_account_id_seq
+                allocationSize: 1
+                initialValue: 1 
+    fields:
+        created:
+            column: created
+            type: datetime
+        updated:
+            column: updated 
+            type: datetime
+        status:
+            column: status
+            type: integer
+        applicationId:
+            column: application_id
+            type: integer
+        name:
+            column: name
+            type: string
+        fullname:
+            column: fullname
+            type: string
+            nullable: true
+        isActive:
+            column: is_active
+            type: boolean
+        sublevel:
+            column: sublevel 
+            type: integer
+        type:
+            column: type
+            type: string
+            nullable: true
+        specialType:
+            column: special_type
+            type: string
+            nullable: true
+        accountNumber:
+            column: account_number
+            type: string
+            nullable: true
+        bankNumber:
+            column: bank_number 
+            type: string
+            nullable: true
+        description:
+            column: description
+            type: string
+            nullable: true
+        balance:
+            column: balance
+            type: decimal
+            precision: 4
+        totalBalance:
+            column: total_balance
+            type: decimal
+            precision: 4
+        cashFlowClassification:
+            column: cash_flow_classification
+            type: string
+            nullable: true
+        quickbooksListId:
+            column: quickbooks_list_id
+            type: string
+            nullable: true
+        quickbooksEditSequence:
+            column: quickbooks_edit_sequence
+            type: string
+            nullable: true
+        quickbooksNameToken:
+            column: quickbooks_name_token
+            type: string
+    manyToOne:
+        application:
+            targetEntity: Application
+            joinColumn:
+                name: application_id
+                referencedColumnName: id
+    lifecycleCallbacks:
+        prePersist: [ onCreate ]
+        preUpdate: [ onUpdate ]

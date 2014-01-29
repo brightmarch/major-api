@@ -1,0 +1,54 @@
+parameters:
+    database_driver:                  "pdo_pgsql"
+    database_host:                    "@@DB_SETTINGS_HOST@@"
+    database_port:                    ~
+    database_name:                    "@@DB_SETTINGS_DATABASE@@"
+    database_user:                    "@@DB_SETTINGS_USERNAME@@"
+    database_password:                "@@DB_SETTINGS_PASSWORD@@"
+
+    test_database_driver:             "pdo_pgsql"
+    test_database_host:               "@@DB_SETTINGS_TEST_HOST@@"
+    test_database_port:               ~
+    test_database_name:               "@@DB_SETTINGS_TEST_DATABASE@@"
+    test_database_user:               "@@DB_SETTINGS_TEST_USERNAME@@"
+    test_database_password:           "@@DB_SETTINGS_TEST_PASSWORD@@"
+
+    mailer_transport:                 smtp
+    mailer_host:                      localhost
+    mailer_user:                      ~
+    mailer_password:                  ~
+
+    locale:                           en
+    secret:                           wazufuceQe8adusp4wr5yebrubrucRefasas
+
+    test_account_email:               "admin@brightmarch.com"
+    test_account_password:            "password"
+    test_application_username:        "quickbooks-pro"
+    test_application_api_key:         "sPa2REgAqe9hugAw"
+    test_quickbooks_account_name:     "Wells Fargo Banc, Inc."
+    test_quickbooks_customer_name:    "Vic Cherubini"
+    test_quickbooks_customer_email:   "customer@majorapi.com"
+    test_quickbooks_item_name:        "BMService"
+    test_quickbooks_item_type:        "service"
+    test_quickbooks_item_price:       175.00
+    test_quickbooks_order_ref_number: "000001"
+    test_quickbooks_vendor_name:      "Apple, Inc."
+    test_quickbooks_vendor_email:     "apple@apple.com"
+
+    redis_host:                       "@@REDIS_HOST@@"
+    redis_port:                       "@@REDIS_PORT@@"
+    resque_dsn:                       "@@REDIS_HOST@@:@@REDIS_PORT@@"
+
+    api_key_length:                   @@API_KEY_LENGTH@@
+
+    plan_amount:                      "@@PLAN_AMOUNT@@"
+    transaction_rate:                 "@@TRANSACTION_RATE@@"
+    records_per_page:                 "@@RECORDS_PER_PAGE@@"
+
+    stripe_secret_key:                "@@STRIPE_SECRET_KEY@@"
+    stripe_publishable_key:           "@@STRIPE_PUBLISHABLE_KEY@@"
+    stripe_client_id:                 "@@STRIPE_CLIENT_ID@@"
+    stripe_item_name:                 "StripeCharge"
+    stripe_item_price:                "0.01"
+
+    build_date:                       "@@BUILD_DATE@@"

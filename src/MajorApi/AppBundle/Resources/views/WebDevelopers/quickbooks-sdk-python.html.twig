@@ -1,0 +1,27 @@
+{% set selectedMenu = 'developers' %}
+{% set developersMenu = 'quickbooks-sdk-python' %}
+{% extends 'MajorApiAppBundle:WebLayouts:default.html.twig' %}
+
+{% block title %}MajorApi &mdash; Developers &mdash; QuickBooks Python SDK{% endblock %}
+
+{% block body %}
+    <article>
+        <div class="wrapper">
+            <div class="documentation clearfix limiter">
+                {% include 'MajorApiAppBundle:WebTemplates:developers-menu.html.twig' %}
+
+                <div class="doc">
+                    <h1>QuickBooks Python SDK</h1>
+                    <p>
+                        The Major QuickBooks REST API Python SDK offers all basic API requests in a single core file. The overall goal is to provide a single file include to handle all API abstraction.
+                    </p>
+
+                    <h2>Download URL</h2>
+                    <p>
+                        <a href="https://github.com/brightmarch/majorapi-python-sdk">https://github.com/brightmarch/majorapi-python-sdk</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </article>
+{% endblock %}
