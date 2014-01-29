@@ -3,6 +3,9 @@ MajorApi was a service that made it very easy to connect to QuickBooks. It creat
 
 The codebase is comprised of two repositories. This repository is the main website and QuickBooks REST API. The [major-api-worker][major-api-worker] repository contains the code that did all of the background data processing through Resque.
 
+## Contact Us
+If you are interested in custom QuickBooks development or integration, please get in touch with us at <admin@brightmarch.com>.
+
 ## License
 The MIT License (MIT)
 
