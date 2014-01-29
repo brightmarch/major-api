@@ -9,3 +9,5 @@ None of this code is actively maintained.
 The MIT License (MIT)
 
 Copyright (c) 2014 Bright March
+
+[major-api-worker]: https://github.com/brightmarch/major-api-worker
